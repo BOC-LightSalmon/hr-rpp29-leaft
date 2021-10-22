@@ -7,12 +7,15 @@ on:
   workflow_dispatch:
 
 jobs: 
-  test-pull-request:
+  test_pull_request:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: setup-node@v1
+      - uses: actions/setup-node@v1
         with: 
           node-version: 14
       - run: npm ci
+      - run: npm ci
+        working-directory: client
       - run: npm test
+      - run: npm run build
