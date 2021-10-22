@@ -7,6 +7,6 @@ const port = process.env.PORT;
 app.listen(port, () => console.log(`BOC-LEAFT server listening on port http://localhost:${port}`));
 
 
-app.get('/test', (req, res) => {
+app.get('/api', (req, res) => {
   res.json('BOC test');
 });
