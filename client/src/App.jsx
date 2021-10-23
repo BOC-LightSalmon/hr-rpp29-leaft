@@ -1,35 +1,51 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import { getTestData } from './APIutils'
+import React from 'react';
+import SignUp from './components/SignUp.jsx';
+import Main from './components/Main.jsx'
 import './App.css';
 
 
-class App extends Component {
-state = {
-    data: null
-  };
-
-  componentDidMount() {
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res }))
-      .catch(err => console.log(err));
+class App extends React.Component {
+  constructor() {
+    super();
+    this.signUpHandle = this.signUpHandle.bind(this);
+    this.loginHandle = this.loginHandle.bind(this);
+    this.state = {
+      signUp: false,
+      login: false 
+    }
   }
-    // fetching the GET route from the Express server which matches the GET route from server.js
-  callBackendAPI = async () => {
-    return await getTestData()
-  };
+
+  signUpHandle() {
+    this.setState({
+      signUp: !this.state.signUp
+    })
+  }
+
+  loginHandle() {
+    this.setState({
+      login: !this.state.login
+    })
+  }
 
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">learn react</h1>
-        </header>
-        <p className="App-intro">{this.state.data}</p>
-      </div>
-    );
+    const { signUp, login } = this.state;
+    if (signUp === true) {
+      return (<SignUp signUpHandle={this.signUpHandle}/>)
+    } 
+    if (login === true) {
+      return (<Main loginHandle={this.loginHandle}/>)
+    } 
+    
+    else {
+      return (
+        <div className="App">
+          <h1>LEAFT</h1>
+          <button onClick={this.loginHandle}>Login</button>
+          <button onClick={this.signUpHandle}>Sign up</button>
+        </div>
+      )
+    }
   }
 }
 
