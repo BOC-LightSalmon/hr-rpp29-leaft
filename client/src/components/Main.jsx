@@ -1,6 +1,6 @@
 import React from 'react';
 import Driver from './Driver';
-import Rider from './Rider'
+import Rider from './Rider/Rider'
 
 class Main extends React.Component {
   constructor(props){
