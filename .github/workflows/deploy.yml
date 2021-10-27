@@ -30,8 +30,9 @@ jobs:
         run: npm install
       
       - name: Install react dependencies
-        run: npm install
-        working-directory: client
+        run: |
+          cd client
+          npm install
         
       - name: Build  
         run: npm run build
