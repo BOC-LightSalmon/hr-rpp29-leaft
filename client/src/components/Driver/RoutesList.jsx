@@ -1,4 +1,6 @@
 import React from 'react';
+
+// import Table from './Table';
 import dummyRoutes from './dummyData';
 
 class RoutesList extends React.Component {
@@ -33,9 +35,7 @@ class RoutesList extends React.Component {
     // fetch routes from DB
   }
 
-  // delete placeholder title once component is more fleshed out
   // format list using css/html
-  // add necessary text formatting
   // connect click handlers to DB
   // more css
 
@@ -43,11 +43,12 @@ class RoutesList extends React.Component {
     return(
       <div id="routes-list-wrapper">
         <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
-        <div>Start End Departure Seats</div>
+        <div id="list-headers">Start End Departure Seats</div>
         <div id="routes-list">
+          {/* <Table /> react-table not working... */}
           {this.state.routes.map((route, i) => {
             return(
-              <div key={i}><span className="cancel" onClick={this.cancelRoute}>X</span> {route.start}, {route.end}, {route.departure}, {route.seats}</div>
+              <div key={i} className="list-item"><span className="cancel" onClick={this.cancelRoute}>X</span> <span className="start">{route.start}</span> <span className="end">{route.end}</span> <span className="departure">{route.departure}</span> <span className="seats">{route.seats}</span></div>
             );
           })}
         </div>

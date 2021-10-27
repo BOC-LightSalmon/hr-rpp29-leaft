@@ -14,6 +14,10 @@ class Map extends React.Component {
     };
   }
 
+  // add custom marker
+  // import start and end points from routes list (need to pass state up from routes list) to display on map
+  // figure out how to show a route between two start and end points
+
   render() {
     const style = {
       width: '50vh',
