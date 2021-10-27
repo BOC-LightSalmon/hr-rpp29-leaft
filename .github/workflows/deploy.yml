@@ -10,7 +10,7 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
     
     steps:
       - name: Checkout repository
@@ -27,7 +27,16 @@ jobs:
           echo PORT=5000 >> .env
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
           cat .env
-      - name: Install root dependencies    
+          
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          
+      - name: Install node dependencies    
         run: npm install
       
       - name: Install client dependencies
