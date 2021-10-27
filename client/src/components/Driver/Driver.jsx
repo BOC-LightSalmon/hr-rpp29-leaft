@@ -19,13 +19,15 @@ class Driver extends React.Component {
 
   render() {
     return(
-      <div id="driver-wrapper">
+      <div>
         <button onClick={this.props.driverHandle}>BACK</button>
         <h3>Driver Page</h3>
-        <Map />
-        <RoutesList />
-        <RouteForm />
-        <button onClick={this.showForm}>Make New Route</button>
+        <div id="driver-wrapper">
+          <Map />
+          <RoutesList />
+          <RouteForm />
+          <button onClick={this.showForm}>Make New Route</button>
+        </div>
       </div>
     );
   }

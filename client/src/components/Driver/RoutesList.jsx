@@ -1,4 +1,5 @@
 import React from 'react';
+import dummyRoutes from './dummyData';
 
 class RoutesList extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class RoutesList extends React.Component {
     this.state = {
       routes: [],
       driverName: 'testDriverName',
-      date: 'October 24th, 2021'
+      date: new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' })
     };
   }
 
@@ -21,26 +22,7 @@ class RoutesList extends React.Component {
 
     // dummy data for now
     this.setState({
-      routes: [
-        {
-          start: '1 Main St',
-          end: '1 Oak St',
-          departure: '1:00PM',
-          seats: 3
-        },
-        {
-          start: '5 Main St',
-          end: '5 Oak St',
-          departure: '5:00PM',
-          seats: 3
-        },
-        {
-          start: '10 Main St',
-          end: '10 Oak St',
-          departure: '10:00PM',
-          seats: 3
-        }
-      ]
+      routes: dummyRoutes
     });
   }
 
@@ -59,15 +41,16 @@ class RoutesList extends React.Component {
 
   render() {
     return(
-      <div>
-        <h3>Routes List</h3>
-        <div>Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}</div>
+      <div id="routes-list-wrapper">
+        <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
         <div>Start End Departure Seats</div>
-        {this.state.routes.map((route, i) => {
-          return(
-            <div key={i}><span className="cancel" onClick={this.cancelRoute}>X</span> {route.start}, {route.end}, {route.departure}, {route.seats}</div>
-          );
-        })}
+        <div id="routes-list">
+          {this.state.routes.map((route, i) => {
+            return(
+              <div key={i}><span className="cancel" onClick={this.cancelRoute}>X</span> {route.start}, {route.end}, {route.departure}, {route.seats}</div>
+            );
+          })}
+        </div>
       </div>
     );
   }

@@ -10,14 +10,15 @@ class Map extends React.Component {
     this.state = {
       google: window.google,
       zoom: 2,
-      center: { lat: 50, lng: 30}
+      center: { lat: 50, lng: 30 }
     };
   }
 
   render() {
     const style = {
-      width: '100%',
-      height: '50vh'
+      width: '50vh',
+      height: '50vh',
+      marginBottom: '30px'
     };
 
     return(
