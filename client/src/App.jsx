@@ -1,7 +1,7 @@
 import React from 'react';
 import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx'
-import './App.css';
+import './App.scss';
 
 
 class App extends React.Component {
