@@ -35,19 +35,19 @@ const Table = (props) => {
   const columns = React.useMemo(() => [
     {
       Header: 'Start',
-      accessor: 'start'
+      accessor: 'routes.start'
     },
     {
       Header: 'End',
-      accessor: 'end'
+      accessor: 'routes.end'
     },
     {
       Header: 'Departure',
-      accessor: 'departure'
+      accessor: 'routes.departure'
     },
     {
       Header: 'Seats',
-      accessor: 'seats'
+      accessor: 'routes.seats'
     }
   ], []);
 

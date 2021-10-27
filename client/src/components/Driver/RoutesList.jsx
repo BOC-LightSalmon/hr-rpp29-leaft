@@ -45,12 +45,12 @@ class RoutesList extends React.Component {
         <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
         <div id="list-headers">Start End Departure Seats</div>
         <div id="routes-list">
-          {/* <Table /> react-table not working... */}
-          {this.state.routes.map((route, i) => {
+          {/* <Table /> */}
+          {/* {this.state.routes.map((route, i) => {
             return(
               <div key={i} className="list-item"><span className="cancel" onClick={this.cancelRoute}>X</span> <span className="start">{route.start}</span> <span className="end">{route.end}</span> <span className="departure">{route.departure}</span> <span className="seats">{route.seats}</span></div>
             );
-          })}
+          })} */}
         </div>
       </div>
     );
