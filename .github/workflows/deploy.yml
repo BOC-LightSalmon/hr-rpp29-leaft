@@ -6,33 +6,59 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
-    
-    strategy:
-      matrix:
-        node-version: [12.x]
+    runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-      
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+    
+      - name: AWS SSM Send Command
+        uses: peterkimzz/aws-ssm-send-command@1.0.1
         with:
-          node-version: ${{ matrix.node-version }}
-          
-      - name: Create .env file    
-        run: |
-          touch .env
-          echo PORT=5000 >> .env
-          echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
-          cat .env
-      - name: Install root dependencies    
-        run: npm install
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID  }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY  }}
+          aws-region: us-east-2
+          instance-ids: ${{ secrets.INSTANCE_ID  }}
+          comment: Deploy the main branch
+          working-directory: /home/ubuntu/leaft
+          command: /bin/sh ./deploy.sh
       
-      - name: Install client dependencies
-        run: npm install
-        working-directory: client
+#         uses: actions/checkout@v2
+      
+# #       - name: Set up Node
+# #         uses: actions/setup-node@v2
+# #         with:
+# #           node-version: '14'
+          
+# #       - name: Create or restore cache
+# #         uses: actions/cache@v2
+# #         id: cache
+# #         with: 
+# #           path: client/node_modules
+# #           key: ${{  runner.os }}-node-${{ hashFiles('**/client/package-lock.json') }}
+# #           restore-keys: |
+# #             ${{  runner.os }}-node-
+          
+#       - name: Create .env file    
+#         run: |
+#           touch .env
+#           echo PORT=5000 >> .env
+#           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
+#           cat .env
+          
+#       - name: Install node dependencies
+#         run: npm install
+      
+#       - name: Install react dependencies
+# #         if: steps.cache.outputs.cache-hit != 'true'
+#         run: |
+#           cd client
+#           npm install
         
-      - name: Build  
-        run: npm run build
+#       - name: Build  
+#         run: npm run build
+      
+#       - name: Restart pm2
+#         run: |
+#           pm2 stop 0
+#           pm2 start 0
+#           pm2 save
