@@ -11,7 +11,7 @@ class App extends React.Component {
     this.loginHandle = this.loginHandle.bind(this);
     this.state = {
       signUp: false,
-      login: false 
+      login: false
     }
   }
 
@@ -32,11 +32,11 @@ class App extends React.Component {
     const { signUp, login } = this.state;
     if (signUp === true) {
       return (<SignUp signUpHandle={this.signUpHandle}/>)
-    } 
+    }
     if (login === true) {
       return (<Main loginHandle={this.loginHandle}/>)
-    } 
-    
+    }
+
     else {
       return (
         <div className="App">
