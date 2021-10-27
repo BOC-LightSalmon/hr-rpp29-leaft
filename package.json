@@ -11,7 +11,9 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^10.0.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mysql2": "^2.3.2",
+    "sequelize": "^6.8.0"
   },
   "devDependencies": {
     "concurrently": "^4.0.1"
