@@ -30,6 +30,7 @@ jobs:
         run: npm install
       
       - name: Install react dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd client
           npm install
