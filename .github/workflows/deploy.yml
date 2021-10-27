@@ -12,6 +12,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14
+      - uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_PORT: 5000
+          envkey_SECRET_KEY: ${{ secrets.DB_PASSWORD }}
+          file_name: .env
       - run: npm ci
       - run: npm ci
         working-directory: client
