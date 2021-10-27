@@ -7,17 +7,32 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
+    
+    strategy:
+      matrix:
+        node-version: [12.x]
+    
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: 14
-      - run: |
+          node-version: ${{ matrix.node-version }}
+          
+      - name: Create .env file    
+        run: |
           touch .env
           echo PORT=5000 >> .env
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
           cat .env
-      - run: npm install
-      - run: npm install
+      - name: Install root dependencies    
+        run: npm install
+      
+      - name: Install client dependencies
+        run: npm install
         working-directory: client
-      - run: npm run build
+        
+      - name: Build  
+        run: npm run build
