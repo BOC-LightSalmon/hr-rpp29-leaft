@@ -4,7 +4,7 @@ import MapContainer from './MapContainer';
 const Rider = (props) => {
   const [center, setCenter] = useState({lat: 37.658428, lng: -121.876999});
   const [zoom, setZoom] = useState(11);
-  // pickup locations, destinations, user's location (or maybe not) 
+  // more state examples: pickup locations, destinations, user's location (or maybe not) 
 
   return (
     <div>
