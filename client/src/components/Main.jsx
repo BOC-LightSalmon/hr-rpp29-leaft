@@ -1,5 +1,5 @@
 import React from 'react';
-import Driver from './Driver';
+import Driver from './Driver/Driver.jsx';
 import Rider from './Rider'
 
 class Main extends React.Component {
