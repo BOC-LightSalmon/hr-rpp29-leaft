@@ -10,3 +10,4 @@ const Route = require('./models/routes');
     logging: false
   });
 })()
+
