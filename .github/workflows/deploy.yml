@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
     
       - name: AWS SSM Send Command
-        uses: peterkimzz/aws-ssm-send-command@master
+        uses: peterkimzz/aws-ssm-send-command@1.1.1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID  }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY  }}
@@ -20,7 +20,8 @@ jobs:
           instance-ids: ${{ secrets.INSTANCE_ID  }}
           comment: Deploy the main branch
           working-directory: /home/ubuntu/hr-rpp29-leaft
-          command: /bin/sh ./deploy.sh
+          command: ls -a
+#           command: /bin/sh ./deploy.sh
       
 #         uses: actions/checkout@v2
       
