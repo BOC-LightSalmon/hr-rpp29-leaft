@@ -1,7 +1,7 @@
 import React from 'react';
 
 import RouteForm from './RouteForm';
-import Map from './Map';
+import MapContainer from './Map';
 import RoutesList from './RoutesList';
 
 class Driver extends React.Component {
@@ -22,7 +22,7 @@ class Driver extends React.Component {
       <div>
         <button onClick={this.props.driverHandle}>BACK</button>
         <h3>Driver Page</h3>
-        <Map />
+        <MapContainer />
         <RoutesList />
         <RouteForm />
         <button onClick={this.showForm}>Make New Route</button>
