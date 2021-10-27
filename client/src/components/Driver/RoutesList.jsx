@@ -1,6 +1,5 @@
 import React from 'react';
-
-// import Table from './Table';
+import MaterialTable from 'material-table';
 import dummyRoutes from './dummyData';
 
 class RoutesList extends React.Component {
@@ -40,6 +39,13 @@ class RoutesList extends React.Component {
   // more css
 
   render() {
+    const columns = [
+      {title: 'Start'},
+      {title: 'End'},
+      {title: 'Departure'},
+      {title: 'Seats'}
+    ];
+
     return(
       <div id="routes-list-wrapper">
         <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
@@ -51,6 +57,11 @@ class RoutesList extends React.Component {
               <div key={i} className="list-item"><span className="cancel" onClick={this.cancelRoute}>X</span> <span className="start">{route.start}</span> <span className="end">{route.end}</span> <span className="departure">{route.departure}</span> <span className="seats">{route.seats}</span></div>
             );
           })} */}
+          <MaterialTable
+            columns={columns}
+            data={this.state.routes}
+            title="Table"
+          />
         </div>
       </div>
     );
