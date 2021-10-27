@@ -1,31 +1,36 @@
 import React from 'react';
-import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import mapsAPIKey from './mapsAPIKey';
 
-class MapContainer extends React.Component {
+import GoogleMapReact from 'google-map-react';
+
+class Map extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       google: window.google,
-      zoom: 2
+      zoom: 2,
+      center: { lat: 50, lng: 30}
     };
   }
 
   render() {
     const style = {
-      width: '50%',
-      height: '50%'
+      width: '100%',
+      height: '50vh'
     };
 
     return(
-      <Map google={window.google} zoom={this.state.zoom} style={style}>
-        <Marker />
-      </Map>
+      <div style={style}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: mapsAPIKey }}
+          defaultCenter={this.state.center}
+          defaultZoom={this.state.zoom}
+        >
+        </GoogleMapReact>
+      </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: mapsAPIKey
-})(MapContainer);
+export default Map;

@@ -12,3 +12,8 @@ label, input{
 input {
   width: 50%;
 }
+
+#driver-wrapper {
+  display: flex;
+  flex-direction: column;
+}
