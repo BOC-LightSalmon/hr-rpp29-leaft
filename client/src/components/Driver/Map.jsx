@@ -1,5 +1,5 @@
 import React from 'react';
-import mapsAPIKey from './mapsAPIKey';
+// import mapsAPIKey from './mapsAPIKey'; // <-- uncomment this after adding API key + file
 
 import GoogleMapReact from 'google-map-react';
 
@@ -28,7 +28,7 @@ class Map extends React.Component {
     return(
       <div style={style}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: mapsAPIKey }}
+          // bootstrapURLKeys={{ key: mapsAPIKey }} // <-- uncomment this after adding API key + file
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
         >
