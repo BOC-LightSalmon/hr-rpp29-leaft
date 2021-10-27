@@ -26,7 +26,7 @@ class Driver extends React.Component {
           <Map />
           <RoutesList />
           <RouteForm />
-          <button onClick={this.showForm}>Make New Route</button>
+          <button onClick={this.showForm} id="make-new-route">Make New Route</button>
         </div>
       </div>
     );

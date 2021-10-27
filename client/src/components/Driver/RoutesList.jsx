@@ -1,5 +1,4 @@
 import React from 'react';
-import MaterialTable from 'material-table';
 import dummyRoutes from './dummyData';
 
 class RoutesList extends React.Component {
@@ -34,34 +33,30 @@ class RoutesList extends React.Component {
     // fetch routes from DB
   }
 
-  // format list using css/html
   // connect click handlers to DB
   // more css
 
   render() {
-    const columns = [
-      {title: 'Start'},
-      {title: 'End'},
-      {title: 'Departure'},
-      {title: 'Seats'}
-    ];
+    const routes = this.state.routes;
 
     return(
       <div id="routes-list-wrapper">
         <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
-        <div id="list-headers">Start End Departure Seats</div>
+        <div id="list-headers"><span id="start">Start</span><span id="end">End</span><span id="departure">Departure</span><span id="seats">Seats</span></div>
         <div id="routes-list">
-          {/* <Table /> */}
-          {/* {this.state.routes.map((route, i) => {
-            return(
-              <div key={i} className="list-item"><span className="cancel" onClick={this.cancelRoute}>X</span> <span className="start">{route.start}</span> <span className="end">{route.end}</span> <span className="departure">{route.departure}</span> <span className="seats">{route.seats}</span></div>
-            );
-          })} */}
-          <MaterialTable
-            columns={columns}
-            data={this.state.routes}
-            title="Table"
-          />
+          <tbody id="routes-table">
+            {routes.map((route, i) => {
+              return(
+                <tr key={i}>
+                  <span className="cancel" onClick={this.cancelRoute}>X</span>
+                  <td>{route.start}</td>
+                  <td>{route.end}</td>
+                  <td>{route.departure}</td>
+                  <td>{route.seats}</td>
+                </tr>
+              );
+            })}
+          </tbody>
         </div>
       </div>
     );
