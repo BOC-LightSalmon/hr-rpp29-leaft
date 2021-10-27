@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - uses: actions/checkout@v2
+    
       - name: AWS SSM Send Command
         uses: peterkimzz/aws-ssm-send-command@1.0.1
         with:
@@ -19,7 +21,6 @@ jobs:
           comment: Deploy the main branch
           working-directory: /home/ubuntu/leaft
           command: /bin/sh ./deploy.sh
-      
       
 #         uses: actions/checkout@v2
       
