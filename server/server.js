@@ -15,6 +15,11 @@ app.use('/api/drivers', driversRouter);
 app.use('/api/riders', ridersRouter);
 app.use('/api/balance', balanceRouter);
 
+//testing deployment
+app.get('/api', (req, res) => {
+  res.send('proxy to node')
+})
+
 app.listen(port, () => {
   console.log(`BOC-LEAFT server listening on port http://localhost:${port}`);
 })
