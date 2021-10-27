@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const app = express();
 const port = process.env.PORT;
+require('../db/index')
 
 const driversRouter = require('./routes/driversRoutes');
 const ridersRouter = require('./routes/ridersRoutes');
@@ -24,5 +25,3 @@ app.get('/api', (req, res) => {
 app.listen(port, () => {
   console.log(`BOC-LEAFT server listening on port http://localhost:${port}`);
 })
-
-
