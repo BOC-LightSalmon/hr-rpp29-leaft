@@ -17,7 +17,7 @@ jobs:
           echo PORT=5000 >> .env
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
           cat .env
-      - run: npm ci
-      - run: npm ci
+      - run: npm install
+      - run: npm install
         working-directory: client
       - run: npm run build
