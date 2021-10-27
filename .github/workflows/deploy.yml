@@ -17,8 +17,6 @@ jobs:
         id: cache
         with:
           node-version: '14'
-          cache: 'npm'
-          cache-dependency-path: '**/client/package-lock.json'
           
       - name: Create .env file    
         run: |
@@ -31,7 +29,6 @@ jobs:
         run: npm install
       
       - name: Install react dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           cd client
           npm install
