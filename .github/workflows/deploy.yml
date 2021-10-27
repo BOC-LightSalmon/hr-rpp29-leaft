@@ -14,8 +14,8 @@ jobs:
       
       - name: Set up Node
         uses: actions/setup-node@v2
+        id: cache
         with:
-          id: cache
           node-version: '14'
           cache: 'npm'
           cache-dependency-path: '**/client/package-lock.json'
