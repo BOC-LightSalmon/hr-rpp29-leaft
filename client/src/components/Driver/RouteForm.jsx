@@ -1,5 +1,5 @@
 import React from "react";
-import './driver.css'
+import './driver.scss'
 
 class RouteForm extends React.Component {
   constructor() {
@@ -10,14 +10,16 @@ class RouteForm extends React.Component {
       pickUp: '',
       dropOff: '',
       departure: '',
-      seats: 1,
+      seats: '',
       date: '',
       zip: ''
     }
   }
 
   submitHandle(event) {
-    //add submit function
+    //still need to implement submit function 
+    console.log(this.state)
+    event.preventDefault();
   }
 
   handleChange(event) {
@@ -29,48 +31,56 @@ class RouteForm extends React.Component {
 
   render() {
     return (
-      <form className='route_form' onSubmit={this.submitHandle}>
-        <label>
-          Pick-Up Location:
+      <div>
+        <h2 id="form_title">Enter your ride info: </h2>
+        <form className='route_form' onSubmit={this.submitHandle}>
+          <label>
+            Pick-Up Location:
+            <br></br>
+            <input type="text" id="pickUp"
+              value={this.state.pickUp} onChange={this.handleChange} />
+          </label>
           <br></br>
-          <input type="text" id="pickUp"
-            value={this.state.pickUp} onChange={this.handleChange} />
-        </label>
-        <br></br>
-        <label>
-          Drop-Off Location:
+          <label>
+            Drop-Off Location:
+            <br></br>
+            <input type="text" id="dropOff"
+              value={this.state.dropOff} onChange={this.handleChange} />
+          </label>
           <br></br>
-          <input type="text" id="dropOff"
-            value={this.state.dropOff} onChange={this.handleChange} />
-        </label>
-        <br></br>
-        <label>
-          ZIP:
-          <br></br>
-          <input type="zipcode" id="zip"
-            value={this.state.zip} onChange={this.handleChange} />
-        </label>
-        <br></br>
-        <label>
-          Date:
-          <input type="date" id="date"
-            value={this.state.date} onChange={this.handleChange} />
-        </label>
-        <br></br>
-        <label>
-          Departure Time:
-          <input type="time" id="departure"
-            value={this.state.departure} onChange={this.handleChange} />
-        </label>
-        <br></br>
-        <label>
-          # of Seats:
-          <input type="number" id="seats" min="1" max="6"
-            onChange={this.handleChange} />
-        </label>
-        <br></br>
-        <input type="submit" value="Submit" />
-      </form>
+          <table>
+            <tbody>
+            <tr>
+                <td>ZIP:</td>
+                <td>
+                  <input type="zipcode" id="zip"
+                    value={this.state.zip} onChange={this.handleChange} />
+                </td>
+              </tr>
+              <tr>
+                <td>Date:</td>
+                <td> <input type="date" id="date"
+                  value={this.state.date} onChange={this.handleChange} /></td>
+              </tr>
+              <tr>
+                <td>Departure Time:</td>
+                <td>
+                  <input type="time" id="departure"
+                    value={this.state.departure} onChange={this.handleChange} />
+                </td>
+              </tr>
+              <tr>
+                <td># of Seats:</td>
+                <td>
+                  <input type="number" id="seats" min="1" max="6"
+                    value={this.state.seats} onChange={this.handleChange} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <input id="submit_button" type="submit" value="Submit Ride" />
+        </form>
+      </div>
     );
   }
 }
