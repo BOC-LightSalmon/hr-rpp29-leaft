@@ -23,10 +23,10 @@ jobs:
         id: deploy
         run: |
           aws deploy create-deployment \
-          –application-name nodeblog_application \
-          –deployment-group-name nodeblog_deployment \
-          –deployment-config-name CodeDeployDefault.OneAtATime \
-          –github-location repository=${{ github.repository }},commitId=${{ github.sha }}
+            -–application-name nodeblog_application \
+            -–deployment-group-name nodeblog_deployment \
+            -–deployment-config-name CodeDeployDefault.OneAtATime \
+            -–github-location repository=${{ github.repository }},commitId=${{ github.sha }}
       
 #         uses: actions/checkout@v2
       
