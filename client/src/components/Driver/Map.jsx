@@ -11,7 +11,7 @@ class Map extends React.Component {
 
   render() {
     return(
-      <div>Map</div>
+      <h3>Map</h3>
     );
   }
 }

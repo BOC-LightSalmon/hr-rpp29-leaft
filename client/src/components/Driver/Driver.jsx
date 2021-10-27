@@ -13,6 +13,10 @@ class Driver extends React.Component {
     };
   }
 
+  showForm() {
+    console.log('submit route form should pop up');
+  }
+
   render() {
     return(
       <div>
@@ -21,6 +25,7 @@ class Driver extends React.Component {
         <Map />
         <RoutesList />
         <RouteForm />
+        <button onClick={this.showForm}>Make New Route</button>
       </div>
     );
   }
