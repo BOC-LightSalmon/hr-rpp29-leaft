@@ -33,11 +33,11 @@ input {
 #routes-list {
   overflow: auto;
   height: 150px;
-  width: 55vh;
+  width: inherit;
 }
 
 #routes-list-wrapper {
-  width: 40vh;
+  width: 45vh;
   margin-bottom: 30px;
   padding: 20px;
 }
@@ -58,12 +58,16 @@ input {
   width: 100px;
 }
 
+table {
+  width: inherit;
+}
+
 thead {
   position: sticky;
-  color: pink;
   top: 0px;
+  background-color: white;
 }
 
 tbody {
-  color: blue;
+
 }
