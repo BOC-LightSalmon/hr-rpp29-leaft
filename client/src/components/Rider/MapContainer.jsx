@@ -1,52 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Geocode from "react-geocode";
+import { API_KEY } from './mapsAPIKey';
 
-Geocode.setApiKey('AIzaSyAxt1bss46Tsxo2ko683AGyx4U2sauBX4o');
+Geocode.setApiKey(API_KEY);
 Geocode.setRegion('us');
 
 const MapContainer = (props) => {
     const [riderLatLng, setRiderLatLng] = useState({});
     const [pickupsLatLng, setPickupsLatLng] = useState([]); // array of lats and lngs of all the nearby pickups like [{lat: , lng: }, {lat: , lng: }]
 
-    console.log('🦔', props.nearbyRides);
+
+    async function getCoordinates(address) {
+        const response = await Geocode.fromAddress(address);
+        const {lat, lng} = response.results[0].geometry.location;
+        const dataObj = {
+          lat: lat,
+          lng: lng,
+        };
+        console.log('🦒', dataObj)
+        return dataObj;
+    }
+      
+    
     useEffect(() => {
-        Geocode.fromAddress(props.riderLocation).then(
-            (response) => {
-                const { lat, lng } = response.results[0].geometry.location;
-                setRiderLatLng({lat: lat, lng: lng});
-            },
-            (error) => {
-                console.error(error);
-            }
-        );
-        console.log('🦥', riderLatLng)
-        let array = [];
-        props.nearbyRides.forEach((nearbyRide) => {
-                Geocode.fromAddress(nearbyRide.start).then((response) => {
-                    const { lat, lng } = response.results[0].geometry.location;
-                    array.push({lat: lat, lng: lng});
-                    setPickupsLatLng(array);
-                },
-                (error) => {
-                    console.error(error);
-                }
-            );
-        });
-        console.log('🌺', pickupsLatLng);
+        getCoordinates(props.riderLocation).then(val => 
+           setRiderLatLng(val));
+
+        // add promise.all to handle a list of addresses
     }, []);
-    
+
+    // console.log('🌺', pickupsLatLng);
+    console.log('🦥', riderLatLng)
     const Marker = ({text}) => <div>{text}</div>
-    
     return (
         <div style={{ height: '50vh', width: '100%' }}>
             <GoogleMapReact
-            bootstrapURLKeys={{ key: 'AIzaSyAxt1bss46Tsxo2ko683AGyx4U2sauBX4o' }}
+            bootstrapURLKeys={{ key: API_KEY }}
             defaultCenter={props.center}
             defaultZoom={props.zoom}
             >
                 <Marker lat={riderLatLng.lat} lng={riderLatLng.lng} text='🍁' />
-                {pickupsLatLng.map((pickupLatLng) => <Marker lat={pickupLatLng.lat} lng={pickupLatLng.lng} text='🌳' />)}
+                {pickupsLatLng.map((pickupLatLng, key) => <Marker lat={pickupLatLng.lat} lng={pickupLatLng.lng} text='🌳' key={key} />)}
             </GoogleMapReact>
         </div>
     );
