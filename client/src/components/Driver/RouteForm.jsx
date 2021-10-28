@@ -1,5 +1,6 @@
 import React from "react";
-import './driver.scss'
+import axios from 'axios';
+import './routeForm.css'
 
 class RouteForm extends React.Component {
   constructor() {
@@ -7,6 +8,8 @@ class RouteForm extends React.Component {
     this.submitHandle = this.submitHandle.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.state = {
+      // change driver ID to login user ID
+      driver_id: 1,
       pickUp: '',
       dropOff: '',
       departure: '',
@@ -17,8 +20,7 @@ class RouteForm extends React.Component {
   }
 
   submitHandle(event) {
-    //still need to implement submit function 
-    console.log(this.state)
+    axios.post('/api/drivers/create', this.state)
     event.preventDefault();
   }
 
@@ -50,7 +52,7 @@ class RouteForm extends React.Component {
           <br></br>
           <table>
             <tbody>
-            <tr>
+              <tr>
                 <td>ZIP:</td>
                 <td>
                   <input type="zipcode" id="zip"

@@ -29,6 +29,6 @@ label, input{
   text-transform: uppercase;
 }
 
-td {
+.route_form td {
   width: 40%;
 }
