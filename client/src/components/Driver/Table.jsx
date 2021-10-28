@@ -56,10 +56,10 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
         {rows.map((row, i) => {
           prepareRow(row);
           return(
-            <tr {...row.getRowProps()} onClick={showRoute} className="table-row">
-              <td className="cancel" onClick={cancelRoute}>X</td>
+            <tr {...row.getRowProps()} className="table-row">
+              <td className="cancel" onClick={cancelRoute} id={row.id}>X</td>
               {row.cells.map((cell) => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                return <td {...cell.getCellProps()} onClick={showRoute}>{cell.render('Cell')}</td>
               })}
             </tr>
           );

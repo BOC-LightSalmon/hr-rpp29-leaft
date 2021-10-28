@@ -31,16 +31,20 @@ class RoutesList extends React.Component {
     });
   }
 
-  cancelRoute() {
-    console.log('route cancelled');
+  cancelRoute(e) {
+    console.log('cancelled the following route: id', e.target.id);
 
     // send delete request to DB for given routeId
     // fetch routes from DB
+    this.getRoutes();
   }
 
   showRoute(e) {
     const getRouteDetails = (e) => {
+      e = e.parentNode.childNodes;
+
       const output = {
+        id: e[0].id,
         start: e[1].innerHTML,
         end: e[2].innerHTML,
         departure: e[3].innerHTML
@@ -49,7 +53,7 @@ class RoutesList extends React.Component {
       return output;
     };
 
-    console.log('selected the following route:', getRouteDetails(e.currentTarget.childNodes));
+    console.log('selected the following route:', getRouteDetails(e.currentTarget));
 
     // connect this click event to live-update the map
   }
