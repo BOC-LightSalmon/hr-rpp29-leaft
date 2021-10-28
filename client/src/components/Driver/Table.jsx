@@ -1,8 +1,7 @@
 import React from 'react';
+import { useTable, useFlexLayout } from 'react-table';
 
-import { useTable, useResizeColumns, useFlexLayout } from 'react-table';
-
-const Table = ({ routes, cancelRoute }) => {
+const Table = ({ routes, cancelRoute, showRoute }) => {
   const data = React.useMemo(() => routes, [routes]);
 
   const columns = React.useMemo(() => [
@@ -17,12 +16,17 @@ const Table = ({ routes, cancelRoute }) => {
     {
       Header: 'Departure',
       accessor: 'departure'
-    },
-    {
-      Header: 'Seats',
-      accessor: 'seats'
     }
   ], []);
+
+  const defaultColumn = React.useMemo(
+    () => ({
+      minWidth: 10,
+      width: 150,
+      maxWidth: 90,
+    }),
+    []
+  );
 
   const {
     getTableProps,
@@ -32,7 +36,8 @@ const Table = ({ routes, cancelRoute }) => {
     prepareRow,
   } = useTable({
     columns,
-    data
+    data,
+    defaultColumn
   },
   useFlexLayout);
 
@@ -40,9 +45,9 @@ const Table = ({ routes, cancelRoute }) => {
     <table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
+          <tr {...headerGroup.getHeaderGroupProps()} id="table-header">
             {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              <th {...column.getHeaderProps()} id={column.Header.toLowerCase()}>{column.render('Header')}</th>
             ))}
         </tr>
         ))}
@@ -51,7 +56,7 @@ const Table = ({ routes, cancelRoute }) => {
         {rows.map((row, i) => {
           prepareRow(row);
           return(
-            <tr {...row.getRowProps()}>
+            <tr {...row.getRowProps()} onClick={showRoute} className="table-row">
               <td className="cancel" onClick={cancelRoute}>X</td>
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>

@@ -19,9 +19,8 @@ class Driver extends React.Component {
 
   render() {
     return(
-      <div>
+      <div id="driver-container">
         <button onClick={this.props.driverHandle}>BACK</button>
-        <h3>Driver Page</h3>
         <div id="driver-wrapper">
           <Map />
           <RoutesList />

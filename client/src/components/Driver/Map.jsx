@@ -20,9 +20,12 @@ class Map extends React.Component {
 
   render() {
     const style = {
-      width: '50vh',
-      height: '50vh',
-      marginBottom: '30px'
+      width: '45vh',
+      height: '45vh',
+      marginBottom: '30px',
+      maxHeight: '45vh',
+      maxWidth: '45vh',
+      paddingLeft: '2%'
     };
 
     return(

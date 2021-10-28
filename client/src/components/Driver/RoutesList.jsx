@@ -14,6 +14,7 @@ class RoutesList extends React.Component {
     };
 
     this.cancelRoute = this.cancelRoute.bind(this);
+    this.showRoute = this.showRoute.bind(this);
   }
 
   componentDidMount() {
@@ -37,17 +38,31 @@ class RoutesList extends React.Component {
     // fetch routes from DB
   }
 
+  showRoute(e) {
+    const getRouteDetails = (e) => {
+      const output = {
+        start: e[1].innerHTML,
+        end: e[2].innerHTML,
+        departure: e[3].innerHTML
+      };
+
+      return output;
+    };
+
+    console.log('selected the following route:', getRouteDetails(e.currentTarget.childNodes));
+
+    // connect this click event to live-update the map
+  }
+
   // connect click handlers to DB
   // more css
 
   render() {
-    const routes = this.state.routes;
-
     return(
       <div id="routes-list-wrapper">
         <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
         <div id="routes-list">
-          <Table routes={routes} cancelRoute={this.cancelRoute}/>
+          <Table routes={this.state.routes} cancelRoute={this.cancelRoute} showRoute={this.showRoute}/>
         </div>
       </div>
     );
