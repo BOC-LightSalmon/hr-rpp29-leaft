@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { useTable } from 'react-table';
+import { useTable, useResizeColumns, useFlexLayout } from 'react-table';
 
-const Table = (props) => {
-  const routes = props.routes;
-
+const Table = ({ routes, cancelRoute }) => {
   const data = React.useMemo(() => routes, [routes]);
 
   const columns = React.useMemo(() => [
@@ -35,7 +33,8 @@ const Table = (props) => {
   } = useTable({
     columns,
     data
-  });
+  },
+  useFlexLayout);
 
   return(
     <table {...getTableProps()}>
@@ -53,6 +52,7 @@ const Table = (props) => {
           prepareRow(row);
           return(
             <tr {...row.getRowProps()}>
+              <td className="cancel" onClick={cancelRoute}>X</td>
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
               })}

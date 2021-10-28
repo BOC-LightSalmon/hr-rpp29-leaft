@@ -12,6 +12,8 @@ class RoutesList extends React.Component {
       driverName: 'testDriverName',
       date: new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' })
     };
+
+    this.cancelRoute = this.cancelRoute.bind(this);
   }
 
   componentDidMount() {
@@ -44,22 +46,8 @@ class RoutesList extends React.Component {
     return(
       <div id="routes-list-wrapper">
         <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
-        {/* <div id="list-headers"><span id="start">Start</span><span id="end">End</span><span id="departure">Departure</span><span id="seats">Seats</span></div> */}
         <div id="routes-list">
-          {/* <tbody id="routes-table">
-            {routes.map((route, i) => {
-              return(
-                <tr key={i}>
-                  <span className="cancel" onClick={this.cancelRoute}>X</span>
-                  <td>{route.start}</td>
-                  <td>{route.end}</td>
-                  <td>{route.departure}</td>
-                  <td>{route.seats}</td>
-                </tr>
-              );
-            })}
-          </tbody> */}
-          <Table routes={routes}/>
+          <Table routes={routes} cancelRoute={this.cancelRoute}/>
         </div>
       </div>
     );

@@ -23,7 +23,7 @@ input {
 .cancel {
   color: red;
   font-weight: bold;
-  margin-right: -10px;
+  margin-right: 20px;
 }
 
 .cancel:hover {
@@ -32,41 +32,20 @@ input {
 
 #routes-list {
   overflow: auto;
-  height: 200px;
+  height: 150px;
   width: 55vh;
 }
 
 #routes-list-wrapper {
-  width: 50vh;
+  width: 40vh;
   margin-bottom: 30px;
+  padding: 20px;
 }
 
 #routes-list-intro {
+  margin-top: -20px;
   margin-bottom: 20px;
   font-weight: bold;
-}
-
-#list-headers {
-  font-weight: bold;
-  width: 55vh;
-  margin-left: 30px;
-}
-
-#end {
-  margin-left: 65px;
-}
-
-#departure {
-  margin-left: 50px;
-}
-
-#seats {
-  margin-left: 15px;
-}
-
-#list-headers span {
-  padding-left: 10px;
-  padding-right: 10px;
 }
 
 .list-item {
@@ -75,12 +54,16 @@ input {
   align-content: space-between;
 }
 
-#routes-table td {
-  padding-left: 24px;
-  overflow-wrap: anywhere;
-  width: 20vh;
-}
-
 #make-new-route {
   width: 100px;
+}
+
+thead {
+  position: sticky;
+  color: pink;
+  top: 0px;
+}
+
+tbody {
+  color: blue;
 }
