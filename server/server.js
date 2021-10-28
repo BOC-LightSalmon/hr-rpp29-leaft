@@ -2,12 +2,17 @@ require('dotenv').config()
 const express = require('express');
 const app = express();
 const port = process.env.PORT;
-require('../db/index')
+require('../db/index');
+
+const cors = require('cors');
 
 const driversRouter = require('./routes/driversRoutes');
 const ridersRouter = require('./routes/ridersRoutes');
 const balanceRouter = require('./routes/balanceRoutes');
 
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
