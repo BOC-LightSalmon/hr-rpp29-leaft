@@ -69,12 +69,12 @@ td {
   overflow-wrap: anywhere;
 }
 
-#departure {
-  margin-right: 10px;
+#pick-up {
+  margin-left: 20px;
 }
 
-#seats {
-  padding-right: 80px;
+#departure {
+  margin-right: 10px;
 }
 
 .table-row:hover {

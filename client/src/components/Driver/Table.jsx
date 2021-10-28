@@ -6,12 +6,12 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
 
   const columns = React.useMemo(() => [
     {
-      Header: 'Start',
-      accessor: 'start'
+      Header: 'Pick-Up',
+      accessor: 'pickUp'
     },
     {
-      Header: 'End',
-      accessor: 'end'
+      Header: 'Drop-Off',
+      accessor: 'dropOff'
     },
     {
       Header: 'Departure',

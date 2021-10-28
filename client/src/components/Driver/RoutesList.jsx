@@ -37,11 +37,9 @@ class RoutesList extends React.Component {
 
   cancelRoute(e) {
     const routeId = e.target.id;
-    console.log('cancelled the following route: id', routeId);
 
     axios.put(`http://localhost:5000/api/drivers/routes/`, { routeId })
       .then(res => {
-        console.log(res);
         this.getRoutes();
       })
       .catch(err => {
@@ -68,8 +66,7 @@ class RoutesList extends React.Component {
     // connect this click event to live-update the map
   }
 
-  // connect click handlers to DB
-  // more css
+  // more css to match wireframe, web/mobile etc
 
   render() {
     return(
