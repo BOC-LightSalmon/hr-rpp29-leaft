@@ -1,5 +1,6 @@
 import React from 'react';
 import dummyRoutes from './dummyData';
+import axios from 'axios';
 
 import Table from './Table';
 
@@ -24,6 +25,13 @@ class RoutesList extends React.Component {
   getRoutes() {
     console.log('fetched routes');
     // fetch routes from DB, set routes state with results
+    axios.get('http://localhost:5000/api/drivers/routes')
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
 
     // dummy data for now
     this.setState({
