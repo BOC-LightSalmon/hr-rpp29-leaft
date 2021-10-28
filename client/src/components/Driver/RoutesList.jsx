@@ -1,6 +1,8 @@
 import React from 'react';
 import dummyRoutes from './dummyData';
 
+import Table from './Table';
+
 class RoutesList extends React.Component {
   constructor(props) {
     super(props);
@@ -42,9 +44,9 @@ class RoutesList extends React.Component {
     return(
       <div id="routes-list-wrapper">
         <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
-        <div id="list-headers"><span id="start">Start</span><span id="end">End</span><span id="departure">Departure</span><span id="seats">Seats</span></div>
+        {/* <div id="list-headers"><span id="start">Start</span><span id="end">End</span><span id="departure">Departure</span><span id="seats">Seats</span></div> */}
         <div id="routes-list">
-          <tbody id="routes-table">
+          {/* <tbody id="routes-table">
             {routes.map((route, i) => {
               return(
                 <tr key={i}>
@@ -56,7 +58,8 @@ class RoutesList extends React.Component {
                 </tr>
               );
             })}
-          </tbody>
+          </tbody> */}
+          <Table routes={routes}/>
         </div>
       </div>
     );
