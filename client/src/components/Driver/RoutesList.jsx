@@ -1,5 +1,4 @@
 import React from 'react';
-import dummyRoutes from './dummyData';
 import axios from 'axios';
 
 import Table from './Table';
@@ -23,28 +22,31 @@ class RoutesList extends React.Component {
   }
 
   getRoutes() {
-    console.log('fetched routes');
-    // fetch routes from DB, set routes state with results
     axios.get('http://localhost:5000/api/drivers/routes')
       .then(res => {
-        console.log(res);
+        console.log(res.data);
+
+        this.setState({
+          routes: res.data
+        });
       })
       .catch(err => {
         console.log(err);
       });
-
-    // dummy data for now
-    this.setState({
-      routes: dummyRoutes
-    });
   }
 
   cancelRoute(e) {
-    console.log('cancelled the following route: id', e.target.id);
+    const routeId = e.target.id;
+    console.log('cancelled the following route: id', routeId);
 
-    // send delete request to DB for given routeId
-    // fetch routes from DB
-    this.getRoutes();
+    axios.put(`http://localhost:5000/api/drivers/routes/`, { routeId })
+      .then(res => {
+        console.log(res);
+        this.getRoutes();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   showRoute(e) {

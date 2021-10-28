@@ -57,7 +57,7 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
           prepareRow(row);
           return(
             <tr {...row.getRowProps()} className="table-row">
-              <td className="cancel" onClick={cancelRoute} id={row.id}>X</td>
+              <td className="cancel" onClick={cancelRoute} id={row.original.id}>X</td>
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()} onClick={showRoute}>{cell.render('Cell')}</td>
               })}

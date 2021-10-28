@@ -13,6 +13,8 @@ const Route = db.define('route', {
   date: Sequelize.DATE,
   start: Sequelize.STRING,
   end: Sequelize.STRING,
+  departure: Sequelize.STRING,
+  seats: Sequelize.INTEGER,
   zip: Sequelize.STRING,
   },
 );
