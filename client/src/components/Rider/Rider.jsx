@@ -10,11 +10,11 @@ const Rider = (props) => {
 
   // will need useEffect to fetch data from database and change state accordingly
   useEffect(() => {
-    setNearbyRides([{start: 'muirwood park', zip: '94588'}, {start: 'moller park', zip: '94588'}]);
+    setNearbyRides([{start: 'muirwood park', zip: '94588'}, {start: 'dublin CA', zip: '94588'}]);
   }, []);
 
   return (
-    <div className="pa">
+    <div className="page">
       <button onClick={props.riderHandle}>BACK</button>
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} center={center} zoom={zoom} />
     </div>

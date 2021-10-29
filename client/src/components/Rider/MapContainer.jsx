@@ -5,7 +5,7 @@ import { API_KEY } from './mapsAPIKey';
 
 Geocode.setApiKey(API_KEY);
 Geocode.setRegion('us');
-
+const Marker = ({text, lat, lng}) => <div>{text}</div>;
 const MapContainer = (props) => {
     const [riderLatLng, setRiderLatLng] = useState({});
     const [pickupsLatLng, setPickupsLatLng] = useState([]); // array of lats and lngs of all the nearby pickups like [{lat: , lng: }, {lat: , lng: }]
@@ -23,16 +23,38 @@ const MapContainer = (props) => {
     }
       
     
+    // console.log('🍍', props.nearbyRides)
     useEffect(() => {
         getCoordinates(props.riderLocation).then(val => 
-           setRiderLatLng(val));
+            setRiderLatLng(val));
+            
+            // add promise.all to handle a list of addresses
 
-        // add promise.all to handle a list of addresses
+        // const nearbyRides = [{start: 'muirwood park', zip: '94588'}, {start: 'moller park', zip: '94588'}];
+        const mapLoop = async _ => {
+            const promises = props.nearbyRides.map(async nearbyRide => {
+                const coordinates = await getCoordinates(nearbyRide);
+                console.log('🥗', nearbyRide, coordinates)
+                return coordinates;
+            });
+            
+            const arrayofcoordinates = await Promise.all(promises);
+            return arrayofcoordinates;
+        }
+        
+        mapLoop().then((res) => {
+            let array = JSON.parse(JSON.stringify(res));
+            console.log('🥦', res)
+            setPickupsLatLng(array);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }, []);
-
-    // console.log('🌺', pickupsLatLng);
+    
+    
+    console.log('🌺', pickupsLatLng);
     console.log('🦥', riderLatLng)
-    const Marker = ({text}) => <div>{text}</div>
     return (
         <div style={{ height: '50vh', width: '100%' }}>
             <GoogleMapReact
@@ -41,7 +63,9 @@ const MapContainer = (props) => {
             defaultZoom={props.zoom}
             >
                 <Marker lat={riderLatLng.lat} lng={riderLatLng.lng} text='🍁' />
-                {pickupsLatLng.map((pickupLatLng, key) => <Marker lat={pickupLatLng.lat} lng={pickupLatLng.lng} text='🌳' key={key} />)}
+                {/* <Marker lat={37} lng={-121} text='🥐' /> */}
+                {console.log('🥨', pickupsLatLng)}
+                {pickupsLatLng.map((element, key) => <Marker lat={element.lat} lng={element.lng} text='🌳' key={key} />)}
             </GoogleMapReact>
         </div>
     );
