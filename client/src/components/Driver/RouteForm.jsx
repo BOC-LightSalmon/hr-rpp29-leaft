@@ -3,10 +3,9 @@ import axios from 'axios';
 import './routeForm.css'
 
 class RouteForm extends React.Component {
-  constructor() {
-    super()
-    this.submitHandle = this.submitHandle.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+  constructor(props) {
+    super(props);
+
     this.state = {
       // change driver ID to login user ID
       // driver_id: 1,
@@ -16,10 +15,15 @@ class RouteForm extends React.Component {
       seats: '',
       date: '',
       zip: ''
-    }
+    };
+
+    this.submitHandle = this.submitHandle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   submitHandle(event) {
+    event.preventDefault();
+
     axios.post('/api/drivers/create', this.state)
       .then(() => {
         this.props.getRoutes();
@@ -28,7 +32,7 @@ class RouteForm extends React.Component {
         console.log(err);
       });
 
-    event.preventDefault();
+    // clear form after submit
   }
 
   handleChange(event) {

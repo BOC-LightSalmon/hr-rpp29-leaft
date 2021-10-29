@@ -12,25 +12,36 @@ class Driver extends React.Component {
     this.state = {
       // logic for showing/hiding various forms/notifications
       routes: [],
-      driverName: 'testDriverName'
+      driverName: 'testDriverName',
+      loaded: false
     };
 
     this.getRoutes = this.getRoutes.bind(this);
   }
 
+  componentDidMount() {
+    this.getRoutes();
+  }
+
   showForm() {
     console.log('submit route form should pop up');
+    // logic to show submit route form
   }
 
   getRoutes() {
-    console.log('entered get routes');
-
     axios.get('/api/drivers/routes')
     .then(res => {
-      console.log(res.data);
+      const data = res.data;
+      console.log(data);
+
+      data.forEach(route => {
+        route.pickUpCoords = { lat: Number(route.latPickUp), lng: Number(route.lngPickUp) };
+        route.dropOffCoords = { lat: Number(route.latDropOff), lng: Number(route.lngDropOff) };
+      });
 
       this.setState({
-        routes: res.data
+        routes: data,
+        loaded: true
       });
     })
     .catch(err => {
@@ -39,17 +50,23 @@ class Driver extends React.Component {
   }
 
   render() {
-    return(
-      <div id="driver-container">
-        <button onClick={this.props.driverHandle}>BACK</button>
-        <div id="driver-wrapper">
-          <Map routes={this.state.routes}/>
-          <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName}/>
-          <RouteForm getRoutes={this.getRoutes}/>
-          <button onClick={this.showForm} id="make-new-route">Make New Route</button>
+    if (this.state.loaded) {
+      return(
+        <div id="driver-container">
+          <button onClick={this.props.driverHandle}>BACK</button>
+          <div id="driver-wrapper">
+            <Map routes={this.state.routes} />
+            <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} />
+            <RouteForm getRoutes={this.getRoutes}/>
+            <button onClick={this.showForm} id="make-new-route">Make New Route</button>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return(
+        <div>Loading...</div>
+      );
+    }
   }
 }
 

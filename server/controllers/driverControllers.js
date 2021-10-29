@@ -2,20 +2,6 @@ require('dotenv').config();
 const axios = require('axios');
 const Route = require('../../db/models/routes');
 
-/*
-driver_id: Sequelize.INTEGER,
-rider_id: Sequelize.INTEGER,
-departure: Sequelize.STRING,
-date: Sequelize.DATEONLY,
-pickUp: Sequelize.STRING,
-dropOff: Sequelize.STRING,
-seats: Sequelize.STRING,
-latPickUp: Sequelize.DECIMAL,
-lngPickUp: Sequelize.DECIMAL,
-latDropOff: Sequelize.DECIMAL,
-lngDropOff: Sequelize.DECIMAL,
-*/
-
 const createRoute = (req, res) => {
   const data = req.body;
 
@@ -37,8 +23,6 @@ const createRoute = (req, res) => {
       data.lngPickUp = pickUp.lng;
       data.latDropOff = dropOff.lat;
       data.lngDropOff = dropOff.lng;
-
-      console.log(data);
 
       const route = Route.create(data)
         .then(() => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
 import GoogleMapReact from 'google-map-react';
 
 class Map extends React.Component {
@@ -9,8 +8,8 @@ class Map extends React.Component {
 
     this.state = {
       google: window.google,
-      zoom: 2,
-      center: { lat: 50, lng: 30 },
+      zoom: 15,
+      center: this.props.routes[0].pickUpCoords,
       key: '',
       loaded: false
     };
@@ -29,9 +28,8 @@ class Map extends React.Component {
      });
   }
 
-  // add custom marker
-  // import lat and lng from routes list (need to pass state up from routes list) to display on map
-  // figure out how to show a route between two start and end points (stretch)
+  // add custom markers
+  // get lat and lng from routes list, display on map via markers
 
   render() {
     if (this.state.loaded) {

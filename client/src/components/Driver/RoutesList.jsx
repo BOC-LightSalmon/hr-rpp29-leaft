@@ -15,10 +15,6 @@ class RoutesList extends React.Component {
     this.showRoute = this.showRoute.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getRoutes();
-  }
-
   cancelRoute(e) {
     const routeId = e.target.id;
 
@@ -37,14 +33,14 @@ class RoutesList extends React.Component {
 
       console.log(e);
 
-      // const output = {
-      //   id: e[0].id,
-      //   pickUp: e[1].innerHTML,
-      //   dropOff: e[2].innerHTML,
-      //   departure: e[3].innerHTML
-      // };
+      const output = {
+        id: e[0].id,
+        pickUp: e[1].innerHTML,
+        dropOff: e[2].innerHTML,
+        departure: e[3].innerHTML
+      };
 
-      // return output;
+      return output;
     };
 
     console.log('selected the following route:', getRouteDetails(e.currentTarget));

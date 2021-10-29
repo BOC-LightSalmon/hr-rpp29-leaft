@@ -15,10 +15,10 @@ const Route = db.define('route', {
   pickUp: Sequelize.STRING,
   dropOff: Sequelize.STRING,
   seats: Sequelize.INTEGER,
-  latPickUp: Sequelize.DECIMAL,
-  lngPickUp: Sequelize.DECIMAL,
-  latDropOff: Sequelize.DECIMAL,
-  lngDropOff: Sequelize.DECIMAL,
+  latPickUp: Sequelize.DECIMAL(10,8),
+  lngPickUp: Sequelize.DECIMAL(10,8),
+  latDropOff: Sequelize.DECIMAL(10,8),
+  lngDropOff: Sequelize.DECIMAL(10,8),
 });
 
 Route.belongsTo(User, {
