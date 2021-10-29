@@ -10,7 +10,7 @@ class Driver extends React.Component {
     super(props);
 
     this.state = {
-      // logic for showing/hiding various forms/notifications
+      formModal: false,
       routes: [],
       selectedRoute: {},
       driverName: 'testDriverName',
@@ -19,6 +19,8 @@ class Driver extends React.Component {
 
     this.getRoutes = this.getRoutes.bind(this);
     this.selectRoute = this.selectRoute.bind(this);
+    this.showForm = this.showForm.bind(this);
+    this.closeForm = this.closeForm.bind(this);
   }
 
   componentDidMount() {
@@ -26,8 +28,15 @@ class Driver extends React.Component {
   }
 
   showForm() {
-    console.log('submit route form should pop up');
-    // logic to show submit route form
+    this.setState({
+      modal: true
+    });
+  }
+
+  closeForm() {
+    this.setState({
+      modal: false
+    });
   }
 
   selectRoute(route) {
@@ -66,9 +75,9 @@ class Driver extends React.Component {
           <div id="driver-wrapper">
             <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute}/>
             <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
-            <RouteForm getRoutes={this.getRoutes}/>
             <button onClick={this.showForm} id="make-new-route">Make New Route</button>
           </div>
+          {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm}/>}
         </div>
       );
     } else {
