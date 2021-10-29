@@ -13,8 +13,7 @@ class RouteForm extends React.Component {
       dropOff: '',
       departure: '',
       seats: '',
-      date: '',
-      zip: ''
+      date: ''
     };
 
     this.submitHandle = this.submitHandle.bind(this);
@@ -63,13 +62,6 @@ class RouteForm extends React.Component {
           <br></br>
           <table>
             <tbody>
-              <tr>
-                <td>ZIP:</td>
-                <td>
-                  <input type="zipcode" id="zip"
-                    value={this.state.zip} onChange={this.handleChange} />
-                </td>
-              </tr>
               <tr>
                 <td>Date:</td>
                 <td> <input type="date" id="date"

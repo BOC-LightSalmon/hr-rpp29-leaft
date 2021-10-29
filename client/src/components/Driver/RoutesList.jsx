@@ -16,6 +16,15 @@ class RoutesList extends React.Component {
   }
 
   cancelRoute(e) {
+    const row = e.currentTarget.parentNode;
+    const rows = row.parentNode.childNodes;
+
+    rows.forEach(row => {
+      row.style['background-color'] = '';
+    });
+
+    this.props.selectRoute({});
+
     const routeId = e.target.id;
 
     axios.put(`/api/drivers/routes`, { routeId })
@@ -28,9 +37,17 @@ class RoutesList extends React.Component {
   }
 
   showRoute(e) {
-    e = e.currentTarget.parentNode.childNodes;
+    const target = e.currentTarget.parentNode.childNodes;
+    const row = e.currentTarget.parentNode;
+    const rows = row.parentNode.childNodes;
 
-    const routeId = Number(e[0].id);
+    rows.forEach(row => {
+      row.style['background-color'] = '';
+    });
+
+    row.style['background-color'] = 'rgb(20, 213, 104)';
+
+    const routeId = Number(target[0].id);
 
     this.props.routes.forEach(route => {
       if (route.id === routeId) {

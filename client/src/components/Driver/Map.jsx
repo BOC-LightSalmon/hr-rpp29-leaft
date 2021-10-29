@@ -9,7 +9,7 @@ class Map extends React.Component {
     this.state = {
       google: window.google,
       zoom: 11,
-      center: this.props.routes.length !== 0 ? this.props.routes[0].pickUpCoords : { lat: 40.7580, lng: -73.9855 },
+      center: this.props.selectedRoute.departure !== undefined ? this.props.selectedRoute.pickUpCoords : { lat: 40.7580, lng: -73.9855 },
       key: '',
       loaded: false
     };
@@ -35,10 +35,11 @@ class Map extends React.Component {
       marginBottom: '30px',
       maxHeight: '45vh',
       maxWidth: '45vh',
-      paddingLeft: '2%'
+      paddingLeft: '1.5%'
     };
 
     const Marker = ({ text, lat, lng }) => <div>{text}</div>;
+
     const selectedRoute = this.props.selectedRoute;
 
     if (this.state.loaded && selectedRoute.departure !== undefined) {
