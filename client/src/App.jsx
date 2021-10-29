@@ -1,6 +1,6 @@
 import React from 'react';
 import SignUp from './components/SignUp.jsx';
-import Main from './components/Main.jsx'
+import Main from './components/Main.jsx';
 import './App.scss';
 
 
@@ -22,7 +22,6 @@ class App extends React.Component {
   }
 
   loginHandle() {
-    console.log(process.env.REACT_APP_TESTING)
     this.setState({
       login: !this.state.login
     })

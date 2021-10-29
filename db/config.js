@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const db = new Sequelize('leaft', 'root', process.env.DB_PASSWORD, {
   dialect: 'mysql',
-  host: process.env.DB_HOSTNAME,
+  host: 'localhost',
   port: 3306,
 });
 
