@@ -22,6 +22,7 @@ class App extends React.Component {
   }
 
   loginHandle() {
+    console.log(process.env.REACT_APP_TESTING)
     this.setState({
       login: !this.state.login
     })
