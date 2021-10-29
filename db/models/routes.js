@@ -14,13 +14,12 @@ const Route = db.define('route', {
   date: Sequelize.DATEONLY,
   pickUp: Sequelize.STRING,
   dropOff: Sequelize.STRING,
-  seats: Sequelize.STRING,
-  latPickup: Sequelize.DECIMAL,
-  lngPickup: Sequelize.DECIMAL,
+  seats: Sequelize.INTEGER,
+  latPickUp: Sequelize.DECIMAL,
+  lngPickUp: Sequelize.DECIMAL,
   latDropOff: Sequelize.DECIMAL,
   lngDropOff: Sequelize.DECIMAL,
-},
-);
+});
 
 Route.belongsTo(User, {
   as: 'driver',

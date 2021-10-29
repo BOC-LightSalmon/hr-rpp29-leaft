@@ -9,7 +9,7 @@ class RouteForm extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.state = {
       // change driver ID to login user ID
-      driver_id: 1,
+      // driver_id: 1,
       pickUp: '',
       dropOff: '',
       departure: '',
@@ -21,6 +21,13 @@ class RouteForm extends React.Component {
 
   submitHandle(event) {
     axios.post('/api/drivers/create', this.state)
+      .then(() => {
+        this.props.getRoutes();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
     event.preventDefault();
   }
 

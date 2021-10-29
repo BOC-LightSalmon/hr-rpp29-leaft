@@ -8,9 +8,7 @@ class RoutesList extends React.Component {
     super(props);
 
     this.state = {
-      routes: [],
-      driverName: 'testDriverName',
-      date: new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' })
+
     };
 
     this.cancelRoute = this.cancelRoute.bind(this);
@@ -18,21 +16,7 @@ class RoutesList extends React.Component {
   }
 
   componentDidMount() {
-    this.getRoutes();
-  }
-
-  getRoutes() {
-    axios.get('/api/drivers/routes')
-      .then(res => {
-        console.log(res.data);
-
-        this.setState({
-          routes: res.data
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.props.getRoutes();
   }
 
   cancelRoute(e) {
@@ -40,7 +24,7 @@ class RoutesList extends React.Component {
 
     axios.put(`/api/drivers/routes`, { routeId })
       .then(res => {
-        this.getRoutes();
+        this.props.getRoutes();
       })
       .catch(err => {
         console.log(err);
@@ -51,14 +35,16 @@ class RoutesList extends React.Component {
     const getRouteDetails = (e) => {
       e = e.parentNode.childNodes;
 
-      const output = {
-        id: e[0].id,
-        start: e[1].innerHTML,
-        end: e[2].innerHTML,
-        departure: e[3].innerHTML
-      };
+      console.log(e);
 
-      return output;
+      // const output = {
+      //   id: e[0].id,
+      //   pickUp: e[1].innerHTML,
+      //   dropOff: e[2].innerHTML,
+      //   departure: e[3].innerHTML
+      // };
+
+      // return output;
     };
 
     console.log('selected the following route:', getRouteDetails(e.currentTarget));
@@ -69,11 +55,13 @@ class RoutesList extends React.Component {
   // more css to match wireframe, web/mobile etc
 
   render() {
+    const date = new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' });
+
     return(
       <div id="routes-list-wrapper">
-        <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
+        <div id="routes-list-intro">Hi, {this.props.driverName}! Here are your listed routes for today, {date}:</div>
         <div id="routes-list">
-          <Table routes={this.state.routes} cancelRoute={this.cancelRoute} showRoute={this.showRoute}/>
+          <Table routes={this.props.routes} cancelRoute={this.cancelRoute} showRoute={this.showRoute}/>
         </div>
       </div>
     );
