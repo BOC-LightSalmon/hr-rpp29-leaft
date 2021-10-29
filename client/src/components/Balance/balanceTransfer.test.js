@@ -9,10 +9,3 @@ test('header renders with correct text', () => {
 
   expect(balanceHeader.textContent).toBe("Balance:")
 })
-
-test('balance renders with zero as default balance', () => {
-  const component = render(<BalanceUpdate userId={1}/>);
-  const currentBalance = component.getByTestId("current-balance")
-
-  expect(currentBalance.textContent).toBe("$ 0")
-})
