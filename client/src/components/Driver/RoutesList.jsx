@@ -1,62 +1,70 @@
 import React from 'react';
-import dummyRoutes from './dummyData';
+import axios from 'axios';
+
+import Table from './Table';
 
 class RoutesList extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      routes: [],
-      driverName: 'testDriverName',
-      date: new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' })
+
     };
+
+    this.cancelRoute = this.cancelRoute.bind(this);
+    this.showRoute = this.showRoute.bind(this);
   }
 
-  componentDidMount() {
-    this.getRoutes();
+  cancelRoute(e) {
+    const row = e.currentTarget.parentNode;
+    const rows = row.parentNode.childNodes;
+
+    rows.forEach(row => {
+      row.style['background-color'] = '';
+    });
+
+    this.props.selectRoute({});
+
+    const routeId = e.target.id;
+
+    axios.put(`/api/drivers/routes`, { routeId })
+      .then(res => {
+        this.props.getRoutes();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
-  getRoutes() {
-    console.log('fetched routes');
-    // fetch routes from DB, set routes state with results
+  showRoute(e) {
+    const target = e.currentTarget.parentNode.childNodes;
+    const row = e.currentTarget.parentNode;
+    const rows = row.parentNode.childNodes;
 
-    // dummy data for now
-    this.setState({
-      routes: dummyRoutes
+    rows.forEach(row => {
+      row.style['background-color'] = '';
+    });
+
+    row.style['background-color'] = 'rgb(20, 213, 104)';
+
+    const routeId = Number(target[0].id);
+
+    this.props.routes.forEach(route => {
+      if (route.id === routeId) {
+        this.props.selectRoute(route);
+        return;
+      }
     });
   }
 
-  cancelRoute() {
-    console.log('route cancelled');
-
-    // send delete request to DB for given routeId
-    // fetch routes from DB
-  }
-
-  // connect click handlers to DB
-  // more css
-
   render() {
-    const routes = this.state.routes;
+    const date = new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' });
 
     return(
       <div id="routes-list-wrapper">
-        <div id="routes-list-intro">Hi, {this.state.driverName}! Here are your listed routes for today, {this.state.date}:</div>
-        <div id="list-headers"><span id="start">Start</span><span id="end">End</span><span id="departure">Departure</span><span id="seats">Seats</span></div>
+        <div id="routes-list-intro">Hi, {this.props.driverName}! Here are your listed routes for today, {date}:</div>
         <div id="routes-list">
-          <tbody id="routes-table">
-            {routes.map((route, i) => {
-              return(
-                <tr key={i}>
-                  <span className="cancel" onClick={this.cancelRoute}>X</span>
-                  <td>{route.start}</td>
-                  <td>{route.end}</td>
-                  <td>{route.departure}</td>
-                  <td>{route.seats}</td>
-                </tr>
-              );
-            })}
-          </tbody>
+          <Table routes={this.props.routes} cancelRoute={this.cancelRoute} showRoute={this.showRoute}/>
         </div>
       </div>
     );

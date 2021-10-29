@@ -1,66 +1,29 @@
-label, input{
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-input {
-  width: 50%;
-}
-
 #driver-wrapper {
   display: flex;
   flex-direction: column;
   align-content: space-between;
   justify-content: space-between;
+  width: 100%;
 }
 
-.cancel {
-  color: red;
+#routes-list-wrapper {
+  margin-bottom: 30px;
+  padding: 30px 10px 10px 30px;
+}
+
+#routes-list-intro {
+  margin-top: -40px;
+  margin-bottom: 20px;
   font-weight: bold;
-  margin-right: -10px;
-}
-
-.cancel:hover {
-  cursor: pointer;
+  width: 370px;
+  max-width: 90vw;
 }
 
 #routes-list {
   overflow: auto;
   height: 200px;
-  width: 55vh;
-}
-
-#routes-list-wrapper {
-  width: 50vh;
-  margin-bottom: 30px;
-}
-
-#routes-list-intro {
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-#list-headers {
-  font-weight: bold;
-  width: 55vh;
-  margin-left: 30px;
-}
-
-#end {
-  margin-left: 65px;
-}
-
-#departure {
-  margin-left: 50px;
-}
-
-#seats {
-  margin-left: 15px;
-}
-
-#list-headers span {
-  padding-left: 10px;
-  padding-right: 10px;
+  width: 360px;
+  max-width: 90vw;
 }
 
 .list-item {
@@ -69,12 +32,57 @@ input {
   align-content: space-between;
 }
 
-#routes-table td {
-  padding-left: 24px;
+thead {
+  position: sticky;
+  top: 0px;
+  background-color: white;
+}
+
+#table-header {
+  border-width: 1px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(177, 177, 177);
+  width: inherit;
+}
+
+td {
   overflow-wrap: anywhere;
-  width: 20vh;
+}
+
+#pick-up {
+  margin-left: 15px;
+}
+
+#departure {
+  margin-right: 10px;
+}
+
+.table-row:hover {
+  cursor: pointer;
+}
+
+.cancel {
+  color: red;
+  font-weight: bold;
+  margin-right: 10px;
+
+}
+
+.cancel:hover {
+  cursor: pointer;
 }
 
 #make-new-route {
-  width: 100px;
+  margin: auto;
+  margin-top: 2em;
+  color: white;
+  display: block;
+  background-color: rgb(20, 213, 104);
+  width: 12em;
+  height: 4em;
+  border: none;
+  border-radius: 2em;
+  text-transform: uppercase;
+  font-weight: bold;
 }

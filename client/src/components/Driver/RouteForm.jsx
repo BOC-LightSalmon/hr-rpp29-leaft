@@ -3,25 +3,34 @@ import axios from 'axios';
 import './routeForm.css'
 
 class RouteForm extends React.Component {
-  constructor() {
-    super()
-    this.submitHandle = this.submitHandle.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+  constructor(props) {
+    super(props);
+
     this.state = {
       // change driver ID to login user ID
-      driver_id: 1,
+      // driver_id: 1,
       pickUp: '',
       dropOff: '',
       departure: '',
       seats: '',
-      date: '',
-      zip: ''
-    }
+      date: ''
+    };
+
+    this.submitHandle = this.submitHandle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   submitHandle(event) {
-    axios.post('/api/drivers/create', this.state)
     event.preventDefault();
+
+    axios.post('/api/drivers/create', this.state)
+      .then(() => {
+        this.props.getRoutes();
+        this.props.closeForm();
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   handleChange(event) {
@@ -33,9 +42,10 @@ class RouteForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="modal">
+        <div id="close-button" onClick={this.props.closeForm}>X</div>
         <h2 id="form_title">Enter your ride info: </h2>
-        <form className='route_form' onSubmit={this.submitHandle}>
+        <form className="route_form" onSubmit={this.submitHandle}>
           <label>
             Pick-Up Location:
             <br></br>
@@ -52,13 +62,6 @@ class RouteForm extends React.Component {
           <br></br>
           <table>
             <tbody>
-              <tr>
-                <td>ZIP:</td>
-                <td>
-                  <input type="zipcode" id="zip"
-                    value={this.state.zip} onChange={this.handleChange} />
-                </td>
-              </tr>
               <tr>
                 <td>Date:</td>
                 <td> <input type="date" id="date"
