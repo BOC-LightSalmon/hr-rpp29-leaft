@@ -12,11 +12,13 @@ class Driver extends React.Component {
     this.state = {
       // logic for showing/hiding various forms/notifications
       routes: [],
+      selectedRoute: {},
       driverName: 'testDriverName',
       loaded: false
     };
 
     this.getRoutes = this.getRoutes.bind(this);
+    this.selectRoute = this.selectRoute.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +28,10 @@ class Driver extends React.Component {
   showForm() {
     console.log('submit route form should pop up');
     // logic to show submit route form
+  }
+
+  selectRoute(e) {
+    console.log('select route');
   }
 
   getRoutes() {
