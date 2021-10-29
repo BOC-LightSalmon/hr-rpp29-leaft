@@ -32,12 +32,13 @@ class Driver extends React.Component {
     axios.get('/api/drivers/routes')
     .then(res => {
       const data = res.data;
-      console.log(data);
 
       data.forEach(route => {
         route.pickUpCoords = { lat: Number(route.latPickUp), lng: Number(route.lngPickUp) };
         route.dropOffCoords = { lat: Number(route.latDropOff), lng: Number(route.lngDropOff) };
       });
+
+      console.log(data);
 
       this.setState({
         routes: data,

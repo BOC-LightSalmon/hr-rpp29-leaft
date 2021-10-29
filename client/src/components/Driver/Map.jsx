@@ -8,7 +8,7 @@ class Map extends React.Component {
 
     this.state = {
       google: window.google,
-      zoom: 15,
+      zoom: 11,
       center: this.props.routes[0].pickUpCoords,
       key: '',
       loaded: false
@@ -28,9 +28,6 @@ class Map extends React.Component {
      });
   }
 
-  // add custom markers
-  // get lat and lng from routes list, display on map via markers
-
   render() {
     if (this.state.loaded) {
       const style = {
@@ -42,6 +39,8 @@ class Map extends React.Component {
         paddingLeft: '2%'
       };
 
+      const Marker = ({ text, lat, lng }) => <div>{text}</div>;
+
       return(
         <div style={style}>
           <GoogleMapReact
@@ -49,6 +48,8 @@ class Map extends React.Component {
             defaultCenter={this.state.center}
             defaultZoom={this.state.zoom}
           >
+             <Marker lat={this.props.routes[0].pickUpCoords.lat} lng={this.props.routes[0].pickUpCoords.lng} text='✅' id="map-start" />
+             <Marker lat={this.props.routes[0].dropOffCoords.lat} lng={this.props.routes[0].dropOffCoords.lng} text='🛑' id="map-end" />
           </GoogleMapReact>
         </div>
       );
