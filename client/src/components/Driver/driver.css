@@ -32,10 +32,6 @@
   align-content: space-between;
 }
 
-#make-new-route {
-  width: 100px;
-}
-
 thead {
   position: sticky;
   top: 0px;
@@ -88,4 +84,5 @@ td {
   border: none;
   border-radius: 2em;
   text-transform: uppercase;
+  font-weight: bold;
 }

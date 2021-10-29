@@ -25,6 +25,13 @@ class Driver extends React.Component {
 
   componentDidMount() {
     this.getRoutes();
+
+    document.addEventListener('click', (e) => {
+      if ((e.target.parentNode.id === 'driver-container' || e.target.parentNode.id === 'driver-wrapper' || e.target.parentNode.getAttribute('aria-label') === 'Map') && e.target.id !== 'make-new-route' && e.target.className !== 'modal') {
+
+        this.closeForm();
+      }
+    }, false);
   }
 
   showForm() {

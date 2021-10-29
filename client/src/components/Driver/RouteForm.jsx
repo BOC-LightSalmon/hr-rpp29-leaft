@@ -26,12 +26,11 @@ class RouteForm extends React.Component {
     axios.post('/api/drivers/create', this.state)
       .then(() => {
         this.props.getRoutes();
+        this.props.closeForm();
       })
       .catch(err => {
         console.log(err);
       });
-
-    // clear form after submit
   }
 
   handleChange(event) {
@@ -43,9 +42,10 @@ class RouteForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="modal">
+        <div id="close-button" onClick={this.props.closeForm}>X</div>
         <h2 id="form_title">Enter your ride info: </h2>
-        <form className='route_form' onSubmit={this.submitHandle}>
+        <form className="route_form" onSubmit={this.submitHandle}>
           <label>
             Pick-Up Location:
             <br></br>
