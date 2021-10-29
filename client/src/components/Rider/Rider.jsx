@@ -4,13 +4,13 @@ import MapContainer from './MapContainer';
 const Rider = (props) => {
   const [center, setCenter] = useState({lat: 37.658428, lng: -121.876999});
   const [zoom, setZoom] = useState(11);
-  const [riderLocation, setRiderLocation] = useState(94588);
+  const [riderLocation, setRiderLocation] = useState({lat: 37.70, lng: -121.876999});
   const [nearbyRides, setNearbyRides] = useState([]); 
   // ^ this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
 
   // will need useEffect to fetch data from database and change state accordingly
   useEffect(() => {
-    setNearbyRides([{start: 'muirwood park', zip: '94588'}, {start: 'dublin CA', zip: '94588'}]);
+    setNearbyRides([{lat: 37.65, lng: -121.876990}, {lat: 37.658434, lng: -121.876995}]);
   }, []);
 
   return (
