@@ -10,11 +10,13 @@ const Route = db.define('route', {
   },
   driver_id: Sequelize.INTEGER,
   rider_id: Sequelize.INTEGER,
-  date: Sequelize.DATE,
-  start: Sequelize.STRING,
-  end: Sequelize.STRING,
+  departure: Sequelize.STRING,
+  date: Sequelize.DATEONLY,
+  pickUp: Sequelize.STRING,
+  dropOff: Sequelize.STRING,
   zip: Sequelize.STRING,
-  },
+  seats: Sequelize.STRING
+},
 );
 
 Route.belongsTo(User, {

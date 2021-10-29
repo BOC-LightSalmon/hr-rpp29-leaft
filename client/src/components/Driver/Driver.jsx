@@ -1,5 +1,4 @@
 import React from 'react';
-
 import RouteForm from './RouteForm';
 import Map from './Map';
 import RoutesList from './RoutesList';
@@ -31,6 +30,7 @@ class Driver extends React.Component {
       </div>
     );
   }
+
 }
 
 export default Driver;

@@ -3,6 +3,6 @@ const driverRouter = express.Router();
 const driverControllers = require('../controllers/driverControllers');
 
 // define routes
-driverRouter.get('/create', driverControllers.createRoute);
+driverRouter.post('/create', driverControllers.createRoute);
 
 module.exports = driverRouter;
