@@ -38,7 +38,7 @@ class RoutesList extends React.Component {
   cancelRoute(e) {
     const routeId = e.target.id;
 
-    axios.put(`/api/drivers/routes/`, { routeId })
+    axios.put(`/api/drivers/routes`, { routeId })
       .then(res => {
         this.getRoutes();
       })
