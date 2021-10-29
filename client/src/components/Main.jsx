@@ -10,7 +10,7 @@ class Main extends React.Component {
     this.riderHandle = this.riderHandle.bind(this)
     this.state = {
       driver: false,
-      rider: false 
+      rider: false
     }
   }
 
