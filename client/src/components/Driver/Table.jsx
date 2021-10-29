@@ -1,93 +1,72 @@
-// import React from 'react';
+import React from 'react';
+import { useTable, useFlexLayout } from 'react-table';
 
-// import { useTable } from 'react-table';
+const Table = ({ routes, cancelRoute, showRoute }) => {
+  const data = React.useMemo(() => routes, [routes]);
 
-// const Table = (props) => {
-//   // const routes = props.routes;
+  const columns = React.useMemo(() => [
+    {
+      Header: 'Pick-Up',
+      accessor: 'pickUp'
+    },
+    {
+      Header: 'Drop-Off',
+      accessor: 'dropOff'
+    },
+    {
+      Header: 'Departure',
+      accessor: 'departure'
+    }
+  ], []);
 
-//   const data = React.useMemo(() => [
-//     {
-//       start: '1 Main St',
-//       end: '1 Oak St',
-//       departure: '1:00PM',
-//       seats: 3
-//     },
-//     {
-//       start: '5 Main St',
-//       end: '5 Oak St',
-//       departure: '5:00PM',
-//       seats: 3
-//     },
-//     {
-//       start: '10 Main St',
-//       end: '10 Oak St',
-//       departure: '10:00PM',
-//       seats: 3
-//     },
-//     {
-//       start: '1 Main St',
-//       end: '1 Oak St',
-//       departure: '1:00PM',
-//       seats: 3
-//     },
-//   ], []);
+  const defaultColumn = React.useMemo(
+    () => ({
+      minWidth: 10,
+      width: 150,
+      maxWidth: 90,
+    }),
+    []
+  );
 
-//   const columns = React.useMemo(() => [
-//     {
-//       Header: 'Start',
-//       accessor: 'routes.start'
-//     },
-//     {
-//       Header: 'End',
-//       accessor: 'routes.end'
-//     },
-//     {
-//       Header: 'Departure',
-//       accessor: 'routes.departure'
-//     },
-//     {
-//       Header: 'Seats',
-//       accessor: 'routes.seats'
-//     }
-//   ], []);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({
+    columns,
+    data,
+    defaultColumn
+  },
+  useFlexLayout);
 
-//   const {
-//     getTableProps,
-//     getTableBodyProps,
-//     headerGroups,
-//     rows,
-//     prepareRow,
-//   } = useTable({
-//     columns,
-//     data
-//   });
+  return(
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()} id="table-header">
+            {headerGroup.headers.map(column => (
+              <th {...column.getHeaderProps()} id={column.Header.toLowerCase()}>{column.render('Header')}</th>
+            ))}
+        </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map((row, i) => {
+          prepareRow(row);
+          return(
+            <tr {...row.getRowProps()} className="table-row">
+              <td className="cancel" onClick={cancelRoute} id={row.original.id}>X</td>
+              {row.cells.map((cell) => {
+                return <td {...cell.getCellProps()} onClick={showRoute}>{cell.render('Cell')}</td>
+              })}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};
 
-//   return(
-//     // <div>this is a table</div>
-//     <table {...getTableProps()}>
-//       <thead>
-//         {headerGroups.map(headerGroup => (
-//           <tr {...headerGroup.getHeaderGroupProps()}>
-//             {headerGroup.headers.map(column => (
-//               <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-//             ))}
-//         </tr>
-//         ))}
-//       </thead>
-//       <tbody {...getTableBodyProps()}>
-//         {rows.map((row, i) => {
-//           prepareRow(row);
-//           return(
-//             <tr {...row.getRowProps()}>
-//               {row.cells.map((cell) => {
-//                 return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-//               })}
-//             </tr>
-//           );
-//         })}
-//       </tbody>
-//     </table>
-//   );
-// };
-
-// export default Table;
+export default Table;

@@ -13,10 +13,7 @@
     "body-parser": "^1.18.3",
     "dotenv": "^10.0.0",
     "express": "^4.16.4",
-    "google-map-react": "^2.1.10",
     "mysql2": "^2.3.2",
-    "react-table": "^7.7.0",
-    "sass": "^1.43.4",
     "sequelize": "^6.8.0"
   },
   "devDependencies": {
