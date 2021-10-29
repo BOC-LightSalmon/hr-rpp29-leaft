@@ -3,9 +3,15 @@ const axios = require('axios');
 const Route = require('../../db/models/routes');
 
 const createRoute = async (req, res) => {
-  const route = await Route.create(req.body)
-  console.log(' save route to db successfully')
-  res.status(201)
+  const data = req.body;
+
+  // console.log('create route data', data);
+
+  const route = await Route.create(req.body);
+
+  console.log('saved route to db successfully');
+
+  res.status(201);
 }
 
 const getRoutes = async (req, res) => {

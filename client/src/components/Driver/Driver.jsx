@@ -2,6 +2,7 @@ import React from 'react';
 import RouteForm from './RouteForm';
 import Map from './Map';
 import RoutesList from './RoutesList';
+import './driver.css';
 
 class Driver extends React.Component {
   constructor(props) {
@@ -29,7 +30,6 @@ class Driver extends React.Component {
       </div>
     );
   }
-
 }
 
 export default Driver;
