@@ -30,8 +30,10 @@ class Driver extends React.Component {
     // logic to show submit route form
   }
 
-  selectRoute(e) {
-    console.log('select route');
+  selectRoute(route) {
+    this.setState({
+      selectedRoute: route
+    });
   }
 
   getRoutes() {
@@ -62,8 +64,8 @@ class Driver extends React.Component {
         <div id="driver-container">
           <button onClick={this.props.driverHandle}>BACK</button>
           <div id="driver-wrapper">
-            <Map routes={this.state.routes} />
-            <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} />
+            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute}/>
+            <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
             <RouteForm getRoutes={this.getRoutes}/>
             <button onClick={this.showForm} id="make-new-route">Make New Route</button>
           </div>

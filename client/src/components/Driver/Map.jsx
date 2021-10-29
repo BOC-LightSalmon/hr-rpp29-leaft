@@ -39,8 +39,9 @@ class Map extends React.Component {
     };
 
     const Marker = ({ text, lat, lng }) => <div>{text}</div>;
+    const selectedRoute = this.props.selectedRoute;
 
-    if (this.state.loaded && this.props.routes.length !== 0) {
+    if (this.state.loaded && selectedRoute.departure !== undefined) {
       return(
         <div style={style}>
           <GoogleMapReact
@@ -48,12 +49,12 @@ class Map extends React.Component {
             defaultCenter={this.state.center}
             defaultZoom={this.state.zoom}
           >
-               <Marker lat={this.props.routes[0].pickUpCoords.lat} lng={this.props.routes[0].pickUpCoords.lng} text='✅' id="map-start" />
-               <Marker lat={this.props.routes[0].dropOffCoords.lat} lng={this.props.routes[0].dropOffCoords.lng} text='🛑' id="map-end" />
+               <Marker lat={selectedRoute.pickUpCoords.lat} lng={selectedRoute.pickUpCoords.lng} text='✅' id="map-start" />
+               <Marker lat={selectedRoute.dropOffCoords.lat} lng={selectedRoute.dropOffCoords.lng} text='🛑' id="map-end" />
           </GoogleMapReact>
         </div>
       );
-    } else if (this.state.loaded && this.props.routes.length === 0) {
+    } else if (this.state.loaded && !selectedRoute.departure) {
       return(
         <div style={style}>
           <GoogleMapReact

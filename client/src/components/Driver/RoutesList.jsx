@@ -28,27 +28,17 @@ class RoutesList extends React.Component {
   }
 
   showRoute(e) {
-    const getRouteDetails = (e) => {
-      e = e.parentNode.childNodes;
+    e = e.currentTarget.parentNode.childNodes;
 
-      console.log(e);
+    const routeId = Number(e[0].id);
 
-      const output = {
-        id: e[0].id,
-        pickUp: e[1].innerHTML,
-        dropOff: e[2].innerHTML,
-        departure: e[3].innerHTML
-      };
-
-      return output;
-    };
-
-    console.log('selected the following route:', getRouteDetails(e.currentTarget));
-
-    // connect this click event to live-update the map
+    this.props.routes.forEach(route => {
+      if (route.id === routeId) {
+        this.props.selectRoute(route);
+        return;
+      }
+    });
   }
-
-  // more css to match wireframe, web/mobile etc
 
   render() {
     const date = new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' });
