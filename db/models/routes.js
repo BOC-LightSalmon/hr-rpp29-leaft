@@ -14,9 +14,9 @@ const Route = db.define('route', {
   date: Sequelize.DATEONLY,
   pickUp: Sequelize.STRING,
   dropOff: Sequelize.STRING,
-  seats: Sequelize.INTEGER,
   zip: Sequelize.STRING,
-  },
+  seats: Sequelize.STRING
+},
 );
 
 Route.belongsTo(User, {

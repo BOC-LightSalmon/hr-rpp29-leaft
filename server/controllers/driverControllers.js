@@ -3,7 +3,9 @@ const axios = require('axios');
 const Route = require('../../db/models/routes');
 
 const createRoute = async (req, res) => {
-
+  const route = await Route.create(req.body)
+  console.log(' save route to db successfully')
+  res.status(201)
 }
 
 const getRoutes = async (req, res) => {
@@ -22,21 +24,8 @@ const cancelRoute = async (req, res) => {
   res.send('canceled route');
 };
 
-const dummyCreate = async (req, res) => {
-  const testRoute = await Route.create({
-    pickUp: '20 Main St',
-    dropOff: '40 Oak St',
-    departure: '1:00PM',
-    seats: 3,
-    zip: '10000'
-   });
-
-   res.send('created route');
-}
-
 module.exports = {
   createRoute,
   getRoutes,
-  cancelRoute,
-  dummyCreate
+  cancelRoute
 };

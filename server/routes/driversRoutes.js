@@ -6,7 +6,4 @@ driverRouter.post('/create', driverControllers.createRoute);
 driverRouter.get('/routes', driverControllers.getRoutes);
 driverRouter.put('/routes', driverControllers.cancelRoute);
 
-// for dev/testing purposes only
-driverRouter.get('/dummyCreate', driverControllers.dummyCreate);
-
 module.exports = driverRouter;
