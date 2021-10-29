@@ -22,7 +22,7 @@ class RoutesList extends React.Component {
   }
 
   getRoutes() {
-    axios.get('http://localhost:5000/api/drivers/routes')
+    axios.get('/api/drivers/routes')
       .then(res => {
         console.log(res.data);
 
@@ -38,7 +38,7 @@ class RoutesList extends React.Component {
   cancelRoute(e) {
     const routeId = e.target.id;
 
-    axios.put(`http://localhost:5000/api/drivers/routes/`, { routeId })
+    axios.put(`/api/drivers/routes/`, { routeId })
       .then(res => {
         this.getRoutes();
       })
