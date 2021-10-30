@@ -60,14 +60,13 @@ const transfer = async (req, res) => {
 
         await User.decrement('balance', {
           by: parseFloat(amount),
-          where: { email: userIdSending }
+          where: { id: userIdSending }
         })
         res.sendStatus(201)
       }
 
     } else {
       res.sendStatus(404)
-      console.log('not found')
     }
 
   } catch (err) {

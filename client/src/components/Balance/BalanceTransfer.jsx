@@ -6,13 +6,14 @@ function BalanceTransfer({ userId }) {
   const [ currentBalance, setCurrentBalance ] = useState(0);
   const [ amount, setAmount ] = useState('');
   const [ driverEmail, setDriverEmail ] = useState('');
-  const [ displayBalanceError, setDisplayBalanceError ] = useState(false);
-  const [ displaySelfError, setDisplaySelfError ] = useState(false);
-  const [ displayNotFoundError, setDisplayNotFoundError ] = useState(false);
-  const [ displaySuccessMessage, setDisplaySuccessMessage ] = useState(false);
-  const [ displayTipForm, setDisplayTipForm ] = useState(true);
 
-
+  const [ displayToggles, setDisplayToggles ] = useState({
+    displayBalanceError: false,
+    displaySelfError: false,
+    displayNotFoundError: false,
+    displaySuccessMessage: false,
+    displayTipForm: true
+  })
 
   const getUserBalance = async () => {
       const { data } = await BalanceAPIutils.getBalance(userId)
@@ -21,31 +22,44 @@ function BalanceTransfer({ userId }) {
 
   const handleSend = async () => {
     try {
-      setDisplaySuccessMessage(false)
-      setDisplaySelfError(false);
-      setDisplayNotFoundError(false);
+      setDisplayToggles({
+        displayBalanceError: false,
+        displaySelfError: false,
+        displayNotFoundError: false,
+        displaySuccessMessage: false,
+        displayTipForm: true
+      })
+
       if (amount > currentBalance) {
-        setDisplayBalanceError(true)
+        setDisplayToggles({
+          ...displayToggles,
+          displayBalanceError: true,
+          displaySelfError: false
+        })
       } else {
-        setDisplayBalanceError(false)
+        setDisplayToggles({...displayToggles, displayBalanceError: false})
         await BalanceAPIutils.transfer(userId, driverEmail, amount)
-        setDisplaySuccessMessage(true)
-        setDisplayTipForm(false)
+        setDisplayToggles({
+          displaySuccessMessage: true,
+          displayTipForm: false
+        })
         getUserBalance()
       }
     } catch (err) {
       if (err.response.status === 405) {
-        setDisplaySelfError(true)
+        setDisplayToggles({...displayToggles, displaySelfError: true})
       }
       if (err.response.status === 404) {
-        setDisplayNotFoundError(true)
+        setDisplayToggles({...displayToggles, displayNotFoundError: true})
       }
     }
   }
 
   const handleBackToFormClick = () => {
-    setDisplayTipForm(true);
-    setDisplaySuccessMessage(false)
+    setDisplayToggles({
+      displaySuccessMessage: false,
+      displayTipForm: true
+    })
   }
 
   useEffect(() => {
@@ -57,7 +71,7 @@ function BalanceTransfer({ userId }) {
   return (
     <div>
       <CurrentBalance currentBalance={currentBalance}/>
-      {displayTipForm &&
+      {displayToggles.displayTipForm &&
         <div>
           <div>
             <label>Enter email address of driver:</label>
@@ -81,19 +95,19 @@ function BalanceTransfer({ userId }) {
           </div>
         </div>
       }
-      {displayBalanceError &&
+      {displayToggles.displayBalanceError &&
         <div className="balance-error">You cannot send more than your current balance</div>
       }
-      {displaySelfError &&
+      {displayToggles.displaySelfError &&
         <div className="balance-error">You cannot send money to yourself</div>
       }
-      {displayNotFoundError &&
+      {displayToggles.displayNotFoundError &&
         <div>
           <div className="balance-error">There is no user found with this email address</div>
           <div className="balance-error">Please Try Again</div>
         </div>
       }
-      {displaySuccessMessage &&
+      {displayToggles.displaySuccessMessage &&
         <div>
           <div>Success!</div>
           <div>You just send $ {amount} to {driverEmail}</div>
