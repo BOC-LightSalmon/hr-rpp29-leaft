@@ -1,49 +1,40 @@
 import React from 'react';
+import { Route, Switch, Link, useRouteMatch } from 'react-router-dom';
 import Driver from './Driver/Driver.jsx';
 import Rider from './Rider/Rider'
 
 
-class Main extends React.Component {
-  constructor(props){
-    super(props);
-    this.driverHandle = this.driverHandle.bind(this)
-    this.riderHandle = this.riderHandle.bind(this)
-    this.state = {
-      driver: false,
-      rider: false 
-    }
-  }
+const Main = () => {
 
-  driverHandle () {
-    this.setState ({
-      driver: !this.state.driver
-    })
-  }
+   const match = useRouteMatch();
 
-  riderHandle () {
-    console.log(this.state.rider)
-    this.setState ({
-      rider: !this.state.rider
-    })
-  }
-
-  render () {
-    const {driver, rider} = this.state;
-    if(driver === true) {
-      return (<Driver driverHandle={this.driverHandle}/>)
-    }
-    if(rider === true) {
-      return (<Rider riderHandle={this.riderHandle}/>)
-    }
-    return (
+  return (
       <div>
-        <button onClick={this.props.loginHandle}>BACK</button>
-        <h3>Main page</h3>
-        <button onClick={this.driverHandle}>Driver</button>
-        <button onClick={this.riderHandle}>Rider</button>
+        <Switch>  
+          <Route exact path="/main">  
+            <Link to="/">
+              <button>BACK</button>
+            </Link>
+            <h3>Main page</h3>
+            <Link to={`${match.url}/driver`}>
+              <button>Driver</button>
+            </Link>
+            <Link to={`${match.url}/rider`}>
+              <button>Rider</button>
+            </Link>
+          </Route>
+
+          <Route path={`${match.url}/driver`}>
+            <Driver />
+          </Route>
+
+          <Route path={`${match.url}/rider`}>
+            <Rider />
+          </Route>
+          
+        </Switch>
       </div>
     )
-  }
 }
 
 export default Main;

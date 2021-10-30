@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import RouteForm from './RouteForm';
 import Map from './Map';
@@ -78,7 +79,9 @@ class Driver extends React.Component {
     if (this.state.loaded) {
       return(
         <div id="driver-container">
-          <button onClick={this.props.driverHandle}>BACK</button>
+          <Link to="/main">
+            <button>BACK</button>
+          </Link>
           <div id="driver-wrapper">
             <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute}/>
             <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
 import './App.scss';
@@ -7,45 +8,39 @@ import './App.scss';
 class App extends React.Component {
   constructor() {
     super();
-    this.signUpHandle = this.signUpHandle.bind(this);
-    this.loginHandle = this.loginHandle.bind(this);
     this.state = {
-      signUp: false,
-      login: false
+
     }
-  }
-
-  signUpHandle() {
-    this.setState({
-      signUp: !this.state.signUp
-    })
-  }
-
-  loginHandle() {
-    this.setState({
-      login: !this.state.login
-    })
   }
 
 
   render() {
-    const { signUp, login } = this.state;
-    if (signUp === true) {
-      return (<SignUp signUpHandle={this.signUpHandle}/>)
-    }
-    if (login === true) {
-      return (<Main loginHandle={this.loginHandle}/>)
-    }
+    return (
+      <Router>
+        <Switch>
+          <Route path="/main" >
+            <Main />
+          </Route>
 
-    else {
-      return (
-        <div className="App">
-          <h1>LEAFT</h1>
-          <button onClick={this.loginHandle}>Login</button>
-          <button onClick={this.signUpHandle}>Sign up</button>
-        </div>
-      )
-    }
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+
+          <Route path="/">
+            <div className="App">
+              <h1>LEAFT</h1>
+              <Link to="/main">
+                <button>Login</button>
+              </Link>
+              <Link to="signup">
+                <button>Sign up</button>
+              </Link>
+            </div>
+          </Route>
+          
+        </Switch>
+      </Router>
+    )
   }
 }
 
