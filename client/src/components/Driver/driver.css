@@ -21,7 +21,7 @@
 
 #routes-list {
   overflow: auto;
-  height: 200px;
+  height: 280px;
   width: 360px;
   max-width: 90vw;
 }
