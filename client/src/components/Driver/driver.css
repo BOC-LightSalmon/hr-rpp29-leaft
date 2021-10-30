@@ -15,14 +15,14 @@
   margin-top: -40px;
   margin-bottom: 20px;
   font-weight: bold;
-  width: 370px;
+  width: 90vw;
   max-width: 90vw;
 }
 
 #routes-list {
   overflow: auto;
-  height: 200px;
-  width: 360px;
+  height: 30vh;
+  width: 90vw;
   max-width: 90vw;
 }
 
@@ -85,4 +85,22 @@ td {
   border-radius: 2em;
   text-transform: uppercase;
   font-weight: bold;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  padding: 6px;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  margin-left: 20px;
+  position: absolute;
+  top: 2%;
+  left: 1%;
+  z-index: 1;
 }
