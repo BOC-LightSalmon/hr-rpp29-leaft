@@ -10,7 +10,8 @@ const Main = () => {
 
   return (
       <div>
-        <Switch>  
+        <Switch>
+     
           <Route exact path="/main">  
             <Link to="/">
               <button>BACK</button>
