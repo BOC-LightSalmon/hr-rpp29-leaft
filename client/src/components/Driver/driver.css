@@ -1,14 +1,88 @@
-.route_form {
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
+#driver-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  justify-content: space-between;
+  width: 100%;
 }
 
-label, input{
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+#routes-list-wrapper {
+  margin-bottom: 30px;
+  padding: 30px 10px 10px 30px;
 }
 
-input {
-  width: 50%;
+#routes-list-intro {
+  margin-top: -40px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  width: 370px;
+  max-width: 90vw;
+}
+
+#routes-list {
+  overflow: auto;
+  height: 200px;
+  width: 360px;
+  max-width: 90vw;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+
+thead {
+  position: sticky;
+  top: 0px;
+  background-color: white;
+}
+
+#table-header {
+  border-width: 1px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgb(177, 177, 177);
+  width: inherit;
+}
+
+td {
+  overflow-wrap: anywhere;
+}
+
+#pick-up {
+  margin-left: 15px;
+}
+
+#departure {
+  margin-right: 10px;
+}
+
+.table-row:hover {
+  cursor: pointer;
+}
+
+.cancel {
+  color: red;
+  font-weight: bold;
+  margin-right: 10px;
+
+}
+
+.cancel:hover {
+  cursor: pointer;
+}
+
+#make-new-route {
+  margin: auto;
+  margin-top: 2em;
+  color: white;
+  display: block;
+  background-color: rgb(20, 213, 104);
+  width: 12em;
+  height: 4em;
+  border: none;
+  border-radius: 2em;
+  text-transform: uppercase;
+  font-weight: bold;
 }
