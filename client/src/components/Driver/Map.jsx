@@ -18,7 +18,7 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('click', (e) => {
+    document.getElementById('routes-list').addEventListener('click', (e) => {
       const parentNode = e.target.parentNode.parentNode.parentNode;
 
       if (parentNode.getAttribute('role') === 'table') {
