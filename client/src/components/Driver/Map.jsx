@@ -7,15 +7,25 @@ class Map extends React.Component {
     super(props);
 
     this.state = {
-      google: window.google,
       zoom: 11,
       center: this.props.selectedRoute.departure !== undefined ? this.props.selectedRoute.pickUpCoords : { lat: 40.7580, lng: -73.9855 },
       key: '',
-      loaded: false
+      loaded: false,
+      reRender: true
     };
+
+    this.reRender = this.reRender.bind(this);
   }
 
   componentDidMount() {
+    document.getElementById('routes-list').addEventListener('click', (e) => {
+      const parentNode = e.target.parentNode.parentNode.parentNode;
+
+      if (parentNode.getAttribute('role') === 'table') {
+        this.reRender();
+      }
+    }, false);
+
     axios.get('/api/key')
      .then(res => {
       this.setState({
@@ -28,30 +38,54 @@ class Map extends React.Component {
      });
   }
 
+  reRender() {
+    this.setState({
+      reRender: !this.state.reRender
+    });
+  }
+
   render() {
     const style = {
-      width: '45vh',
+      width: '100vw',
       height: '45vh',
       marginBottom: '30px',
-      maxHeight: '45vh',
-      maxWidth: '45vh',
-      paddingLeft: '1.5%'
+      marginTop: '-17px'
     };
-
-    const Marker = ({ text, lat, lng }) => <div>{text}</div>;
 
     const selectedRoute = this.props.selectedRoute;
 
+    const apiIsLoaded = (map, maps) => {
+      const directionsService = new window.google.maps.DirectionsService();
+      const directionsRenderer = new window.google.maps.DirectionsRenderer();
+      directionsRenderer.setMap(map);
+      const origin = selectedRoute.pickUpCoords;
+      const destination = selectedRoute.dropOffCoords;
+
+      directionsService.route({
+          origin,
+          destination,
+          travelMode: window.google.maps.TravelMode.DRIVING
+        }, (result, status) => {
+            if (status === window.google.maps.DirectionsStatus.OK) {
+              directionsRenderer.setDirections(result);
+            } else {
+              console.log('error', result);
+            }
+        }
+      );
+    };
+
     if (this.state.loaded && selectedRoute.departure !== undefined) {
       return(
-        <div style={style}>
+        <div style={style} >
           <GoogleMapReact
             bootstrapURLKeys={{ key: this.state.key }}
             defaultCenter={this.state.center}
             defaultZoom={this.state.zoom}
+            yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={({ map, maps }) => apiIsLoaded(map, maps)}
+            key={this.state.reRender}
           >
-               <Marker lat={selectedRoute.pickUpCoords.lat} lng={selectedRoute.pickUpCoords.lng} text='✅' id="map-start" />
-               <Marker lat={selectedRoute.dropOffCoords.lat} lng={selectedRoute.dropOffCoords.lng} text='🛑' id="map-end" />
           </GoogleMapReact>
         </div>
       );

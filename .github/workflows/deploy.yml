@@ -22,6 +22,7 @@ jobs:
           echo PORT=5000 >> .env
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
           echo MAPS_API_KEY=${{ secrets.MAPS_API_KEY }} >> .env
+          echo MAPS_SERVER_API_KEY=${{ secrets.MAPS_SERVER_API_KEY }} >> .env
           cat .env
           
       - name: Install node dependencies

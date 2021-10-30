@@ -27,8 +27,7 @@ class Driver extends React.Component {
     this.getRoutes();
 
     document.addEventListener('click', (e) => {
-      if ((e.target.parentNode.id === 'driver-container' || e.target.parentNode.id === 'driver-wrapper' || e.target.parentNode.getAttribute('aria-label') === 'Map') && e.target.id !== 'make-new-route' && e.target.className !== 'modal') {
-
+      if (!e.target.closest('.modal') && e.target.id !== 'make-new-route') {
         this.closeForm();
       }
     }, false);
@@ -55,14 +54,14 @@ class Driver extends React.Component {
   getRoutes() {
     axios.get('/api/drivers/routes')
     .then(res => {
-      const data = res.data;
+      let data = res.data;
 
       data.forEach(route => {
         route.pickUpCoords = { lat: Number(route.latPickUp), lng: Number(route.lngPickUp) };
         route.dropOffCoords = { lat: Number(route.latDropOff), lng: Number(route.lngDropOff) };
       });
 
-      console.log(data);
+      data.sort((a, b) => Number(a.departure.replace(':', '')) - Number(b.departure.replace(':', '')));
 
       this.setState({
         routes: data,
@@ -78,9 +77,9 @@ class Driver extends React.Component {
     if (this.state.loaded) {
       return(
         <div id="driver-container">
-          <button onClick={this.props.driverHandle}>BACK</button>
+          <p><i onClick={this.props.driverHandle} className="arrow left"></i></p>
           <div id="driver-wrapper">
-            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute}/>
+            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
             <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
             <button onClick={this.showForm} id="make-new-route">Make New Route</button>
           </div>
