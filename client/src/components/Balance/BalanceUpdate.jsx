@@ -5,11 +5,17 @@ import BalanceAPIutils from './BalanceAPIutils';
 function BalanceUpdate({ userId }) {
   const [currentBalance, setCurrentBalance] = useState(0);
   const [amount, setAmount] = useState('');
-  const [displayError, setDisplayError] = useState(false);
-  const [ successDeposit, setSuccessDeposit] = useState(false);
-  const [ successWithdrawal, setSuccessWithdrawal] = useState(false);
-  const [ deposited, setDeposited] = useState('');
-  const [ withdrawn, setWithdrawn] = useState('');
+
+  const [ displayToggles, setDisplayToggles ] = useState({
+    displayError: false,
+    successDeposit: false,
+    successWithdrawal: false
+  })
+
+  const [ transfered, setTransfered ] = useState({
+    deposited: '',
+    withdrawn: ''
+  })
 
   const getUserBalance = async () => {
       const { data } = await BalanceAPIutils.getBalance(userId)
@@ -21,13 +27,16 @@ function BalanceUpdate({ userId }) {
   }, [])
 
   const handleDeposit = async () => {
-    setSuccessDeposit(false);
-    setSuccessWithdrawal(false);
+    setDisplayToggles({
+      ...displayToggles,
+      successDeposit: false,
+      successWithdrawal: false
+    })
     const { status } = await BalanceAPIutils.deposit(userId, amount);
 
     if (status === 201) {
-      setDeposited(amount);
-      setSuccessDeposit(true);
+      setTransfered({...transfered, deposited: amount });
+    setDisplayToggles({...displayToggles, successDeposit: true})
     }
 
     getUserBalance();
@@ -35,17 +44,19 @@ function BalanceUpdate({ userId }) {
   }
 
   const handleWithdrawal = async () => {
-    setSuccessDeposit(false);
-    setSuccessWithdrawal(false);
+    setDisplayToggles({
+      ...displayToggles,
+      successDeposit: false,
+      successWithdrawal: false
+    })
     if (amount > currentBalance) {
-      setDisplayError(true);
+      setDisplayToggles({...displayToggles, displayError: true})
     } else {
-      setDisplayError(false)
+      setDisplayToggles({...displayToggles, displayError: false})
       const { status } = await BalanceAPIutils.withdraw(userId, amount);
 
       if (status === 201) {
-        setWithdrawn(amount)
-        setSuccessWithdrawal(true)
+        setTransfered({...transfered, withdrawn: amount })
       }
     }
     getUserBalance();
@@ -79,19 +90,19 @@ function BalanceUpdate({ userId }) {
           >Withdraw
         </button>
       </div>
-      {displayError &&
+      {displayToggles.displayError &&
         <div id="balance-error">You cannot withdraw more than your current balance</div>
       }
-      {successDeposit &&
+      {displayToggles.successDeposit &&
         <div>
           <div>SUCCESS!</div>
-          <div id="balance-success">$ {deposited} has been added to your account</div>
+          <div id="balance-success">$ {transfered.deposited} has been added to your account</div>
         </div>
       }
-      {successWithdrawal &&
+      {displayToggles.successWithdrawal &&
         <div>
           <div>SUCCESS!</div>
-          <div id="balance-success">$ {withdrawn} has been withdrawn from your account</div>
+          <div id="balance-success">$ {transfered.withdrawn} has been withdrawn from your account</div>
         </div>
       }
     </div>
