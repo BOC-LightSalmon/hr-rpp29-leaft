@@ -79,7 +79,7 @@ class Driver extends React.Component {
         <div id="driver-container">
           <p><i onClick={this.props.driverHandle} className="arrow left"></i></p>
           <div id="driver-wrapper">
-            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute}/>
+            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
             <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
             <button onClick={this.showForm} id="make-new-route">Make New Route</button>
           </div>
