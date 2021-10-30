@@ -46,12 +46,10 @@ class Map extends React.Component {
 
   render() {
     const style = {
-      width: '45vh',
+      width: '100vw',
       height: '45vh',
       marginBottom: '30px',
-      maxHeight: '45vh',
-      maxWidth: '45vh',
-      paddingLeft: '1.5%'
+      marginTop: '-17px'
     };
 
     const selectedRoute = this.props.selectedRoute;
@@ -79,7 +77,7 @@ class Map extends React.Component {
 
     if (this.state.loaded && selectedRoute.departure !== undefined) {
       return(
-        <div style={style}>
+        <div style={style} >
           <GoogleMapReact
             bootstrapURLKeys={{ key: this.state.key }}
             defaultCenter={this.state.center}

@@ -85,6 +85,10 @@ td {
   border-radius: 2em;
   text-transform: uppercase;
   font-weight: bold;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .arrow {
@@ -95,4 +99,7 @@ td {
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
   margin-left: 20px;
+  position: absolute;
+  top: 1%;
+  left: 1%;
 }

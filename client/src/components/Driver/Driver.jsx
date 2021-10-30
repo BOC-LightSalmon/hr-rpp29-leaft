@@ -27,8 +27,7 @@ class Driver extends React.Component {
     this.getRoutes();
 
     document.addEventListener('click', (e) => {
-      if ((e.target.parentNode.id === 'driver-container' || e.target.parentNode.id === 'driver-wrapper' || e.target.parentNode.getAttribute('aria-label') === 'Map') && e.target.id !== 'make-new-route' && e.target.className !== 'modal') {
-
+      if (!e.target.closest('.modal') && e.target.id !== 'make-new-route') {
         this.closeForm();
       }
     }, false);
@@ -78,7 +77,6 @@ class Driver extends React.Component {
     if (this.state.loaded) {
       return(
         <div id="driver-container">
-          {/* <button onClick={this.props.driverHandle}>BACK</button> */}
           <p><i onClick={this.props.driverHandle} className="arrow left"></i></p>
           <div id="driver-wrapper">
             <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute}/>
