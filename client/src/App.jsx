@@ -1,7 +1,6 @@
 import React from 'react';
 import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
-import BalanceUpdate from './components/Balance/BalanceUpdate.jsx'
 import './App.scss';
 
 
@@ -44,7 +43,6 @@ class App extends React.Component {
           <h1>LEAFT</h1>
           <button onClick={this.loginHandle}>Login</button>
           <button onClick={this.signUpHandle}>Sign up</button>
-          <BalanceUpdate userId={1}/>
         </div>
       )
     }
