@@ -1,75 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
-// import Geocode from "react-geocode";
-import { API_KEY } from '../Driver/mapsAPIKey';
+import axios from 'axios';
 
-// Geocode.setApiKey(API_KEY);
-// Geocode.setRegion('us');
-const Marker = ({text}) => <div>{text}</div>;
+const Marker = ({text, onMarkerClick}) => <div onClick={onMarkerClick}>{text}</div>;
 const MapContainer = (props) => {
-    // const [riderLatLng, setRiderLatLng] = useState({});
-    // const [pickupsLatLng, setPickupsLatLng] = useState([]); // array of lats and lngs of all the nearby pickups like [{lat: , lng: }, {lat: , lng: }]
-
-
-    // async function getCoordinates(address) {
-    //     const response = await Geocode.fromAddress(address);
-    //     const {lat, lng} = response.results[0].geometry.location;
-    //     const dataObj = {
-    //       lat: lat,
-    //       lng: lng,
-    //     };
-    //     console.log('🦒', dataObj)
-    //     return dataObj;
-    // }
-      
-    
-    // console.log('🍍', props.nearbyRides)
+    const [key, setKey] = useState('');
+    const [loaded, setLoaded] = useState(false);
+    // eslint-disable-next-line
+    const [zoom, setZoom] = useState(11);
+    // eslint-disable-next-line
+    const [center, setCenter] = useState({lat: 37.658428, lng: -121.876999});
+    const [markerClicked, setMarkerClicked] = useState(false);
+    const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
+    const [reRender, setReRender] = useState(false);
+         
     useEffect(() => {
-        // getCoordinates(props.riderLocation).then(val => 
-        //     setRiderLatLng(val));
-            
-            // add promise.all to handle a list of addresses
-
-        // const nearbyRides = [{start: 'muirwood park', zip: '94588'}, {start: 'moller park', zip: '94588'}];
-        // const mapLoop = async _ => {
-        //     const promises = props.nearbyRides.map(async nearbyRide => {
-        //         const coordinates = await getCoordinates(nearbyRide);
-        //         console.log('🥗', nearbyRide, coordinates)
-        //         return coordinates;
-        //     });
-            
-        //     const arrayofcoordinates = await Promise.all(promises);
-        //     return arrayofcoordinates;
-        // }
-        
-        // mapLoop().then((res) => {
-        //     let array = JSON.parse(JSON.stringify(res));
-        //     console.log('🥦', res)
-        //     setPickupsLatLng(array);
-        // })
-        // .catch((err) => {
-        //     console.log(err);
-        // })
+        axios.get('api/key')
+            .then(res => {
+                setKey(res.data);
+                setLoaded(true);
+            })
+            .catch(err => {
+                console.log ('error in axios get api key', err);
+            });
     }, []);
+
+    const handleGoogleMapApi = (map, maps) => {  
+        console.log('🌴', whichMarkerClicked)
+        if (whichMarkerClicked !== null) {
+            const directionsService = new window.google.maps.DirectionsService();
+            const directionsRenderer = new window.google.maps.DirectionsRenderer();
+            directionsRenderer.setMap(map);
+            
+            const origin = {lat: parseFloat(props.nearbyRides[whichMarkerClicked].latPickUp), lng: parseFloat(props.nearbyRides[whichMarkerClicked].lngPickUp)};
+            const destination = {lat: parseFloat(props.nearbyRides[whichMarkerClicked].latDropOff), lng: parseFloat(props.nearbyRides[whichMarkerClicked].lngDropOff)};
     
+            directionsService.route({
+                origin,
+                destination,
+                travelMode: window.google.maps.TravelMode.DRIVING
+            }, (result, status) => {
+                if (status === window.google.maps.DirectionsStatus.OK) {
+                    directionsRenderer.setDirections(result);
+                } else {
+                    console.log('error', result);
+                }
+            });   
+        }
+    };
     
-    // console.log('🌺', pickupsLatLng);
-    // console.log('🦥', riderLatLng)
+    const handleMarkerClick = (key) => {
+        setMarkerClicked(true);
+        setReRender(!reRender);
+        setWhichMarkerClicked(key);
+    }
+
     return (
+        loaded ? 
         <div style={{ height: '50vh', width: '100%' }}>
             <GoogleMapReact
-            bootstrapURLKeys={{ key: API_KEY }}
-            defaultCenter={props.center}
-            defaultZoom={props.zoom}
+            bootstrapURLKeys={{ key: key }}
+            defaultCenter={center}
+            defaultZoom={zoom} yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={({ map, maps }) => handleGoogleMapApi(map, maps)} key={reRender}
             >
-                {console.log('🍩', props.riderLocation)}
-                <Marker lat={props.riderLocation.lat} lng={props.riderLocation.lng} text={'🍁'} />
-                {props.nearbyRides.map((nearbyRide, key) => console.log('🍺', nearbyRide) || <Marker lat={nearbyRide.lat} lng={nearbyRide.lng} text={'🌳'} key={key} />)}
+                <Marker lat={props.riderLocation.lat} lng={props.riderLocation.lng} text={'🍀'} />
+
+                {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} text={'🍃'} key={key} onMarkerClick={() => handleMarkerClick(key)} />)}
+
+                {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} text={'🍂'} key={key} />)}
             </GoogleMapReact>
-        </div>
+        </div> : <div>Loading...</div>
     );
 }
 
 export default MapContainer;
-
-// on the first page we will need all the pickup locations in a given zipcode
