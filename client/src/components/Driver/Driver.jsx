@@ -54,12 +54,14 @@ class Driver extends React.Component {
   getRoutes() {
     axios.get('/api/drivers/routes')
     .then(res => {
-      const data = res.data;
+      let data = res.data;
 
       data.forEach(route => {
         route.pickUpCoords = { lat: Number(route.latPickUp), lng: Number(route.lngPickUp) };
         route.dropOffCoords = { lat: Number(route.latDropOff), lng: Number(route.lngDropOff) };
       });
+
+      data.sort((a, b) => Number(a.departure.replace(':', '')) - Number(b.departure.replace(':', '')));
 
       console.log(data);
 
