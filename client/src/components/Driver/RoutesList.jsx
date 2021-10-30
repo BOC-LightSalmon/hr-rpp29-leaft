@@ -7,10 +7,6 @@ class RoutesList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    };
-
     this.cancelRoute = this.cancelRoute.bind(this);
     this.showRoute = this.showRoute.bind(this);
   }

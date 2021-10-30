@@ -63,8 +63,6 @@ class Driver extends React.Component {
 
       data.sort((a, b) => Number(a.departure.replace(':', '')) - Number(b.departure.replace(':', '')));
 
-      console.log(data);
-
       this.setState({
         routes: data,
         loaded: true
