@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +24,7 @@ class Login extends React.Component {
   }
   submitForm(e) {
     e.preventDefault();
-    console.log('clicked');
+
   }
   render() {
     return(

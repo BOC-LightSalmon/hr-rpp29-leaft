@@ -7,6 +7,7 @@ require('../db/index');
 const driversRouter = require('./routes/driversRoutes');
 const ridersRouter = require('./routes/ridersRoutes');
 const balanceRouter = require('./routes/balanceRoutes');
+const logins = require('./routes/logins');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -14,7 +15,7 @@ app.use(express.urlencoded({extended: false}));
 app.use('/api/drivers', driversRouter);
 app.use('/api/riders', ridersRouter);
 app.use('/api/balance', balanceRouter);
-
+app.use('/api/logins', logins);
 //testing deployment
 app.get('/api', (req, res) => {
   res.send('proxy to node')

@@ -2,7 +2,7 @@ import React from 'react';
 import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
 // import Login from './components/SignUp/login.jsx';
-// import Register from './components/SignUp/register.jsx';
+import Register from './components/SignUp/register.jsx';
 import './App.scss';
 
 
@@ -33,7 +33,7 @@ class App extends React.Component {
   render() {
     const { signUp, login } = this.state;
     // return(<Login/>);
-    // return(<Register/>);
+    return(<Register/>);
     if (signUp === true) {
       return (<SignUp signUpHandle={this.signUpHandle}/>)
     }

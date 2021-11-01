@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 class Register extends React.Component {
   constructor(props){
     super(props);
@@ -22,7 +22,9 @@ class Register extends React.Component {
 
   register(e) {
     e.preventDefault();
-    console.log(this.state);
+    axios.post('/api/logins/login', this.state).then((res) => console.log(res)).catch((err) => {
+      console.log(err.response.data);
+    })
   }
 
   render() {
