@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "driver_id": 1,
+        "rider_id":1,
+        "date":"Thu Nov 11 2021 08:50:00 GMT-0500 (Central Daylight Time)",
+        "start": "144 S Union St, Lawrence, MA 01843",
+        "end": "2 Lawrence St, Lawrence, MA 01840",
+        "zip": "01843"
+    },
+    {
+        "id": 2,
+        "driver_id": 1,
+        "rider_id":1,
+        "date":"Thu Nov 11 2021 11:25:00 GMT-0500 (Central Daylight Time)",
+        "start": "154 S Broadway, Lawrence, MA 01843",
+        "end": "118 S Union St, Lawrence, MA 01843",
+        "zip": "01843"
+    },
+    {
+        "id": 3,
+        "driver_id": 1,
+        "rider_id":1,
+        "date":"Thu Nov 11 2021 15:00:00 GMT-0500 (Central Daylight Time)",
+        "start": "436 S Union St, Lawrence, MA 01843",
+        "end": "431 Common St, Lawrence, MA 01840",
+        "zip": "01843"
+    },
+    {
+        "id": 4,
+        "driver_id": 1,
+        "rider_id":1,
+        "date":"Thu Nov 11 2021 08:50:00 GMT-0500 (Central Daylight Time)",
+        "start": "144 S Union St, Lawrence, MA 01843",
+        "end": "2 Lawrence St, Lawrence, MA 01840",
+        "zip": "01843"
+    },
+    {
+        "id": 5,
+        "driver_id": 1,
+        "rider_id":1,
+        "date":"Thu Nov 11 2021 11:25:00 GMT-0500 (Central Daylight Time)",
+        "start": "154 S Broadway, Lawrence, MA 01843",
+        "end": "118 S Union St, Lawrence, MA 01843",
+        "zip": "01843"
+    },
+    {
+        "id": 6,
+        "driver_id": 1,
+        "rider_id":1,
+        "date":"Thu Nov 11 2021 15:00:00 GMT-0500 (Central Daylight Time)",
+        "start": "436 S Union St, Lawrence, MA 01843",
+        "end": "431 Common St, Lawrence, MA 01840",
+        "zip": "01843"
+    }
+]
