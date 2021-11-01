@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import date from 'date-and-time';
 import ordinal from 'date-and-time/plugin/ordinal';
 import meridiem from 'date-and-time/plugin/meridiem';

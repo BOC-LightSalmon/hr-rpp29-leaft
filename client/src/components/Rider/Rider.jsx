@@ -7,6 +7,7 @@ import axios from 'axios';
 const rides = require('./rideData.json');
 
 const Rider = (props) => {
+  // eslint-disable-next-line
   const [riderLocation, setRiderLocation] = useState({lat: 37.70, lng: -121.876999});
   const [nearbyRides, setNearbyRides] = useState(rides); // this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
   const [rideSelected, setRideSelected] = useState(false);
@@ -28,31 +29,37 @@ const Rider = (props) => {
       // eslint-disable-next-line
   }, []);
 
+  // Changes page to confirmation page
   const handleSelectRide = e => {
     const ride = e.target.attributes.ride.nodeValue;
     // use ride to call db for full ride data / time / riderName
     setRideSelected(true);
     console.log(ride);
   }
-
+  
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
       setRideConfirmed(true);
       setShowConfirmationModal(true);
+      // need to put riderid on route row 
     } else {
       setRideSelected(false);
+      // map needs to go back to route departure view
     }
   }
 
+  // removes ride confirmation modal view
   const handleConfirmationOKPress = () => {
     setShowConfirmationModal(false);
   }
 
+  // opens 'Are you sure?' modal
   const handlePostConfirmationCanellationBtnPress = e => {
     setShowCancelRideModal(true);
   }
 
+  // needs to remove riderid from route 
   const handleRideCancellation = () => {
     setShowCancelRideModal(false);
     setRideSelected(false);
@@ -60,6 +67,7 @@ const Rider = (props) => {
     // removes rideid from db
   }
 
+  
   const riderConfirmationModal = (
     <div id="riderConfirmationModal" className="riderModal">
       <span>Ride Confirmed!</span>

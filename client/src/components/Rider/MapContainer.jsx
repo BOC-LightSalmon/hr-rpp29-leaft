@@ -10,6 +10,7 @@ const MapContainer = (props) => {
     const [zoom, setZoom] = useState(11);
     // eslint-disable-next-line
     const [center, setCenter] = useState({lat: 37.658428, lng: -121.876999});
+    // eslint-disable-next-line
     const [markerClicked, setMarkerClicked] = useState(false);
     const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
     const [reRender, setReRender] = useState(false);
