@@ -1,0 +1,135 @@
+#confirmationPage {
+    width: 100%;
+    padding: 0 10%;
+}
+
+#confirmationPageHeader {
+    display: block;
+    font-weight: 600;
+    font-size: 24px;
+    margin: 7% 0 5% 0;
+}
+
+#fullRideDetails {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#fullRideDetails li {
+    margin: 5px 0;
+}
+
+.rideDetail {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.btnsContainer {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.riderBtn {
+    height: 50px;
+    width: 150px;
+    color: green;
+    background-color: white;
+    border: 1px solid green;
+    border-radius: 5%;
+    &:hover{
+        color: white;
+        background-color: green;
+        cursor: pointer;
+        border-color: green;
+      }
+}
+
+.cancelRideBtn {
+    height: 50px;
+    width: 150px;
+    color: red;
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 5%;
+    &:hover{
+        color: white;
+        background-color: red;
+        cursor: pointer;
+        border-color: red;
+      }
+}
+
+
+.riderModal {
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 5;
+    border-radius: 5%;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+
+
+
+@media (min-width: 480px){
+    .btnsContainer {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+@media (min-width: 768px){
+    #SelectedRide {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    #confirmationPage {
+        width: fit-content;
+        padding: 0 0;
+    }
+
+    .btnsContainer {
+        margin: 4% 0 0 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .pageBtn {
+        margin-bottom: 20%;
+    }
+
+}
+
+@media (min-width: 1024px){
+
+
+
+}
+
+@media (min-width: 1200px){
+
+
+
+}
