@@ -9,7 +9,7 @@ const MapContainer = (props) => {
     const [riderLatLng, setRiderLatLng] = useState({});
     const [pickupsLatLng, setPickupsLatLng] = useState([]); // array of lats and lngs of all the nearby pickups like [{lat: , lng: }, {lat: , lng: }]
 
-    console.log('🦔', props.nearbyRides);
+    //console.log('🦔', props.nearbyRides);
     useEffect(() => {
         Geocode.fromAddress(props.riderLocation).then(
             (response) => {
@@ -20,7 +20,7 @@ const MapContainer = (props) => {
                 console.error(error);
             }
         );
-        console.log('🦥', riderLatLng)
+        //console.log('🦥', riderLatLng)
         let array = [];
         props.nearbyRides.forEach((nearbyRide) => {
                 Geocode.fromAddress(nearbyRide.start).then((response) => {
@@ -33,7 +33,7 @@ const MapContainer = (props) => {
                 }
             );
         });
-        console.log('🌺', pickupsLatLng);
+        //console.log('🌺', pickupsLatLng);
     }, []);
     
     const Marker = ({text}) => <div>{text}</div>
