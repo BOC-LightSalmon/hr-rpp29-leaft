@@ -13,7 +13,6 @@ const User = db.define('user', {
   last_name: Sequelize.STRING,
   balance: Sequelize.FLOAT,
   phone_number: Sequelize.STRING,
-  balance: Sequelize.INTEGER
   },
 );
 

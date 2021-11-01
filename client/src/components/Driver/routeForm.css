@@ -1,0 +1,56 @@
+.modal {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: none;
+  border-radius: 1em;
+  padding: 10px;
+  opacity: 0.99;
+  box-shadow: 2px 2px rgb(199, 199, 199);
+}
+
+#form_title {
+  text-align: center;
+}
+
+label, input{
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  border-radius: 1.5em;
+  height: 2.5em;
+  width: 97%;
+}
+
+#submit_button {
+  margin: auto;
+  margin-top: 2em;
+  color: white;
+  display: block;
+  background-color: rgb(20, 213, 104);
+  width: 12em;
+  height: 4em;
+  border: none;
+  border-radius: 2em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.route_form td {
+  width: 40%;
+}
+
+#close-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 10px;
+  margin-top: 10px;
+  color: rgb(20, 213, 104);
+  font-weight: bold;
+}
