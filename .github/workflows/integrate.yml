@@ -19,4 +19,3 @@ jobs:
         working-directory: client
       - run: npm test
       - run: CI= npm run build
-
