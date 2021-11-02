@@ -35,7 +35,7 @@ const MapContainer = (props) => {
             
             const origin = {lat: parseFloat(props.nearbyRides[whichMarkerClicked].latPickUp), lng: parseFloat(props.nearbyRides[whichMarkerClicked].lngPickUp)};
             const destination = {lat: parseFloat(props.nearbyRides[whichMarkerClicked].latDropOff), lng: parseFloat(props.nearbyRides[whichMarkerClicked].lngDropOff)};
-    
+            console.log('🍄', origin, destination)
             directionsService.route({
                 origin,
                 destination,
