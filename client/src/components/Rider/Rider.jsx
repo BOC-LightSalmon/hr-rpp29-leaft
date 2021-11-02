@@ -55,6 +55,9 @@ const Rider = (props) => {
   const handleSelectRide = key => {
     setRideSelected(true);
     setWhichListItemClicked(key);
+    setWhichMarkerClicked(key);
+    setMarkerClicked(true);
+    setReRender(!reRender);
   }
   
   const handleConfirmationPageBtnPress = e => {
