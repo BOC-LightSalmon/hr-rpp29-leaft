@@ -10,7 +10,8 @@ class Register extends React.Component {
       lastName: '',
       email: '',
       phone: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   }
 
@@ -22,14 +23,24 @@ class Register extends React.Component {
 
   register(e) {
     e.preventDefault();
-    axios.post('/api/logins/login', this.state).then((res) => console.log(res)).catch((err) => {
+    const {errorMessage, ...rest} = this.state
+    axios.post('/api/logins/login', rest).then((res) =>{
+      this.props.redirect('/login');
+    }).catch((err) => {
       console.log(err.response.data);
+      this.setState({
+        errorMessage: err.response.data
+      })
     })
   }
 
   render() {
     return(<div>
-      <form onSubmit={(e) => this.register(e)}>
+      <form onChange={() => {
+        this.setState({
+          errorMessage: ''
+        })
+      }} onSubmit={(e) => this.register(e)}>
         <label htmlFor='firstName'>First Name</label>
         <input type='text' id='firstName' onChange={e => this.handleChange(e)}></input>
         <br></br>
@@ -48,6 +59,7 @@ class Register extends React.Component {
         <input type='submit' value='Submit'></input>
       </form>
       <h5>Already Have An Account? <button>Sign In</button></h5>
+      {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
     </div>)
   }
 }
