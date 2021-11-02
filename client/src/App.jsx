@@ -52,7 +52,7 @@ class App extends React.Component {
       return(<Register redirect={this.handleRedirect}/>);
     }
     if(this.state.redirect === '/login') {
-      return(<Login login={this.handleLoginEmail}/>);
+      return(<Login login={this.handleLoginEmail} redirect={this.handleRedirect}/>);
     }
     if (signUp === true) {
       return (<SignUp signUpHandle={this.signUpHandle}/>)

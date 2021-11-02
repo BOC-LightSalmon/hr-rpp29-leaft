@@ -34,7 +34,7 @@ router.post('/login', (req, res, next) => {
     }
     if(!user) {
       console.log('2')
-      res.send('fail')
+      res.status(401).send('Incorrect Password');
     }else {
       console.log('3')
       res.send(user.email);
