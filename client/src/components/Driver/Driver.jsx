@@ -3,7 +3,7 @@ import axios from 'axios';
 import RouteForm from './RouteForm';
 import Map from './Map';
 import RoutesList from './RoutesList';
-import './driver.css';
+import './driver.scss';
 
 class Driver extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Driver extends React.Component {
     this.getRoutes();
 
     document.addEventListener('click', (e) => {
-      if (!e.target.closest('.modal') && e.target.id !== 'make-new-route') {
+      if (this.state.modal && !e.target.closest('.driver-modal') && e.target.id !== 'make-new-route') {
         this.closeForm();
       }
     }, false);
