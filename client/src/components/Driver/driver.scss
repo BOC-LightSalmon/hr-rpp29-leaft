@@ -40,7 +40,6 @@
   }
 
   #table-header {
-    border-width: 1px;
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: rgb(177, 177, 177);
@@ -52,7 +51,11 @@
   }
 
   #pick-up {
-    margin-left: 15px;
+    margin-left: 25px;
+  }
+
+  #drop-off {
+    margin-left: 10px;
   }
 
   #departure {
