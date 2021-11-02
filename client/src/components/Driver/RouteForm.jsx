@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import './routeForm.css'
+import './routeForm.scss'
 
 class RouteForm extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class RouteForm extends React.Component {
 
   render() {
     return (
-      <div className="modal">
+      <div className="driver-modal">
         <div id="close-button" onClick={this.props.closeForm}>X</div>
         <h2 id="form_title">Enter your ride info: </h2>
         <form className="route_form" onSubmit={this.submitHandle}>

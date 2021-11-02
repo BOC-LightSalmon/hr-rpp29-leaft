@@ -51,13 +51,13 @@ const Rider = (props) => {
     setMarkerClicked(true);
     setReRender(!reRender);
   }
-  
+
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
       setRideConfirmed(true);
       setShowConfirmationModal(true);
-      // need to put riderid on route row 
+      // need to put riderid on route row
     } else {
       setRideSelected(false);
 
@@ -78,7 +78,7 @@ const Rider = (props) => {
     setShowCancelRideModal(true);
   }
 
-  // needs to remove riderid from route 
+  // needs to remove riderid from route
   const handleRideCancellation = () => {
     setShowCancelRideModal(false);
     setRideSelected(false);
@@ -89,7 +89,7 @@ const Rider = (props) => {
     setWhichMarkerClicked(false);
     setReRender(!reRender);
   }
-  
+
   const riderConfirmationModal = (
     <div id="riderConfirmationModal" className="riderModal">
       <span>Ride Confirmed!</span>
@@ -112,11 +112,11 @@ const Rider = (props) => {
       {showCancelRideModal ? cancelRideModal : null}
       <button onClick={props.riderHandle}>BACK</button>
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
-      {!rideSelected ? 
+      {!rideSelected ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
-      <SelectedRide 
-      ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]} 
-      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress} 
+      <SelectedRide
+      ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
+      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} />
       }
