@@ -22,8 +22,7 @@ const MapContainer = (props) => {
             });
     }, []);
 
-    const handleGoogleMapApi = (map, maps) => {  
-        console.log('🌴', props.whichMarkerClicked)
+    const handleGoogleMapApi = (map, maps) => {
         if (props.markerClicked && props.whichMarkerClicked !== null) {
             const directionsService = new window.google.maps.DirectionsService();
             const directionsRenderer = new window.google.maps.DirectionsRenderer();
@@ -31,7 +30,6 @@ const MapContainer = (props) => {
             
             const origin = {lat: parseFloat(props.nearbyRides[props.whichMarkerClicked].latPickUp), lng: parseFloat(props.nearbyRides[props.whichMarkerClicked].lngPickUp)};
             const destination = {lat: parseFloat(props.nearbyRides[props.whichMarkerClicked].latDropOff), lng: parseFloat(props.nearbyRides[props.whichMarkerClicked].lngDropOff)};
-            console.log('🍄', origin, destination)
             directionsService.route({
                 origin,
                 destination,

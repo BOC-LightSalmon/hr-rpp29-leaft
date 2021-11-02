@@ -44,14 +44,6 @@ const Rider = (props) => {
     setRideSelected(true);
   }
 
-  // Changes page to confirmation page
-  // const handleSelectRide = e => {
-  //   const ride = e.target.attributes.ride.nodeValue;
-  //   // use ride to call db for full ride data / time / riderName
-  //   setRideSelected(true);
-  //   console.log('🌜', e.target.attributes);
-  // } // below is a temporary change until i double check w/ Ryan
-
   const handleSelectRide = key => {
     setRideSelected(true);
     setWhichListItemClicked(key);
