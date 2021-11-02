@@ -11,10 +11,17 @@ class App extends React.Component {
     super();
     this.signUpHandle = this.signUpHandle.bind(this);
     this.loginHandle = this.loginHandle.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
     this.state = {
       signUp: false,
-      login: false
+      login: false,
+      redirect: null
     }
+  }
+  handleRedirect(redirect) {
+    this.setState({
+      redirect: redirect
+    })
   }
 
   signUpHandle() {
@@ -32,8 +39,13 @@ class App extends React.Component {
 
   render() {
     const { signUp, login } = this.state;
-    // return(<Login/>);
-    // return(<Register/>);
+
+    // if(this.state.redirect === null) {
+    //   return(<Register redirect={this.handleRedirect}/>);
+    // }
+    // if(this.state.redirect === '/login') {
+    //   return(<Login/>);
+    // }
     if (signUp === true) {
       return (<SignUp signUpHandle={this.signUpHandle}/>)
     }
