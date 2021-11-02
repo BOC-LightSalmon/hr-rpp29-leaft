@@ -54,7 +54,9 @@ class Login extends React.Component {
         </div>
       )
     } else {
-      return (<Main loginHandle={this.loginHandle}/>)
+      return (<Main loginHandle={() => this.setState({
+        isLoggedIn: false
+      })}/>)
     }
   }
 }
