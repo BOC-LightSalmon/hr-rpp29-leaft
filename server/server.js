@@ -21,6 +21,7 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/api/key', (req, res) => {
+  console.log('getting to /api/key')
   res.send(process.env.MAPS_API_KEY);
 });
 

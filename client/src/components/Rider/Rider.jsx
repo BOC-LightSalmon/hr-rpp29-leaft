@@ -5,7 +5,7 @@ import './rider.css';
 
 const Rider = (props) => {
   // eslint-disable-next-line
-  const [riderLocation, setRiderLocation] = useState({lat: 37.70, lng: -121.876999});
+  const [riderLocation, setRiderLocation] = useState({lat: 37.658428, lng: -121.876999});
   const [nearbyRides, setNearbyRides] = useState([]); 
   // ^ this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
 

@@ -7,12 +7,12 @@ const MapContainer = (props) => {
     const [key, setKey] = useState('');
     const [loaded, setLoaded] = useState(false);
     // eslint-disable-next-line
-    const [zoom, setZoom] = useState(11);
+    const [zoom, setZoom] = useState(15);
     // eslint-disable-next-line
     const [center, setCenter] = useState({lat: 37.658428, lng: -121.876999});
+    // eslint-disable-next-line
     const [markerClicked, setMarkerClicked] = useState(false);
     const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
-    const [reRender, setReRender] = useState(false);
          
     useEffect(() => {
         axios.get('api/key')
@@ -25,8 +25,7 @@ const MapContainer = (props) => {
             });
     }, []);
 
-    const handleGoogleMapApi = (map, maps) => {  
-        console.log('🌴', whichMarkerClicked)
+    const handleGoogleMapApi = (map, maps) => {
         if (whichMarkerClicked !== null) {
             const directionsService = new window.google.maps.DirectionsService();
             const directionsRenderer = new window.google.maps.DirectionsRenderer();
@@ -50,8 +49,7 @@ const MapContainer = (props) => {
     };
     
     const handleMarkerClick = (key) => {
-        setMarkerClicked(true);
-        setReRender(!reRender);
+        setMarkerClicked(!markerClicked);
         setWhichMarkerClicked(key);
     }
 
@@ -62,7 +60,7 @@ const MapContainer = (props) => {
             bootstrapURLKeys={{ key: key }}
             defaultCenter={center}
             defaultZoom={zoom} yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) => handleGoogleMapApi(map, maps)} key={reRender}
+            onGoogleApiLoaded={({ map, maps }) => handleGoogleMapApi(map, maps)} key={markerClicked}
             >
                 <Marker lat={props.riderLocation.lat} lng={props.riderLocation.lng} text={'🍀'} />
 
