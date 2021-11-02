@@ -1,8 +1,8 @@
 import React from 'react';
 import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
-// import Login from './components/SignUp/login.jsx';
-// import Register from './components/SignUp/register.jsx';
+import Login from './components/SignUp/login.jsx';
+import Register from './components/SignUp/register.jsx';
 import './App.scss';
 
 
@@ -11,10 +11,25 @@ class App extends React.Component {
     super();
     this.signUpHandle = this.signUpHandle.bind(this);
     this.loginHandle = this.loginHandle.bind(this);
+    this.handleRedirect = this.handleRedirect.bind(this);
+    this.handleLoginEmail = this.handleLoginEmail.bind(this);
     this.state = {
       signUp: false,
-      login: false
+      login: false,
+      redirect: '/register',
+      email: ''
     }
+  }
+  handleLoginEmail(email) {
+    this.setState({
+      email: email
+    })
+  }
+
+  handleRedirect(redirect) {
+    this.setState({
+      redirect: redirect
+    })
   }
 
   signUpHandle() {
@@ -32,8 +47,13 @@ class App extends React.Component {
 
   render() {
     const { signUp, login } = this.state;
-    // return(<Login/>);
-    // return(<Register/>);
+
+    if(this.state.redirect === '/register') {
+      return(<Register redirect={this.handleRedirect}/>);
+    }
+    if(this.state.redirect === '/login') {
+      return(<Login login={this.handleLoginEmail} redirect={this.handleRedirect}/>);
+    }
     if (signUp === true) {
       return (<SignUp signUpHandle={this.signUpHandle}/>)
     }

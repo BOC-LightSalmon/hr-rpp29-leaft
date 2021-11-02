@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SelectedRide = props => {
-    console.log('🌺', props);
     return (
         <div className={"RiderBtmPanel"} id="SelectedRide">
             <div id="confirmationPage">

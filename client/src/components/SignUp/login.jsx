@@ -1,5 +1,8 @@
 import React from 'react';
-// import axios from 'axios';
+import axios from 'axios';
+// import {BrowserRo}
+import Main from '../Main.jsx';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -8,7 +11,9 @@ class Login extends React.Component {
     this.submitForm =this.submitForm.bind(this);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      isLoggedIn: false,
+      errorMessage: ''
     };
   }
   handlePassword(e) {
@@ -24,23 +29,46 @@ class Login extends React.Component {
   }
   submitForm(e) {
     e.preventDefault();
-    console.log('clicked');
+    axios.post('/api/logins/login', this.state).then((results) => {
+      this.props.login(results.data);
+      this.setState({
+        isLoggedIn: true
+      })
+    }).catch((err) =>  {
+      console.log(err.response);
+      this.setState({
+        errorMessage: err.response.data
+      })
+    })
   }
   render() {
-    return(
-      <div>
-      <form onSubmit={e => this.submitForm(e)}>
-        <label htmlFor='login_email'>Email:</label>
-        <input type='email' id='login_email' name='email' onChange={e => this.handleEmail(e)}></input>
-        <br></br>
-        <label htmlFor='login_password'>Password:</label>
-        <input type='password' id='login_password' name='password' onChange={e => this.handlePassword(e)}></input>
-        <br></br>
-        <input type='submit' value='Submit'></input>
-      </form>
-        <h5>New Here? <button>Register</button></h5>
-      </div>
-    )
+    if(!this.state.isLoggedIn) {
+      return(
+        <div>
+        <form onChange={() => {
+          this.setState({
+            errorMessage: ''
+          })
+        }} onSubmit={e => this.submitForm(e)}>
+          <label htmlFor='login_email'>Email:</label>
+          <input type='email' id='login_email' name='email' onChange={e => this.handleEmail(e)}></input>
+          <br></br>
+          <label htmlFor='login_password'>Password:</label>
+          <input type='password' id='login_password' name='password' onChange={e => this.handlePassword(e)}></input>
+          <br></br>
+          <input type='submit' value='Submit'></input>
+        </form>
+          <h5>New Here? <button onClick={() => {
+            this.props.redirect('/register');
+          }}>Register</button></h5>
+          {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
+        </div>
+      )
+    } else {
+      return (<Main loginHandle={() => this.setState({
+        isLoggedIn: false
+      })}/>)
+    }
   }
 }
 

@@ -17,6 +17,13 @@ const Rider = (props) => {
   const [showCancelRideModal, setShowCancelRideModal] = useState(false);
   const rideObj = {};
 
+  const [reRender, setReRender] = useState(false);
+  // eslint-disable-next-line
+  const [markerClicked, setMarkerClicked] = useState(false);
+  const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
+  const [whichListItemClicked, setWhichListItemClicked] = useState(null);
+
+
   useEffect(() => {
     axios.get('/api/riders/rides')
       .then(res => {
@@ -30,13 +37,6 @@ const Rider = (props) => {
       // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    nearbyRides.forEach(ride => {
-      rideObj[ride.id] = ride;
-    });
-    console.log(rideObj);
-  }, [nearbyRides]);
-
   const associateRiderWithRide = (routeId, riderId) => {
     axios.put('/api/riders/rides/associateRider', { routeId, riderId })
       .then(res => {
@@ -47,25 +47,35 @@ const Rider = (props) => {
       })
   }
 
-  // Changes page to confirmation page
-  const handleSelectRide = e => {
-    const rideid = e.target.attributes.rideid.value;
-    console.log(rideObj[rideid])
-    // use ride to call db for full ride data / time / riderName
-    setSelectedRide(rideObj[rideid])
+  const handleMarkerClick = (key) => {
+    setMarkerClicked(true);
+    setReRender(!reRender);
+    setWhichMarkerClicked(key);
+
     setRideSelected(true);
   }
-  
+
+
+  const handleSelectRide = key => {
+    setRideSelected(true);
+    setWhichListItemClicked(key);
+    setWhichMarkerClicked(key);
+    setMarkerClicked(true);
+    setReRender(!reRender);
+  }
+
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
       setRideConfirmed(true);
       setShowConfirmationModal(true);
-      // need to put riderid on route row 
-      //associateRiderWithRide(6);
+      // need to put riderid on route row
     } else {
       setRideSelected(false);
-      setSelectedRide({})
+
+      setMarkerClicked(false);
+      setWhichMarkerClicked(false);
+      setReRender(!reRender);
       // map needs to go back to route departure view
     }
   }
@@ -80,15 +90,18 @@ const Rider = (props) => {
     setShowCancelRideModal(true);
   }
 
-  // needs to remove riderid from route 
+  // needs to remove riderid from route
   const handleRideCancellation = () => {
     setShowCancelRideModal(false);
     setRideSelected(false);
     setRideConfirmed(false);
     // removes rideid from db
+
+    setMarkerClicked(false);
+    setWhichMarkerClicked(false);
+    setReRender(!reRender);
   }
 
-  
   const riderConfirmationModal = (
     <div id="riderConfirmationModal" className="riderModal">
       <span>Ride Confirmed!</span>
@@ -105,19 +118,17 @@ const Rider = (props) => {
     </div>
   );
 
-
-
   return (
     <div>
       {showConfirmationModal ? riderConfirmationModal : null}
       {showCancelRideModal ? cancelRideModal : null}
       <button onClick={props.riderHandle}>BACK</button>
-      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} />
-      {!rideSelected ? 
+      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
+      {!rideSelected ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
-      <SelectedRide 
-      ride={selectedRide} 
-      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress} 
+      <SelectedRide
+      ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
+      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} />
       }
