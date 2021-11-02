@@ -15,6 +15,11 @@ const Rider = (props) => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showCancelRideModal, setShowCancelRideModal] = useState(false);
 
+  const [reRender, setReRender] = useState(false);
+  // eslint-disable-next-line
+  const [markerClicked, setMarkerClicked] = useState(false);
+  const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
+
 
   useEffect(() => {
     axios.get('/api/riders/rides')
@@ -28,6 +33,15 @@ const Rider = (props) => {
       })
       // eslint-disable-next-line
   }, []);
+
+
+  const handleMarkerClick = (key) => {
+    setMarkerClicked(true);
+    setReRender(!reRender);
+    setWhichMarkerClicked(key);
+
+    setRideSelected(true);
+  }
 
   // Changes page to confirmation page
   const handleSelectRide = e => {
@@ -45,6 +59,9 @@ const Rider = (props) => {
       // need to put riderid on route row 
     } else {
       setRideSelected(false);
+
+      setMarkerClicked(false);
+      setReRender(!reRender);
       // map needs to go back to route departure view
     }
   }
@@ -65,8 +82,10 @@ const Rider = (props) => {
     setRideSelected(false);
     setRideConfirmed(false);
     // removes rideid from db
-  }
 
+    setMarkerClicked(false);
+    setReRender(!reRender);
+  }
   
   const riderConfirmationModal = (
     <div id="riderConfirmationModal" className="riderModal">
@@ -84,18 +103,16 @@ const Rider = (props) => {
     </div>
   );
 
-
-
   return (
     <div>
       {showConfirmationModal ? riderConfirmationModal : null}
       {showCancelRideModal ? cancelRideModal : null}
       <button onClick={props.riderHandle}>BACK</button>
-      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} />
+      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
       {!rideSelected ? 
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
       <SelectedRide 
-      ride={nearbyRides[0]} 
+      ride={nearbyRides[whichMarkerClicked]} 
       handleConfirmationPageBtnPress={handleConfirmationPageBtnPress} 
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} />

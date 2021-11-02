@@ -10,10 +10,6 @@ const MapContainer = (props) => {
     const [zoom, setZoom] = useState(11);
     // eslint-disable-next-line
     const [center, setCenter] = useState({lat: 37.658428, lng: -121.876999});
-    // eslint-disable-next-line
-    const [markerClicked, setMarkerClicked] = useState(false);
-    const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
-    const [reRender, setReRender] = useState(false);
          
     useEffect(() => {
         axios.get('api/key')
@@ -27,14 +23,14 @@ const MapContainer = (props) => {
     }, []);
 
     const handleGoogleMapApi = (map, maps) => {  
-        console.log('🌴', whichMarkerClicked)
-        if (whichMarkerClicked !== null) {
+        console.log('🌴', props.whichMarkerClicked)
+        if (props.markerClicked && props.whichMarkerClicked !== null) {
             const directionsService = new window.google.maps.DirectionsService();
             const directionsRenderer = new window.google.maps.DirectionsRenderer();
             directionsRenderer.setMap(map);
             
-            const origin = {lat: parseFloat(props.nearbyRides[whichMarkerClicked].latPickUp), lng: parseFloat(props.nearbyRides[whichMarkerClicked].lngPickUp)};
-            const destination = {lat: parseFloat(props.nearbyRides[whichMarkerClicked].latDropOff), lng: parseFloat(props.nearbyRides[whichMarkerClicked].lngDropOff)};
+            const origin = {lat: parseFloat(props.nearbyRides[props.whichMarkerClicked].latPickUp), lng: parseFloat(props.nearbyRides[props.whichMarkerClicked].lngPickUp)};
+            const destination = {lat: parseFloat(props.nearbyRides[props.whichMarkerClicked].latDropOff), lng: parseFloat(props.nearbyRides[props.whichMarkerClicked].lngDropOff)};
             console.log('🍄', origin, destination)
             directionsService.route({
                 origin,
@@ -49,12 +45,6 @@ const MapContainer = (props) => {
             });   
         }
     };
-    
-    const handleMarkerClick = (key) => {
-        setMarkerClicked(true);
-        setReRender(!reRender);
-        setWhichMarkerClicked(key);
-    }
 
     return (
         loaded ? 
@@ -63,11 +53,11 @@ const MapContainer = (props) => {
             bootstrapURLKeys={{ key: key }}
             defaultCenter={center}
             defaultZoom={zoom} yesIWantToUseGoogleMapApiInternals
-            onGoogleApiLoaded={({ map, maps }) => handleGoogleMapApi(map, maps)} key={reRender}
+            onGoogleApiLoaded={({ map, maps }) => handleGoogleMapApi(map, maps)} key={props.reRender}
             >
                 <Marker lat={props.riderLocation.lat} lng={props.riderLocation.lng} text={'🍀'} />
 
-                {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} text={'🍃'} key={key} onMarkerClick={() => handleMarkerClick(key)} />)}
+                {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} text={'🍃'} key={key} onMarkerClick={() => props.handleMarkerClick(key)} />)}
 
                 {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} text={'🍂'} key={key} />)}
             </GoogleMapReact>
