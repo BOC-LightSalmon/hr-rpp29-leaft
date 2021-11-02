@@ -11,17 +11,18 @@ const Rider = (props) => {
   const [riderLocation, setRiderLocation] = useState({lat: 37.70, lng: -121.876999});
   const [nearbyRides, setNearbyRides] = useState([]); // this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
   const [rideSelected, setRideSelected] = useState(false);
+  const [selectedRide, setSelectedRide] = useState({});
   const [rideConfirmed, setRideConfirmed] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showCancelRideModal, setShowCancelRideModal] = useState(false);
-
+  const rideObj = {};
 
   useEffect(() => {
     axios.get('/api/riders/rides')
       .then(res => {
-        console.log('🦨', res.data)
+        //console.log('🦨', res.data)
         setNearbyRides(res.data);
-        console.log(nearbyRides)
+        //console.log(nearbyRides)
       })
       .catch(err => {
         console.log('err in back to client', err);
@@ -29,12 +30,30 @@ const Rider = (props) => {
       // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    nearbyRides.forEach(ride => {
+      rideObj[ride.id] = ride;
+    });
+    console.log(rideObj);
+  }, [nearbyRides]);
+
+  const associateRiderWithRide = (routeId, riderId) => {
+    axios.put('/api/riders/rides/associateRider', { routeId, riderId })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log('err in back to client', err);
+      })
+  }
+
   // Changes page to confirmation page
   const handleSelectRide = e => {
-    const ride = e.target.attributes.ride.nodeValue;
+    const rideid = e.target.attributes.rideid.value;
+    console.log(rideObj[rideid])
     // use ride to call db for full ride data / time / riderName
+    setSelectedRide(rideObj[rideid])
     setRideSelected(true);
-    console.log(ride);
   }
   
   const handleConfirmationPageBtnPress = e => {
@@ -43,8 +62,10 @@ const Rider = (props) => {
       setRideConfirmed(true);
       setShowConfirmationModal(true);
       // need to put riderid on route row 
+      //associateRiderWithRide(6);
     } else {
       setRideSelected(false);
+      setSelectedRide({})
       // map needs to go back to route departure view
     }
   }
@@ -95,7 +116,7 @@ const Rider = (props) => {
       {!rideSelected ? 
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
       <SelectedRide 
-      ride={nearbyRides[0]} 
+      ride={selectedRide} 
       handleConfirmationPageBtnPress={handleConfirmationPageBtnPress} 
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} />
