@@ -12,7 +12,8 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      errorMessage: ''
     };
   }
   handlePassword(e) {
@@ -33,13 +34,22 @@ class Login extends React.Component {
       this.setState({
         isLoggedIn: true
       })
-    }).catch((err) =>  console.log(err))
+    }).catch((err) =>  {
+      console.log(err.response);
+      this.setState({
+        errorMessage: err.response.data
+      })
+    })
   }
   render() {
     if(!this.state.isLoggedIn) {
       return(
         <div>
-        <form onSubmit={e => this.submitForm(e)}>
+        <form onChange={() => {
+          this.setState({
+            errorMessage: ''
+          })
+        }} onSubmit={e => this.submitForm(e)}>
           <label htmlFor='login_email'>Email:</label>
           <input type='email' id='login_email' name='email' onChange={e => this.handleEmail(e)}></input>
           <br></br>
@@ -51,6 +61,7 @@ class Login extends React.Component {
           <h5>New Here? <button onClick={() => {
             this.props.redirect('/register');
           }}>Register</button></h5>
+          {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
         </div>
       )
     } else {
