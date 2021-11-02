@@ -24,7 +24,7 @@ class Register extends React.Component {
   register(e) {
     e.preventDefault();
     const {errorMessage, ...rest} = this.state
-    axios.post('/api/logins/login', rest).then((res) =>{
+    axios.post('/api/logins/register', rest).then((res) =>{
       this.props.redirect('/login');
     }).catch((err) => {
       console.log(err.response.data);
@@ -58,7 +58,9 @@ class Register extends React.Component {
         <br></br>
         <input type='submit' value='Submit'></input>
       </form>
-      <h5>Already Have An Account? <button>Sign In</button></h5>
+      <h5>Already Have An Account? <button onClick={() => {
+        this.props.redirect('/login')
+      }}>Sign In</button></h5>
       {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
     </div>)
   }
