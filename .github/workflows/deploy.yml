@@ -34,7 +34,7 @@ jobs:
           npm install
         
       - name: Build  
-        run: npm run build
+        run: CI= npm run build
       
       - name: Restart pm2
         run: |
