@@ -19,6 +19,7 @@ const Rider = (props) => {
   // eslint-disable-next-line
   const [markerClicked, setMarkerClicked] = useState(false);
   const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
+  const [whichListItemClicked, setWhichListItemClicked] = useState(null);
 
 
   useEffect(() => {
@@ -44,11 +45,16 @@ const Rider = (props) => {
   }
 
   // Changes page to confirmation page
-  const handleSelectRide = e => {
-    const ride = e.target.attributes.ride.nodeValue;
-    // use ride to call db for full ride data / time / riderName
+  // const handleSelectRide = e => {
+  //   const ride = e.target.attributes.ride.nodeValue;
+  //   // use ride to call db for full ride data / time / riderName
+  //   setRideSelected(true);
+  //   console.log('🌜', e.target.attributes);
+  // } // below is a temporary change until i double check w/ Ryan
+
+  const handleSelectRide = key => {
     setRideSelected(true);
-    console.log(ride);
+    setWhichListItemClicked(key);
   }
   
   const handleConfirmationPageBtnPress = e => {
@@ -61,6 +67,7 @@ const Rider = (props) => {
       setRideSelected(false);
 
       setMarkerClicked(false);
+      setWhichMarkerClicked(false);
       setReRender(!reRender);
       // map needs to go back to route departure view
     }
@@ -84,6 +91,7 @@ const Rider = (props) => {
     // removes rideid from db
 
     setMarkerClicked(false);
+    setWhichMarkerClicked(false);
     setReRender(!reRender);
   }
   
@@ -112,7 +120,7 @@ const Rider = (props) => {
       {!rideSelected ? 
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
       <SelectedRide 
-      ride={nearbyRides[whichMarkerClicked]} 
+      ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]} 
       handleConfirmationPageBtnPress={handleConfirmationPageBtnPress} 
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} />
