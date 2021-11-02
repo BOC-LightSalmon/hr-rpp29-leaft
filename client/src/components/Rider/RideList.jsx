@@ -8,21 +8,19 @@ date.plugin(meridiem);
 
 const RideList = props => {
 
-    const nearbyRides = props.nearbyRides.map(ride => {
+    const nearbyRides = props.nearbyRides.map((ride, key) => {
         let unformattedDate = new Date(ride.date);
         let formattedDate = date.format(unformattedDate, 'dddd, MMM DDD hh:mm a');
         return (
-            <div className="listItem" onClick={props.handleSelectRide} key={ride.id} ride={ride.id}>
+            <div className="listItem" onClick={() => props.handleSelectRide(key)} key={key} ride={ride.id}>
                 <img className="locationIcon" src={locationIcon} alt="location icon" ride={ride.id}></img>
                 <div className="destinationDetails" ride={ride}>
-                    <span className="destinationListName" ride={ride}>{ride.end}</span>
+                    <span className="destinationListName" ride={ride}>{ride.dropOff}</span>
                     <span className="destinationListPickupDetails" ride={ride.id} >Pick up : {formattedDate}</span>
                 </div>
             </div>
         )
     });
-
-
 
     return (
         <div className="RideList RiderBtmPanel">
