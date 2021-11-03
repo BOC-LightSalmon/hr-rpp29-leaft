@@ -2,7 +2,8 @@ import React from 'react';
 import date from 'date-and-time';
 import ordinal from 'date-and-time/plugin/ordinal';
 import meridiem from 'date-and-time/plugin/meridiem';
-import locationIcon from '../../location.svg';
+import locationIcon from './location.svg';
+
 date.plugin(ordinal);
 date.plugin(meridiem);
 

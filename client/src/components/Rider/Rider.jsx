@@ -4,19 +4,16 @@ import './RideBtmPanel.scss';
 import RideList from './RideList';
 import SelectedRide from './SelectedRide';
 import axios from 'axios';
-const rides = require('./rideData.json');
 
 const Rider = (props) => {
   // eslint-disable-next-line
   const [riderLocation, setRiderLocation] = useState({lat: 37.70, lng: -121.876999});
   const [nearbyRides, setNearbyRides] = useState([]); // this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
   const [rideSelected, setRideSelected] = useState(false);
-  const [selectedRide, setSelectedRide] = useState({});
   const [rideConfirmed, setRideConfirmed] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showCancelRideModal, setShowCancelRideModal] = useState(false);
-  const rideObj = {};
-
+  const [userid, setUserid] = useState('');
   const [reRender, setReRender] = useState(false);
   // eslint-disable-next-line
   const [markerClicked, setMarkerClicked] = useState(false);
@@ -37,8 +34,14 @@ const Rider = (props) => {
       // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    console.log(props.userid);
+    setUserid(setUserid);
+  }, [props.userid]);
+
+
   const associateRiderWithRide = (routeId, riderId) => {
-    axios.put('/api/riders/rides/associateRider', { routeId, riderId })
+    axios.put('/api/riders/rides/associateRider', { routeId, userid })
       .then(res => {
         console.log(res)
       })
@@ -67,12 +70,12 @@ const Rider = (props) => {
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
+      associateRiderWithRide(whichListItemClicked, userid)
       setRideConfirmed(true);
       setShowConfirmationModal(true);
       // need to put riderid on route row
     } else {
       setRideSelected(false);
-
       setMarkerClicked(false);
       setWhichMarkerClicked(false);
       setReRender(!reRender);
@@ -122,7 +125,8 @@ const Rider = (props) => {
     <div>
       {showConfirmationModal ? riderConfirmationModal : null}
       {showCancelRideModal ? cancelRideModal : null}
-      <button onClick={props.riderHandle}>BACK</button>
+      {/* <button onClick={props.riderHandle}>BACK</button> */}
+      <p><i onClick={props.riderHandle} className="arrow left"></i></p>
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
       {!rideSelected ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :

@@ -33,12 +33,17 @@ const addRiderToRoute = async (req, res) => {
 }
 
 const removeRiderFromRoute = async (req, res) => {
-  try {
-    console.log(req.body.userId);
+  Routes.update(
+    {rider_id: null},
+    {id: req.body.routeId}
+  )
+  .then(result => {
+    console.log(result);
     res.status(200)
-  } catch (err) {
-    res.status(200)
-  }
+  })
+  .catch(err => {
+    res.status(400);
+  })
 }
 
 module.exports = {
