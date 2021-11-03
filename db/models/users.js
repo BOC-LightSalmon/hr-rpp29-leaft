@@ -11,7 +11,7 @@ const User = db.define('user', {
   password: Sequelize.STRING,
   first_name: Sequelize.STRING,
   last_name: Sequelize.STRING,
-  balance: Sequelize.FLOAT,
+  balance: { type: Sequelize.FLOAT, defaultValue: 0 },
   phone_number: Sequelize.STRING,
   },
 );

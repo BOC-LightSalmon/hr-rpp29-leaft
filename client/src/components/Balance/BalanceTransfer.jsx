@@ -70,30 +70,32 @@ function BalanceTransfer({ userId }) {
 
 
   return (
-    <div>
+    <div className="balance">
       <Navbar userId={userId} />
       <CurrentBalance currentBalance={currentBalance}/>
       {displayToggles.displayTipForm &&
         <div>
-          <div>
-            <label>Enter email address of driver:</label>
-            <input
-              value={driverEmail}
-              onChange={(e) => setDriverEmail(e.target.value)}
-            />
+          <div className="balance-form">
+            <div>
+              <label className="balance-instructions">Enter email address of driver</label>
+              <input
+                value={driverEmail}
+                onChange={(e) => setDriverEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="balance-instructions">Enter Tip Amount</label>
+              <input
+                value={amount}
+                type="number"
+                min="0.00"
+                step="0.01"
+                onChange={(e) => setAmount(e.target.value)}
+              />
+            </div>
           </div>
           <div>
-            <label>Enter Tip Amount:</label>
-            <input
-              value={amount}
-              type="number"
-              min="0.00"
-              step="0.01"
-              onChange={(e) => setAmount(e.target.value)}
-            />
-          </div>
-          <div>
-            <button type="button" onClick={handleSend}>Send Tip</button>
+            <button type="button" className="transfer-button" onClick={handleSend}>Send Tip</button>
           </div>
         </div>
       }

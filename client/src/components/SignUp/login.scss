@@ -7,10 +7,16 @@
     background-color: rgb(20, 213, 104);
     width: 12em;
     height: 4em;
+    line-height: 4em;
     border: none;
     border-radius: 2em;
     text-transform: uppercase;
     font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    &:hover {
+      color: white;
+    }
   }
 
   #login-submit-button {

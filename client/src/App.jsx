@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
 import Login from './components/SignUp/login.jsx';
-// import Register from './components/SignUp/register.jsx';
+import Register from './components/SignUp/register.jsx';
 import Driver from './components/Driver/Driver.jsx';
 import Rider from './components/Rider/Rider.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
@@ -85,7 +85,11 @@ class App extends React.Component {
         <Switch>
  
           <Route exact path="/login">
-            <Login login={this.handleLogin} redirect={this.handleRedirect}/>
+            <Login />
+          </Route>
+
+          <Route exact path="/register">
+            <Register login={this.handleLogin}/>
           </Route>
 
           <PrivateRoute exact path="/" component={Main} userId={id} />

@@ -1,7 +1,63 @@
-h1, h3 {
-  text-align: center;
-}
+.balance {
 
-h1 {
-  font-size: 4rem;
+  h1, h3 {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  .transfer-button {
+    margin: auto;
+    margin-top: 2em;
+    color: white;
+    display: block;
+    background-color: rgb(20, 213, 104);
+    width: 12em;
+    height: 4em;
+    line-height: 4em;
+    border: none;
+    border-radius: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    &:hover {
+      color: white;
+    }
+  }
+
+  label, input{
+    margin-left: 1em;
+    border-radius: 1.5em;
+    height: 3em;
+    width: 90%;
+    max-width: 500px;
+  }
+
+  .balance-error {
+    // need styling here
+  }
+
+  .balance-message-container {
+    margin-top: 3rem;
+  }
+
+  .balance-message {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .balance-instructions {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .balance-form {
+    text-align: center;
+  }
 }

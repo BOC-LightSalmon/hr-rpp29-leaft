@@ -4,6 +4,7 @@ import axios from 'axios';
 import Main from '../Main.jsx';
 
 import './login.scss';
+import { NavLink } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor(props) {
@@ -66,9 +67,10 @@ class Login extends React.Component {
           <input type='submit' value='Submit' id="login-submit-button"></input>
         </form>
           <h5 id="new-here">New Here?</h5>
-          <button id="register-button" onClick={() => {
+          <NavLink id="register-button" to="/register">Register</NavLink>
+          {/* <button id="register-button" onClick={() => {
             this.props.redirect('/register');
-          }}>Register</button>
+          }}>Register</button> */}
           {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
         </div>
       )
