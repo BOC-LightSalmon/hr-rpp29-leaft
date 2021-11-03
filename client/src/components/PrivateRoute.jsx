@@ -8,7 +8,6 @@ function PrivateRoute({ component: Component, userId, ...rest }) {
     <Route 
       {...rest} 
       render={props => {
-        console.log('render props:', props)
         return userId ? <Component userId={userId} {...props} /> : <Redirect to="/login"/>
       }}
     />
