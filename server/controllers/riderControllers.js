@@ -1,7 +1,6 @@
 require('dotenv').config();
 const Route = require('../../db/models/routes');
 const { Op } = require('sequelize');
-// const axios = require('axios');
 
 const selectRoute = async (req, res) => {
   // write function to interact with database
