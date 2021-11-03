@@ -15,14 +15,14 @@ import './App.scss';
 class App extends React.Component {
   constructor() {
     super();
-    this.signUpHandle = this.signUpHandle.bind(this);
-    this.loginHandle = this.loginHandle.bind(this);
-    this.handleRedirect = this.handleRedirect.bind(this);
+    // this.signUpHandle = this.signUpHandle.bind(this);
+    // this.loginHandle = this.loginHandle.bind(this);
+    // this.handleRedirect = this.handleRedirect.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.state = {
       signUp: false,
       login: false,
-      redirect: '/register',
+      // redirect: '/register',
       email: '',
       first_name: '',
       last_name: '',
@@ -40,23 +40,23 @@ class App extends React.Component {
     }
   }
 
-  handleRedirect(redirect) {
-    this.setState({
-      redirect: redirect
-    })
-  }
+  // handleRedirect(redirect) {
+  //   this.setState({
+  //     redirect: redirect
+  //   })
+  // }
 
-  signUpHandle() {
-    this.setState({
-      signUp: !this.state.signUp
-    })
-  }
+  // signUpHandle() {
+  //   this.setState({
+  //     signUp: !this.state.signUp
+  //   })
+  // }
 
-  loginHandle() {
-    this.setState({
-      login: !this.state.login
-    })
-  }
+  // loginHandle() {
+  //   this.setState({
+  //     login: !this.state.login
+  //   })
+  // }
 
 
   render() {
