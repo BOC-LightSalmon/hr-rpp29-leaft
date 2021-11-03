@@ -129,7 +129,7 @@ const Rider = (props) => {
       {showConfirmationModal ? riderConfirmationModal : null}
       {showCancelRideModal ? cancelRideModal : null}
       {/* <button onClick={props.riderHandle}>BACK</button> */}
-      <p><i onClick={props.riderHandle} className="arrow left"></i></p>
+      <i onClick={props.riderHandle} className="arrow left"></i>
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
       {!rideSelected ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :

@@ -40,7 +40,7 @@ class Main extends React.Component {
     return (
       <div>
         {/* <button onClick={this.props.loginHandle}>BACK</button> */}
-        <p><i onClick={this.props.loginHandle} className="arrow left"></i></p>
+        <i onClick={this.props.loginHandle} className="arrow left"></i>
         <div id="main-page-buttons">
         <button className="main-page-button" onClick={this.driverHandle}>Driver</button>
         <button className="main-page-button" onClick={this.riderHandle}>Rider</button>
