@@ -18,7 +18,7 @@ function BalanceTransfer({ userId }) {
 
   const getUserBalance = async () => {
       const { data } = await BalanceAPIutils.getBalance(userId)
-      setCurrentBalance(data);
+      setCurrentBalance(data.toFixed(2));
   }
 
   const handleSend = async () => {

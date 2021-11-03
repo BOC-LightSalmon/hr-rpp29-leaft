@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar/Navbar';
 import CurrentBalance from "./CurrentBalance";
 import BalanceAPIutils from './BalanceAPIutils';
+import './balance.scss'
 
 function BalanceUpdate({ userId }) {
-  const [currentBalance, setCurrentBalance] = useState(0);
+  const [currentBalance, setCurrentBalance] = useState(0.00);
   const [amount, setAmount] = useState('');
 
   const [ displayToggles, setDisplayToggles ] = useState({
@@ -20,7 +21,7 @@ function BalanceUpdate({ userId }) {
 
   const getUserBalance = async () => {
       const { data } = await BalanceAPIutils.getBalance(userId)
-      setCurrentBalance(data);
+      setCurrentBalance(data.toFixed(2));
   }
 
   useEffect(() => {
@@ -93,18 +94,18 @@ function BalanceUpdate({ userId }) {
         </button>
       </div>
       {displayToggles.displayError &&
-        <div id="balance-error">You cannot withdraw more than your current balance</div>
+        <div className="balance-message" id="balance-error">You cannot withdraw more than your current balance</div>
       }
       {displayToggles.successDeposit &&
         <div>
           <div>SUCCESS!</div>
-          <div id="balance-success">$ {transfered.deposited} has been added to your account</div>
+          <div id="balance-message balance-success">$ {transfered.deposited} has been added to your account</div>
         </div>
       }
       {displayToggles.successWithdrawal &&
         <div>
           <div>SUCCESS!</div>
-          <div id="balance-success">$ {transfered.withdrawn} has been withdrawn from your account</div>
+          <div id="balance-message balance-success">$ {transfered.withdrawn} has been withdrawn from your account</div>
         </div>
       }
     </div>
