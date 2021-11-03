@@ -13,7 +13,28 @@ router.post('/register', (req, res) => {
   hashedPassword.then((hashed) => {
    return User.create({first_name: firstName, last_name: lastName, email: email, phone_number: phone, password: hashed})
   }).then((results) => {
-    res.send('success');
+    // res.redirect('/login')
+    passport.authenticate('local', (err, user, info) => {
+      if(err) {
+        console.log('11')
+        return next(err)
+      }
+      if(!user) {
+        console.log('22')
+        res.status(401).send('Incorrect Password');
+      }else {
+        console.log('33')
+        const {first_name, last_name, email, id, balance} = user;
+        const obj = {}
+        obj.first_name = first_name;
+        obj.last_name = last_name;
+        obj.email = email;
+        obj.id = id;
+        obj.balance = balance
+        console.log("🤲🏻", obj);
+        res.send(obj);
+      }
+    })(req, res);
   }).catch((err) => {
     console.log("😵", err.errors[0].message);
     if(err.errors[0].message === 'users.email must be unique') {
@@ -22,11 +43,11 @@ router.post('/register', (req, res) => {
       res.status(400).send('Fail');
     }
   })
-  // res.send('test');
+  // res.redirect('/login');
 });
 
 router.post('/login', (req, res, next) => {
-  console.log("test")
+  console.log("test11111🤒");
   passport.authenticate('local', (err, user, info) => {
     if(err) {
       console.log('1')
@@ -36,8 +57,17 @@ router.post('/login', (req, res, next) => {
       console.log('2')
       res.status(401).send('Incorrect Password');
     }else {
-      console.log('3')
-      res.send(user.email);
+      // const {first_name, last_name, email, id, balance} = user;
+      //   const obj = {phone_number, first_name, last_name, email, id};const {first_name, last_name, email, id, balance} = user;
+        const {first_name, last_name, email, id, balance} = user;
+        const obj = {}
+        obj.first_name = first_name;
+        obj.last_name = last_name;
+        obj.email = email;
+        obj.id = id;
+        obj.balance = balance
+        console.log("🤲🏻", obj);
+      res.send(obj);
     }
   })(req, res);
 })

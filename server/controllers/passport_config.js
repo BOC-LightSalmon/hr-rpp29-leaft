@@ -20,7 +20,7 @@ const initialize = (passport) => {
           return done(null, false);
         }
       } catch(e) {
-        console.log('wtf');
+        console.log('a');
         return done(e)
       }
     })
