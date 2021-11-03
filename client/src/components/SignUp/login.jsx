@@ -36,12 +36,13 @@ class Login extends React.Component {
       this.setState({
         isLoggedIn: true
       })
-    }).catch((err) =>  {
-      console.log(err.response);
-      this.setState({
-        errorMessage: err.response.data
-      })
     })
+    // .catch((err) =>  {
+    //   console.log(err.response);
+    //   this.setState({
+    //     errorMessage: err.response.data
+    //   })
+    // })
   }
   render() {
     if(!this.state.isLoggedIn) {

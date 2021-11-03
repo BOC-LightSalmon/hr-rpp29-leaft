@@ -91,7 +91,7 @@ class App extends React.Component {
           </Route>
  
           <Route exact path="/login">
-            <Main loginHandle={this.loginHandle} handleRedirect={this.handleRedirect}/>
+            <Login login={this.handleLoginEmail} redirect={this.handleRedirect} handleRedirect={this.handleRedirect}/>
           </Route>
 
 
