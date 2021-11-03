@@ -28,7 +28,7 @@
 
   #submit_button {
     margin: auto;
-    margin-top: 2em;
+    margin-top: 1em;
     color: white;
     display: block;
     background-color: rgb(20, 213, 104);
@@ -52,5 +52,9 @@
     margin-top: 10px;
     color: rgb(20, 213, 104);
     font-weight: bold;
+  }
+
+  #form-note {
+    text-align: center;
   }
 }
