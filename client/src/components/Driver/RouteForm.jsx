@@ -7,8 +7,8 @@ class RouteForm extends React.Component {
     super(props);
 
     this.state = {
-      // change driver ID to login user ID
-      // driver_id: 1,
+      // change driver ID to login user ID - hardcoded to 1 for now
+      driver_id: 1,
       pickUp: '',
       dropOff: '',
       departure: '',
@@ -24,7 +24,12 @@ class RouteForm extends React.Component {
     event.preventDefault();
 
     axios.post('/api/drivers/create', this.state)
-      .then(() => {
+      .then((result) => {
+        if (result.data === 'Coordinates out of range. Please try another route!') {
+          alert(result.data);
+          return;
+        }
+
         this.props.getRoutes();
         this.props.closeForm();
       })

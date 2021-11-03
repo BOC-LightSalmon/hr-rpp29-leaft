@@ -19,10 +19,27 @@ const createRoute = (req, res) => {
       const pickUp = result[0].data.results[0].geometry.location;
       const dropOff = result[1].data.results[0].geometry.location;
 
+      // these coordinates are the center/home coordinates. adjust as necessary!
+      const centerLat = 40.7580;
+      const centerLng = -73.9855;
+
+      // this is lat/lng range in degrees. 1 degree lat = ~69 miles, 1 degree lng = ~54.6 miles. adjust as necessary!
+      const range = 1;
+
+      const lowestLat = centerLat - range;
+      const highestLat = centerLat + range;
+      const lowestLng = centerLng - range;
+      const highestLng = centerLng + range;
+
       data.latPickUp = pickUp.lat;
       data.lngPickUp = pickUp.lng;
       data.latDropOff = dropOff.lat;
       data.lngDropOff = dropOff.lng;
+
+      if (data.latPickUp > highestLat || data.latPickUp < lowestLat || data.lngPickUp > highestLng || data.lngPickUp < lowestLng || data.latDropOff > highestLat || data.latDropOff < lowestLat || data.lngDropOff > highestLng || data.lngDropOff < lowestLng) {
+        res.send('Coordinates out of range. Please try another route!');
+        return;
+      }
 
       const route = Route.create(data)
         .then(() => {
