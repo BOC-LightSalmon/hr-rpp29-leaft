@@ -7,7 +7,7 @@ const MapContainer = (props) => {
     const [key, setKey] = useState('');
     const [loaded, setLoaded] = useState(false);
     // eslint-disable-next-line
-    const [zoom, setZoom] = useState(11);
+    const [zoom, setZoom] = useState(15);
     // eslint-disable-next-line
     const [center, setCenter] = useState({ lat: 40.7580, lng: -73.9855 });
 
