@@ -1,5 +1,6 @@
 require('dotenv').config();
 const Route = require('../../db/models/routes');
+const Users = require('../../db/models/users');
 const { Op } = require('sequelize');
 
 const selectRoute = async (req, res) => {
@@ -17,7 +18,15 @@ const findNearbyRoutes = async (req, res) => {
     const nearbyRoutes = await Route.findAll({
       where: {
         [Op.and]: [{latPickUp: {[Op.between]: [minLat, maxLat]}}, {lngPickUp: {[Op.between]: [minLng, maxLng]}}]
-      }
+      },
+      include: [
+        {
+            model: Users,
+            as: 'driver',
+            where: {},
+            attributes: ['first_name']
+        }
+    ]
     });
 
     res.status(200).send(nearbyRoutes);
@@ -25,6 +34,7 @@ const findNearbyRoutes = async (req, res) => {
     res.status(400).send(err);
   }
 }
+
 
 
 const addRiderToRoute = async (req, res) => {

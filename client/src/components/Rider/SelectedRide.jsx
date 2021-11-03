@@ -9,7 +9,6 @@ date.plugin(meridiem);
 const SelectedRide = props => {
     let unformattedDate = new Date(`${props.ride.date} ${props.ride.departure}`);
     let formattedDateTime = date.format(unformattedDate, 'dddd, MMM DDD hh:mm a');
-
     return (
         <div className={"RiderBtmPanel"} id="SelectedRide">
             <div id="confirmationPage">
@@ -18,7 +17,7 @@ const SelectedRide = props => {
                     <li><span className="rideDetail">Pick up time: </span>{formattedDateTime ? formattedDateTime : 'Tuesday, Nov 18th at 9am'}</li>
                     <li><span className="rideDetail">Pick up location: </span>{props.ride.pickUp}</li>
                     <li><span className="rideDetail">Drop off location: </span>{props.ride.dropOff}</li>
-                    <li><span className="rideDetail">Driver's Name: </span>{props.ride.driver ? props.ride.driver: 'Nate'}</li>
+                    <li><span className="rideDetail">Driver's Name: </span>{props.ride.driver ? props.ride.driver.first_name : 'Nate'}</li>
                 </ul>
             </div>
             {!props.rideConfirmed ?
