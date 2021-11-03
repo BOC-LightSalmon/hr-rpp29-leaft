@@ -68,9 +68,7 @@ class Login extends React.Component {
         </div>
       )
     } else {
-      return (<Main loginHandle={() => this.setState({
-        isLoggedIn: false
-      })}/>)
+      return (<Main loginHandle={() => this.setState({ isLoggedIn: false })} handleRedirect={this.props.handleRedirect}/>)
     }
   }
 }

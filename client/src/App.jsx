@@ -1,9 +1,11 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
 import Login from './components/SignUp/login.jsx';
 import Register from './components/SignUp/register.jsx';
-
+import BalanceTransfer from './components/Balance/BalanceTransfer.jsx';
+import BalanceUpdate from './components/Balance/BalanceUpdate.jsx';
 import './App.scss';
 
 
@@ -49,31 +51,46 @@ class App extends React.Component {
   render() {
     const { signUp, login } = this.state;
 
-    if(this.state.redirect === '/register') {
-      return(<Register redirect={this.handleRedirect}/>);
-    }
-    if(this.state.redirect === '/login') {
-      return(<Login login={this.handleLoginEmail} redirect={this.handleRedirect}/>);
-    }
-    if(this.state.redirect === '/balance-transfer') {
-      return(<BalanceTransfer userId={1} />);
-    }
-    if (signUp === true) {
-      return (<SignUp signUpHandle={this.signUpHandle}/>)
-    }
-    if (login === true) {
-      return (<Main loginHandle={this.loginHandle} redirect={this.handleRedirect}/>)
-    }
+    // if(this.state.redirect === '/register') {
+    //   return(<Register redirect={this.handleRedirect}/>);
+    // }
+    // if(this.state.redirect === '/login') {
+    //   return(<Login login={this.handleLoginEmail} redirect={this.handleRedirect} handleRedirect={this.handleRedirect}/>);
+    // }
+    // if (signUp === true) {
+    //   return (<SignUp signUpHandle={this.signUpHandle}/>)
+    // }
+    // if (login === true) {
+    //   return (<Main loginHandle={this.loginHandle} handleRedirect={this.handleRedirect}/>)
+    // }
 
-    else {
-      return (
-        <div className="App">
-          <h1>LEAFT</h1>
-          <button onClick={this.loginHandle}>Login</button>
-          <button onClick={this.signUpHandle}>Sign up</button>
-        </div>
-      )
-    }
+    // else {
+    //   return (
+    //     <div className="App">
+    //       <h1>LEAFT</h1>
+    //       <button onClick={this.loginHandle}>Login</button>
+    //       <button onClick={this.signUpHandle}>Sign up</button>
+    //     </div>
+    //   )
+    // }
+
+    return (
+      <Router>
+        <Switch>
+
+          <Route exact path="/">
+            <Register/>
+          </Route>
+ 
+          <Route exact path="/login">
+            <Main loginHandle={this.loginHandle} handleRedirect={this.handleRedirect}/>
+          </Route>
+
+
+        </Switch>
+      </Router>
+
+    )
   }
 }
 

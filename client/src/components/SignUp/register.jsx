@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 import './register.scss';
@@ -26,9 +27,9 @@ class Register extends React.Component {
 
   register(e) {
     e.preventDefault();
-    const {errorMessage, ...rest} = this.state
+    const {errorMessage, ...rest} = this.state;
     axios.post('/api/logins/register', rest).then((res) =>{
-      this.props.redirect('/login');
+      // this.props.redirect('/login');
     }).catch((err) => {
       console.log(err.response.data);
       this.setState({
@@ -62,9 +63,10 @@ class Register extends React.Component {
         <input className="register-buttons" type='submit' value='Submit'></input>
       </form>
       <h5 id="already-have-account">Already Have An Account?</h5>
-      <button className="register-buttons" onClick={() => {
+      <NavLink className="register-buttons" to="/login">Sign In</NavLink>
+      {/* <button className="register-buttons" onClick={() => {
         this.props.redirect('/login')
-      }}>Sign In</button>
+      }}>Sign In</button> */}
       {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
     </div>)
   }
