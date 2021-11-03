@@ -24,9 +24,7 @@ function Navbar({ userId }) {
   return (
     <div>
       <div className="navbar">
-        <Link to="#" className="menu-bars">
           <FaBars className="nav-icon" onClick={toggleSidebar}/>
-        </Link>
       </div>
       <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
         <ul className="nav-menu-items">
