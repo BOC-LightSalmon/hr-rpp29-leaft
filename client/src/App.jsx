@@ -15,18 +15,26 @@ class App extends React.Component {
     this.signUpHandle = this.signUpHandle.bind(this);
     this.loginHandle = this.loginHandle.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
-    this.handleLoginEmail = this.handleLoginEmail.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.state = {
       signUp: false,
       login: false,
       redirect: '/register',
-      email: ''
+      email: '',
+      first_name: '',
+      last_name: '',
+      id: '',
+      balance: ''
     }
   }
-  handleLoginEmail(email) {
-    this.setState({
-      email: email
-    })
+  handleLogin(data) {
+    console.log(data)
+    for(var keys in data) {
+      console.log('keys =', data[keys]);
+      this.setState({
+        [keys]: data[keys] === null ? 0 : data[keys]
+      },() => console.log(this.state))
+    }
   }
 
   handleRedirect(redirect) {

@@ -29,7 +29,8 @@ class Register extends React.Component {
     e.preventDefault();
     const {errorMessage, ...rest} = this.state;
     axios.post('/api/logins/register', rest).then((res) =>{
-      // this.props.redirect('/login');
+      this.props.login(res.data);
+      this.props.redirect('/login');
     }).catch((err) => {
       console.log(err.response.data);
       this.setState({

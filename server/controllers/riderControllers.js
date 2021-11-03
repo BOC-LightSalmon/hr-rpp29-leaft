@@ -1,6 +1,6 @@
 require('dotenv').config();
 const Route = require('../../db/models/routes');
-const axios = require('axios');
+const { Op } = require('sequelize');
 
 const selectRoute = async (req, res) => {
   // write function to interact with database
@@ -8,8 +8,17 @@ const selectRoute = async (req, res) => {
 
 // define more controllers for driver actions
 const findNearbyRoutes = async (req, res) => {
+  const minLat = JSON.parse(req.query.riderLocation).lat - .35;
+  const maxLat = JSON.parse(req.query.riderLocation).lat + .35;
+  const minLng = JSON.parse(req.query.riderLocation).lng - .35;
+  const maxLng = JSON.parse(req.query.riderLocation).lng + .35;
+  
   try {
-    const nearbyRoutes = await Route.findAll(); // for now nearby routes is all routes in db, will change it later to only find rides within a specific lat and lng
+    const nearbyRoutes = await Route.findAll({
+      where: {
+        [Op.and]: [{latPickUp: {[Op.between]: [minLat, maxLat]}}, {lngPickUp: {[Op.between]: [minLng, maxLng]}}]
+      }
+    });
 
     res.status(200).send(nearbyRoutes);
   } catch (err) {
