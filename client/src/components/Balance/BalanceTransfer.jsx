@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from '../Navbar/Navbar.jsx';
 import CurrentBalance from './CurrentBalance.jsx';
 import BalanceAPIutils from './BalanceAPIutils'
 
@@ -70,6 +71,7 @@ function BalanceTransfer({ userId }) {
 
   return (
     <div>
+      <Navbar userId={userId} />
       <CurrentBalance currentBalance={currentBalance}/>
       {displayToggles.displayTipForm &&
         <div>

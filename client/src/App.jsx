@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import SignUp from './components/SignUp.jsx';
+// import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
 import Login from './components/SignUp/login.jsx';
-import Register from './components/SignUp/register.jsx';
+// import Register from './components/SignUp/register.jsx';
 import Driver from './components/Driver/Driver.jsx';
 import Rider from './components/Rider/Rider.jsx';
+import PrivateRoute from './components/PrivateRoute.jsx';
 import BalanceTransfer from './components/Balance/BalanceTransfer.jsx';
 import BalanceUpdate from './components/Balance/BalanceUpdate.jsx';
 import './App.scss';
@@ -59,7 +60,7 @@ class App extends React.Component {
 
 
   render() {
-    const { signUp, login, id } = this.state;
+    const { id } = this.state;
 
     // const { signUp, login } = this.state;
 
@@ -82,23 +83,20 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-
-          <Route exact path="/">
-            <Register/>
-          </Route>
  
           <Route exact path="/login">
             <Login login={this.handleLogin} redirect={this.handleRedirect}/>
           </Route>
 
-          <Route exact path="/driver">
-            <Driver userId={id}/>
-          </Route>
+          <PrivateRoute exact path="/" component={Main} userId={id} />
+          <PrivateRoute exact path="/driver" component={Driver} userId={id} />
+          <PrivateRoute exact path="/rider" component={Rider} userId={id} />
+          <PrivateRoute exact path="/balance-update" component={BalanceUpdate} userId={id} />
+          <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} userId={id} />
 
-          <Route exact path="/rider">
-            <Rider userId={id}/>
+          <Route path="/">
+            <div>404 Not Found</div>
           </Route>
-
 
         </Switch>
       </Router>

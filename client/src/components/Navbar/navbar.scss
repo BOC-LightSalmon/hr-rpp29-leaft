@@ -2,9 +2,8 @@ $primaryGreen: #15D568;
 
 .navbar {
   background-color: $primaryGreen;
-  height: 50px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   margin-bottom: 1rem;
 }
@@ -34,9 +33,8 @@ $primaryGreen: #15D568;
 
 .nav-text {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
-  // padding: 8px 0 8px 16px;
   padding-right: 16px;
   list-style: none;
   height: 60px;
@@ -53,6 +51,7 @@ $primaryGreen: #15D568;
     border-radius: 4px;
     &:hover {
       background-color: #08632e;
+      color: #f5f5f5;
     }
   }
 }
@@ -66,7 +65,7 @@ $primaryGreen: #15D568;
   width: 100%;
   height: 50px;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 

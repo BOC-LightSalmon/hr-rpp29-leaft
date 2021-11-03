@@ -1,9 +1,7 @@
-import React from 'react';
-
 export const NavBarData = [
   {
     title: 'Home',
-    path: '/main',
+    path: '/',
     cName: 'nav-text'
   },
   {

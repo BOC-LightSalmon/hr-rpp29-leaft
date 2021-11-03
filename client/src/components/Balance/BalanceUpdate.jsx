@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from '../Navbar/Navbar';
 import CurrentBalance from "./CurrentBalance";
 import BalanceAPIutils from './BalanceAPIutils';
 
@@ -65,6 +66,7 @@ function BalanceUpdate({ userId }) {
 
   return (
     <div>
+      <Navbar userId={userId} />
       <CurrentBalance currentBalance={currentBalance}/>
       <div>
         <label>Enter amount to deposit or withdraw</label>

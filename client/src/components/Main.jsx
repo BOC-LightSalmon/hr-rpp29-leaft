@@ -1,6 +1,6 @@
 import React from 'react';
-import Driver from './Driver/Driver.jsx';
-import Rider from './Rider/Rider';
+// import Driver from './Driver/Driver.jsx';
+// import Rider from './Rider/Rider';
 
 import './main.scss';
 import { NavLink } from 'react-router-dom';
@@ -40,7 +40,7 @@ class Main extends React.Component {
     // }
     return (
       <div>
-        <p><i onClick={this.props.loginHandle} className="arrow left"></i></p>
+        {/* <p><i onClick={this.props.loginHandle} className="arrow left"></i></p> */}
         <div id="main-page-buttons">
         {/* <button className="main-page-button" onClick={this.driverHandle}>Driver</button> */}
         <NavLink className="main-page-button" to="/driver">Driver</NavLink>
