@@ -4,6 +4,8 @@ import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
 import Login from './components/SignUp/login.jsx';
 import Register from './components/SignUp/register.jsx';
+import Driver from './components/Driver/Driver.jsx';
+import Rider from './components/Rider/Rider.jsx';
 import BalanceTransfer from './components/Balance/BalanceTransfer.jsx';
 import BalanceUpdate from './components/Balance/BalanceUpdate.jsx';
 import './App.scss';
@@ -57,29 +59,24 @@ class App extends React.Component {
 
 
   render() {
-    const { signUp, login } = this.state;
+    const { signUp, login, id } = this.state;
+
+    // const { signUp, login } = this.state;
 
     // if(this.state.redirect === '/register') {
-    //   return(<Register redirect={this.handleRedirect}/>);
+    //   return(<Register redirect={this.handleRedirect} login={this.handleLogin}/>);
     // }
     // if(this.state.redirect === '/login') {
-    //   return(<Login login={this.handleLoginEmail} redirect={this.handleRedirect} handleRedirect={this.handleRedirect}/>);
+    //   if(this.state.email !== '') {
+    //     return(<Login login={this.handleLogin} redirect={this.handleRedirect} isLoggedIn={true}/>);
+    //   }
+    //   return(<Login login={this.handleLogin} redirect={this.handleRedirect}/>);
     // }
     // if (signUp === true) {
     //   return (<SignUp signUpHandle={this.signUpHandle}/>)
     // }
     // if (login === true) {
-    //   return (<Main loginHandle={this.loginHandle} handleRedirect={this.handleRedirect}/>)
-    // }
-
-    // else {
-    //   return (
-    //     <div className="App">
-    //       <h1>LEAFT</h1>
-    //       <button onClick={this.loginHandle}>Login</button>
-    //       <button onClick={this.signUpHandle}>Sign up</button>
-    //     </div>
-    //   )
+    //   return (<Main loginHandle={this.loginHandle}/>)
     // }
 
     return (
@@ -92,6 +89,14 @@ class App extends React.Component {
  
           <Route exact path="/login">
             <Login login={this.handleLogin} redirect={this.handleRedirect}/>
+          </Route>
+
+          <Route exact path="/driver">
+            <Driver userId={id}/>
+          </Route>
+
+          <Route exact path="/rider">
+            <Rider userId={id}/>
           </Route>
 
 

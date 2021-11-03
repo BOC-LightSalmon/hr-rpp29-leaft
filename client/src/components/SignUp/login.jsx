@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-// import {BrowserRo}
+
 import Main from '../Main.jsx';
 
 import './login.scss';
@@ -11,6 +11,7 @@ class Login extends React.Component {
     this.handlePassword = this.handlePassword.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
     this.submitForm =this.submitForm.bind(this);
+
     this.state = {
       email: '',
       password: '',
@@ -31,18 +32,21 @@ class Login extends React.Component {
   }
   submitForm(e) {
     e.preventDefault();
+    
     axios.post('/api/logins/login', this.state).then((results) => {
       this.props.login(results.data);
       this.setState({
         isLoggedIn: true
       })
+      // redirect to main
+
     })
-    // .catch((err) =>  {
-    //   console.log(err.response);
-    //   this.setState({
-    //     errorMessage: err.response.data
-    //   })
-    // })
+    .catch((err) =>  {
+      console.log(err.response);
+      this.setState({
+        errorMessage: err.response.data
+      })
+    })
   }
   render() {
     if(!this.state.isLoggedIn) {
