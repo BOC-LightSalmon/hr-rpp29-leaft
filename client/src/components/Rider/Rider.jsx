@@ -8,7 +8,7 @@ const rides = require('./rideData.json');
 
 const Rider = (props) => {
   // eslint-disable-next-line
-  const [riderLocation, setRiderLocation] = useState({lat: 37.70, lng: -121.876999});
+  const [riderLocation, setRiderLocation] = useState({ lat: 40.7580, lng: -73.9855 });
   const [nearbyRides, setNearbyRides] = useState([]); // this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
   const [rideSelected, setRideSelected] = useState(false);
   const [rideConfirmed, setRideConfirmed] = useState(false);
