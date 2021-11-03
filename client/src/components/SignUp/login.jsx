@@ -14,7 +14,7 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-      isLoggedIn: false,
+      isLoggedIn: this.props.isLoggedIn || false,
       errorMessage: ''
     };
   }
