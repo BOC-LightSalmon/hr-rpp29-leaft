@@ -22,9 +22,12 @@ const Rider = (props) => {
 
 
   useEffect(() => {
-    axios.get('/api/riders/rides')
-      .then(res => {
-        //console.log('🦨', res.data)
+    axios.get('/api/riders/rides', { 
+      params: {
+        riderLocation: riderLocation
+      } 
+      }).then(res => {
+        console.log('🦨', res.data)
         setNearbyRides(res.data);
         //console.log(nearbyRides)
       })
