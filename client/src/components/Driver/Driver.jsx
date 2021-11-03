@@ -63,6 +63,16 @@ class Driver extends React.Component {
 
       data.sort((a, b) => Number(a.departure.replace(':', '')) - Number(b.departure.replace(':', '')));
 
+      // implement filtering + deleting routes by date + time here using PUT request on all relevant route ids
+
+      // axios.put(`/api/drivers/routes`, { routeId })
+      // .then(res => {
+      //   this.props.getRoutes();
+      // })
+      // .catch(err => {
+      //   console.log(err);
+      // });
+
       this.setState({
         routes: data,
         loaded: true
