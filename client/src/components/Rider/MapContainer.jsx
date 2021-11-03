@@ -9,8 +9,8 @@ const MapContainer = (props) => {
     // eslint-disable-next-line
     const [zoom, setZoom] = useState(11);
     // eslint-disable-next-line
-    const [center, setCenter] = useState({lat: 37.658428, lng: -121.876999});
-         
+    const [center, setCenter] = useState({ lat: 40.7580, lng: -73.9855 });
+
     useEffect(() => {
         axios.get('api/key')
             .then(res => {
@@ -27,7 +27,7 @@ const MapContainer = (props) => {
             const directionsService = new window.google.maps.DirectionsService();
             const directionsRenderer = new window.google.maps.DirectionsRenderer();
             directionsRenderer.setMap(map);
-            
+
             const origin = {lat: parseFloat(props.nearbyRides[props.whichMarkerClicked].latPickUp), lng: parseFloat(props.nearbyRides[props.whichMarkerClicked].lngPickUp)};
             const destination = {lat: parseFloat(props.nearbyRides[props.whichMarkerClicked].latDropOff), lng: parseFloat(props.nearbyRides[props.whichMarkerClicked].lngDropOff)};
             directionsService.route({
@@ -40,12 +40,12 @@ const MapContainer = (props) => {
                 } else {
                     console.log('error', result);
                 }
-            });   
+            });
         }
     };
 
     return (
-        loaded ? 
+        loaded ?
         <div style={{ height: '50vh', width: '100%' }}>
             <GoogleMapReact
             bootstrapURLKeys={{ key: key }}

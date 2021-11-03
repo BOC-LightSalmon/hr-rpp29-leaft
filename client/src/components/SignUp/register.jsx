@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+
+import './register.scss';
+
 class Register extends React.Component {
   constructor(props){
     super(props);
@@ -35,7 +38,7 @@ class Register extends React.Component {
   }
 
   render() {
-    return(<div>
+    return(<div id="register">
       <form onChange={() => {
         this.setState({
           errorMessage: ''
@@ -56,11 +59,12 @@ class Register extends React.Component {
         <label htmlFor='password'>Password</label>
         <input type='password' id='password'onChange={e => this.handleChange(e)}></input>
         <br></br>
-        <input type='submit' value='Submit'></input>
+        <input className="register-buttons" type='submit' value='Submit'></input>
       </form>
-      <h5>Already Have An Account? <button onClick={() => {
+      <h5 id="already-have-account">Already Have An Account?</h5>
+      <button className="register-buttons" onClick={() => {
         this.props.redirect('/login')
-      }}>Sign In</button></h5>
+      }}>Sign In</button>
       {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
     </div>)
   }

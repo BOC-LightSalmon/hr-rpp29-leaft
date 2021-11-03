@@ -1,6 +1,8 @@
 import React from 'react';
 import Driver from './Driver/Driver.jsx';
-import Rider from './Rider/Rider'
+import Rider from './Rider/Rider';
+
+import './main.scss';
 
 
 class Main extends React.Component {
@@ -37,10 +39,12 @@ class Main extends React.Component {
     }
     return (
       <div>
-        <button onClick={this.props.loginHandle}>BACK</button>
-        <h3>Main page</h3>
-        <button onClick={this.driverHandle}>Driver</button>
-        <button onClick={this.riderHandle}>Rider</button>
+        {/* <button onClick={this.props.loginHandle}>BACK</button> */}
+        <p><i onClick={this.props.loginHandle} className="arrow left"></i></p>
+        <div id="main-page-buttons">
+        <button className="main-page-button" onClick={this.driverHandle}>Driver</button>
+        <button className="main-page-button" onClick={this.riderHandle}>Rider</button>
+        </div>
       </div>
     )
   }

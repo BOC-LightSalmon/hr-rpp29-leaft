@@ -3,6 +3,8 @@ import axios from 'axios';
 // import {BrowserRo}
 import Main from '../Main.jsx';
 
+import './login.scss';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,7 @@ class Login extends React.Component {
   render() {
     if(!this.state.isLoggedIn) {
       return(
-        <div>
+        <div id="login-register">
         <form onChange={() => {
           this.setState({
             errorMessage: ''
@@ -56,11 +58,12 @@ class Login extends React.Component {
           <label htmlFor='login_password'>Password:</label>
           <input type='password' id='login_password' name='password' onChange={e => this.handlePassword(e)}></input>
           <br></br>
-          <input type='submit' value='Submit'></input>
+          <input type='submit' value='Submit' id="login-submit-button"></input>
         </form>
-          <h5>New Here? <button onClick={() => {
+          <h5 id="new-here">New Here?</h5>
+          <button id="register-button" onClick={() => {
             this.props.redirect('/register');
-          }}>Register</button></h5>
+          }}>Register</button>
           {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
         </div>
       )
