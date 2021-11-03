@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
+import currentLocation from './currentLocation.svg'
+import startLocation from './startLocation.svg';
+import endLocation from './endLocation.svg';
 
-const Marker = ({text, onMarkerClick}) => <div onClick={onMarkerClick}>{text}</div>;
+
+//const Marker = ({text, onMarkerClick}) => <div onClick={onMarkerClick}>{text}</div>;
+
+const RiderLocationMarker = ({onMarkerClick}) =>  <img  className="locationMarker" src={currentLocation} alt="current location icon" onClick={onMarkerClick}/>;
+const StartLocationMarker = ({onMarkerClick}) =>  <img className="locationMarker" src={startLocation} alt="start location icon" onClick={onMarkerClick}/>;
+const EndLocationMarker = ({onMarkerClick}) =>  <img className="locationMarker" src={endLocation} alt="end location icon" onClick={onMarkerClick}/>;
+
+
+
 const MapContainer = (props) => {
     const [key, setKey] = useState('');
     const [loaded, setLoaded] = useState(false);
@@ -53,11 +64,15 @@ const MapContainer = (props) => {
             defaultZoom={zoom} yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={({ map, maps }) => handleGoogleMapApi(map, maps)} key={props.reRender}
             >
-                <Marker lat={props.riderLocation.lat} lng={props.riderLocation.lng} text={'🍀'} />
+                {/* <Marker lat={props.riderLocation.lat} lng={props.riderLocation.lng} text={'🍀'} /> */}
+                <RiderLocationMarker lat={props.riderLocation.lat} lng={props.riderLocation.lng} />
 
-                {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} text={'🍃'} key={key} onMarkerClick={() => props.handleMarkerClick(key)} />)}
+                {/* {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} text={'🍃'} key={key} onMarkerClick={() => props.handleMarkerClick(key)} />)} */}
+                {props.nearbyRides.map((nearbyRide, key) => <StartLocationMarker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} key={key} onMarkerClick={() => props.handleMarkerClick(key)} />)}
 
-                {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} text={'🍂'} key={key} />)}
+                {/* {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} text={'🍂'} key={key} />)} */}
+                {props.nearbyRides.map((nearbyRide, key) => <EndLocationMarker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} key={key} />)}
+
             </GoogleMapReact>
         </div> : <div>Loading...</div>
     );
