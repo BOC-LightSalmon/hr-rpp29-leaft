@@ -2,26 +2,19 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar/Navbar';
 import CurrentBalance from "./CurrentBalance";
 import BalanceAPIutils from './BalanceAPIutils';
-import './balance.scss'
 
 function BalanceUpdate({ userId }) {
-  const [currentBalance, setCurrentBalance] = useState(0.00);
+  const [currentBalance, setCurrentBalance] = useState(0);
   const [amount, setAmount] = useState('');
-
-  const [ displayToggles, setDisplayToggles ] = useState({
-    displayError: false,
-    successDeposit: false,
-    successWithdrawal: false
-  })
-
-  const [ transfered, setTransfered ] = useState({
-    deposited: '',
-    withdrawn: ''
-  })
+  const [displayError, setDisplayError] = useState(false);
+  const [ successDeposit, setSuccessDeposit] = useState(false);
+  const [ successWithdrawal, setSuccessWithdrawal] = useState(false);
+  const [ deposited, setDeposited] = useState('');
+  const [ withdrawn, setWithdrawn] = useState('');
 
   const getUserBalance = async () => {
       const { data } = await BalanceAPIutils.getBalance(userId)
-      setCurrentBalance(data.toFixed(2));
+      setCurrentBalance(data);
   }
 
   useEffect(() => {
@@ -29,16 +22,13 @@ function BalanceUpdate({ userId }) {
   }, [])
 
   const handleDeposit = async () => {
-    setDisplayToggles({
-      ...displayToggles,
-      successDeposit: false,
-      successWithdrawal: false
-    })
+    setSuccessDeposit(false);
+    setSuccessWithdrawal(false);
     const { status } = await BalanceAPIutils.deposit(userId, amount);
 
     if (status === 201) {
-      setTransfered({...transfered, deposited: amount });
-    setDisplayToggles({...displayToggles, successDeposit: true})
+      setDeposited(amount);
+      setSuccessDeposit(true);
     }
 
     getUserBalance();
@@ -46,19 +36,17 @@ function BalanceUpdate({ userId }) {
   }
 
   const handleWithdrawal = async () => {
-    setDisplayToggles({
-      ...displayToggles,
-      successDeposit: false,
-      successWithdrawal: false
-    })
-    if (parseInt(amount) > currentBalance) {
-      setDisplayToggles({...displayToggles, displayError: true})
+    setSuccessDeposit(false);
+    setSuccessWithdrawal(false);
+    if (amount > currentBalance) {
+      setDisplayError(true);
     } else {
-      setDisplayToggles({...displayToggles, displayError: false})
+      setDisplayError(false)
       const { status } = await BalanceAPIutils.withdraw(userId, amount);
 
       if (status === 201) {
-        setTransfered({...transfered, withdrawn: amount })
+        setWithdrawn(amount)
+        setSuccessWithdrawal(true)
       }
     }
     getUserBalance();
@@ -97,19 +85,19 @@ function BalanceUpdate({ userId }) {
           >Withdraw
         </button>
       </div>
-      {displayToggles.displayError &&
+      {displayError &&
         <div className="balance-message balance-error" id="balance-error">You cannot withdraw more than your current balance</div>
       }
-      {displayToggles.successDeposit &&
+      {successDeposit &&
         <div className="balance-message-container">
           <div className="balance-message balance-success">SUCCESS!</div>
-          <div className="balance-message balance-success">$ {parseInt(transfered.deposited).toFixed(2)} has been added to your account</div>
+          <div className="balance-message balance-success">$ {parseInt(deposited).toFixed(2)} has been added to your account</div>
         </div>
       }
-      {displayToggles.successWithdrawal &&
+      {successWithdrawal &&
         <div className="balance-message-container">
           <div className="balance-message balance-success">SUCCESS!</div>
-          <div className="balance-message balance-success">$ {transfered.withdrawn} has been withdrawn from your account</div>
+          <div className="balance-message balance-success">$ {withdrawn} has been withdrawn from your account</div>
         </div>
       }
     </div>
