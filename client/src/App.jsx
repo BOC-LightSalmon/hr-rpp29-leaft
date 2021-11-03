@@ -3,6 +3,7 @@ import SignUp from './components/SignUp.jsx';
 import Main from './components/Main.jsx';
 import Login from './components/SignUp/login.jsx';
 import Register from './components/SignUp/register.jsx';
+
 import './App.scss';
 
 
@@ -54,11 +55,14 @@ class App extends React.Component {
     if(this.state.redirect === '/login') {
       return(<Login login={this.handleLoginEmail} redirect={this.handleRedirect}/>);
     }
+    if(this.state.redirect === '/balance-transfer') {
+      return(<BalanceTransfer userId={1} />);
+    }
     if (signUp === true) {
       return (<SignUp signUpHandle={this.signUpHandle}/>)
     }
     if (login === true) {
-      return (<Main loginHandle={this.loginHandle}/>)
+      return (<Main loginHandle={this.loginHandle} redirect={this.handleRedirect}/>)
     }
 
     else {

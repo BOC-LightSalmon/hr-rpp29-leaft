@@ -32,10 +32,10 @@ class Main extends React.Component {
   render () {
     const {driver, rider} = this.state;
     if(driver === true) {
-      return (<Driver driverHandle={this.driverHandle}/>)
+      return (<Driver driverHandle={this.driverHandle} redirect={this.handleRedirect}/>)
     }
     if(rider === true) {
-      return (<Rider riderHandle={this.riderHandle}/>)
+      return (<Rider riderHandle={this.riderHandle} redirect={this.handleRedirect}/>)
     }
     return (
       <div>
