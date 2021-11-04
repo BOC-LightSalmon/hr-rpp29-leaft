@@ -9,7 +9,7 @@ import axios from 'axios';
 const Rider = (props) => {
   // eslint-disable-next-line
   const [riderLocation, setRiderLocation] = useState({ lat: 40.7580, lng: -73.9855 });
-  const [nearbyRides, setNearbyRides] = useState([]); // this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
+  const [nearbyRides, setNearbyRides] = useState([]);
   const [rideSelected, setRideSelected] = useState(false);
   const [rideConfirmed, setRideConfirmed] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -20,6 +20,7 @@ const Rider = (props) => {
   const [markerClicked, setMarkerClicked] = useState(false);
   const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
   const [whichListItemClicked, setWhichListItemClicked] = useState(null);
+  const [confirmedRide, setConfirmedRide] = useState({}); // this is the confirmed ride, its pulled from the database, using same route, just filtering the response of that route to only rides with rider id === user id
 
 
   useEffect(() => {
@@ -30,7 +31,6 @@ const Rider = (props) => {
       }).then(res => {
         console.log('🦨', res.data)
         setNearbyRides(res.data);
-        //console.log(nearbyRides)
       })
       .catch(err => {
         console.log('err in back to client', err);
@@ -129,10 +129,12 @@ const Rider = (props) => {
     <div>
       <Navbar userId={props.userId} />
       {showConfirmationModal ? riderConfirmationModal : null}
+
       {showCancelRideModal ? cancelRideModal : null}
-      {/* <button onClick={props.riderHandle}>BACK</button> */}
+
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
-      {!rideSelected ?
+
+      {!rideSelected && !rideConfirmed ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
       <SelectedRide
       ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
