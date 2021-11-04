@@ -1,6 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-// import {BrowserRo}
+
 import Main from '../Main.jsx';
 
 import './login.scss';
@@ -11,6 +12,7 @@ class Login extends React.Component {
     this.handlePassword = this.handlePassword.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
     this.submitForm =this.submitForm.bind(this);
+
     this.state = {
       email: '',
       password: '',
@@ -31,17 +33,21 @@ class Login extends React.Component {
   }
   submitForm(e) {
     e.preventDefault();
+
     axios.post('/api/logins/login', this.state).then((results) => {
       this.props.login(results.data);
       this.setState({
         isLoggedIn: true
       })
-    }).catch((err) =>  {
-      console.log(err.response);
-      this.setState({
-        errorMessage: err.response.data
-      })
+      // redirect to main
+
     })
+    // .catch((err) =>  {
+    //   console.log(err.response);
+    //   this.setState({
+    //     errorMessage: err.response.data
+    //   })
+    // })
   }
   test() {
     axios.get('/api/logins/test').then((res) => {
@@ -66,17 +72,17 @@ class Login extends React.Component {
           <input type='submit' value='Submit' id="login-submit-button"></input>
         </form>
           <h5 id="new-here">New Here?</h5>
-          <button id="register-button" onClick={() => {
+          <NavLink id="register-button" to="/register">Register</NavLink>
+          {/* <button id="register-button" onClick={() => {
             this.props.redirect('/register');
           }}>Register</button>
           <button onClick={this.test.bind(this)}>test</button>
+          }}>Register</button> */}
           {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
         </div>
       )
     } else {
-      return (<Main loginHandle={() => this.setState({
-        isLoggedIn: false
-      })}/>)
+      return (<Main loginHandle={() => this.setState({ isLoggedIn: false })} />)
     }
   }
 }
