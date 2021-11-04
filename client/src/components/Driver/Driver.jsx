@@ -8,7 +8,7 @@ import Navbar from '../Navbar/Navbar';
 import socketClient from "socket.io-client";
 import Confirm from './Confirm';
 import Cancel from './Cancel';
-
+import { AuthContext } from '../../App';
 
 class Driver extends React.Component {
   constructor(props) {
@@ -43,10 +43,10 @@ class Driver extends React.Component {
       if (this.state.modal && !e.target.closest('.driver-modal') && e.target.id !== 'make-new-route') {
         this.closeForm();
       }
-    }, false); 
+    }, false);
   }
 
-  connectToSocket () {
+  connectToSocket() {
     const socket = socketClient('http://localhost:5000')
 
     socket.on('confirmRoute', (data) => {
@@ -102,50 +102,65 @@ class Driver extends React.Component {
 
   getRoutes() {
     axios.get('/api/drivers/routes')
-    .then(res => {
-      let data = res.data;
+      .then(res => {
+        let data = res.data;
 
-      data.forEach(route => {
-        route.pickUpCoords = { lat: Number(route.latPickUp), lng: Number(route.lngPickUp) };
-        route.dropOffCoords = { lat: Number(route.latDropOff), lng: Number(route.lngDropOff) };
+        data.forEach(route => {
+          route.pickUpCoords = { lat: Number(route.latPickUp), lng: Number(route.lngPickUp) };
+          route.dropOffCoords = { lat: Number(route.latDropOff), lng: Number(route.lngDropOff) };
+        });
+
+        data.sort((a, b) => Number(a.departure.replace(':', '')) - Number(b.departure.replace(':', '')));
+
+        this.setState({
+          routes: data,
+          loaded: true
+        });
+      })
+      .catch(err => {
+        console.log(err);
       });
-
-      data.sort((a, b) => Number(a.departure.replace(':', '')) - Number(b.departure.replace(':', '')));
-
-      this.setState({
-        routes: data,
-        loaded: true
-      });
-    })
-    .catch(err => {
-      console.log(err);
-    });
   }
 
   render() {
     if (this.state.loaded) {
-      return(
-        <div id="driver-container">
-          <Navbar userId={this.props.userId} />
-          {/* <p><i onClick={this.props.driverHandle} className="arrow left"></i></p> */}
-          <div id="driver-wrapper">
-            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
-            <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
-            <button onClick={this.showForm} id="make-new-route">Make New Route</button>
-          </div>
-          {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm}/>}
-          {this.state.confirm && <Confirm
-            handleConfirmation={this.handleConfirmation}
-            notificationData={this.state.notificationData}
-          />}
-           {this.state.cancel && <Cancel
-            handleCancellation={this.handleCancellation}
-            notificationData={this.state.notificationData}
-          />}
-        </div>
+      return (
+        <AuthContext.Consumer >
+          {userData => { // userData is App state
+            return (
+              <div id="driver-container">
+                {/*
+              *****************************************************
+
+              You can access anything from App state like this:
+
+              <div>{userData.id}</div>
+
+              *****************************************************
+              */}
+
+                <Navbar />
+                <div id="driver-wrapper">
+                  <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
+                  <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
+                  <button onClick={this.showForm} id="make-new-route">Make New Route</button>
+                </div>
+                {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm} />}
+                {this.state.confirm && <Confirm
+                  handleConfirmation={this.handleConfirmation}
+                  notificationData={this.state.notificationData}
+                />}
+                {this.state.cancel && <Cancel
+                  handleCancellation={this.handleCancellation}
+                  notificationData={this.state.notificationData}
+                />}
+              </div>
+            )
+          }}
+        </AuthContext.Consumer>
       );
     } else {
-      return(
+      return (
         <div>Loading...</div>
       );
     }
