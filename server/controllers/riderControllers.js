@@ -28,7 +28,6 @@ const findNearbyRoutes = async (req, res) => {
         }
     ]
     });
-
     res.status(200).send(nearbyRoutes);
   } catch (err) {
     res.status(400).send(err);

@@ -71,7 +71,11 @@ const MapContainer = (props) => {
                 {props.nearbyRides.map((nearbyRide, key) => <StartLocationMarker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} key={key} onMarkerClick={() => props.handleMarkerClick(key)} />)}
 
                 {/* {props.nearbyRides.map((nearbyRide, key) => <Marker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} text={'🍂'} key={key} />)} */}
-                {props.nearbyRides.map((nearbyRide, key) => <EndLocationMarker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} key={key} />)}
+                {/* {props.nearbyRides.map((nearbyRide, key) => <EndLocationMarker lat={nearbyRide.latDropOff} lng={nearbyRide.lngDropOff} key={key} />)} */}
+
+                {console.log('🌸', props.markerClicked, props.whichMarkerClicked)}
+                {props.markerClicked && props.whichMarkerClicked !== null ? <EndLocationMarker lat={props.nearbyRides[props.whichMarkerClicked].latDropOff} lng={props.nearbyRides[props.whichMarkerClicked].lngDropOff} /> : null}
+                {props.rideSelected && props.whichListItemClicked ? <EndLocationMarker lat={props.nearbyRides[props.whichListItemClicked].latDropOff} lng={props.nearbyRides[props.whichListItemClicked].lngDropOff} /> : null}
 
             </GoogleMapReact>
         </div> : <div>Loading...</div>

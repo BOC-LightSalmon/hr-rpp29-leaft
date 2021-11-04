@@ -8,7 +8,7 @@ class RouteForm extends React.Component {
 
     this.state = {
       // change driver ID to login user ID
-      // driver_id: 1,
+      driver_id: 1,
       pickUp: '',
       dropOff: '',
       departure: '',

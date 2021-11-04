@@ -80,7 +80,7 @@ const Rider = (props) => {
     } else {
       setRideSelected(false);
       setMarkerClicked(false);
-      setWhichMarkerClicked(false);
+      setWhichMarkerClicked(null);
       setReRender(!reRender);
       // map needs to go back to route departure view
     }
@@ -130,7 +130,7 @@ const Rider = (props) => {
       {showCancelRideModal ? cancelRideModal : null}
       {/* <button onClick={props.riderHandle}>BACK</button> */}
       <i onClick={props.riderHandle} className="arrow left"></i>
-      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
+      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} whichListItemClicked={whichListItemClicked} handleMarkerClick={handleMarkerClick} rideSelected={rideSelected} />
       {!rideSelected ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
       <SelectedRide
