@@ -43,6 +43,11 @@ class Login extends React.Component {
       })
     })
   }
+  test() {
+    axios.get('/api/logins/test').then((res) => {
+      console.log(res)
+    })
+  }
   render() {
     if(!this.state.isLoggedIn) {
       return(
@@ -64,6 +69,7 @@ class Login extends React.Component {
           <button id="register-button" onClick={() => {
             this.props.redirect('/register');
           }}>Register</button>
+          <button onClick={this.test.bind(this)}>test</button>
           {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
         </div>
       )
