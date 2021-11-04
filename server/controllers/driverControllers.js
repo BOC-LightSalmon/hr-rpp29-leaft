@@ -52,7 +52,13 @@ const createRoute = (req, res) => {
 };
 
 const getRoutes = async (req, res) => {
-  const routes = await Route.findAll();
+  const driver_id = req.query.driver_id;
+
+  const routes = await Route.findAll({
+    where: {
+      driver_id
+    }
+  });
 
   // implement filtering + deleting routes by date + time here using PUT request on all relevant route ids
 

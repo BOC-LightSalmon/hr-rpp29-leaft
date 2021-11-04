@@ -54,7 +54,7 @@ class Driver extends React.Component {
   }
 
   getRoutes() {
-    axios.get('/api/drivers/routes')
+    axios.get(`/api/drivers/routes?driver_id=${this.state.userId}`)
     .then(res => {
       let data = res.data;
 
