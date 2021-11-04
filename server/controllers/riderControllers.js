@@ -1,5 +1,5 @@
 require('dotenv').config();
-const Route = require('../../db/models/routes');
+const Routes = require('../../db/models/routes');
 const Users = require('../../db/models/users');
 const { Op } = require('sequelize');
 
@@ -13,20 +13,19 @@ const findNearbyRoutes = async (req, res) => {
   const maxLat = JSON.parse(req.query.riderLocation).lat + .35;
   const minLng = JSON.parse(req.query.riderLocation).lng - .35;
   const maxLng = JSON.parse(req.query.riderLocation).lng + .35;
-  
   try {
-    const nearbyRoutes = await Route.findAll({
+    const nearbyRoutes = await Routes.findAll({
       where: {
-        [Op.and]: [{latPickUp: {[Op.between]: [minLat, maxLat]}}, {lngPickUp: {[Op.between]: [minLng, maxLng]}}]
+        [Op.and]: [{ latPickUp: { [Op.between]: [minLat, maxLat] } }, { lngPickUp: { [Op.between]: [minLng, maxLng] } }]
       },
       include: [
         {
-            model: Users,
-            as: 'driver',
-            where: {},
-            attributes: ['first_name']
+          model: Users,
+          as: 'driver',
+          where: {},
+          attributes: ['first_name']
         }
-    ]
+      ]
     });
 
     res.status(200).send(nearbyRoutes);
@@ -40,36 +39,81 @@ const findNearbyRoutes = async (req, res) => {
 const addRiderToRoute = async (req, res) => {
   console.log(req.body);
   Routes.update(
-    {rider_id: req.body.riderId},
-    {id: req.body.routeId}
+    { rider_id: req.body.riderId },
+    { id: req.body.routeId }
   )
-  .then(result => {
-    console.log(result);
-    res.status(200)
-  })
-  .catch(err => {
-    res.status(400);
-  })
+    .then(result => {
+      console.log(result);
+      res.status(200)
+    })
+    .catch(err => {
+      res.status(400);
+    })
 }
 
 const removeRiderFromRoute = async (req, res) => {
   Routes.update(
-    {rider_id: null},
-    {id: req.body.routeId}
+    { rider_id: null },
+    { id: req.body.routeId }
   )
-  .then(result => {
-    console.log(result);
-    res.status(200)
-  })
-  .catch(err => {
-    res.status(400);
-  })
+    .then(result => {
+      console.log(result);
+      res.status(200)
+    })
+    .catch(err => {
+      res.status(400);
+    })
 }
+
+const confirmRoute = async (req, res) => {
+  try {
+    const socket = req.app.get('socket')
+    console.log(req.app.get.toString())
+    const route = await Routes.findOne({
+      where: { id: req.body.id },
+      attributes: ['driver_id', 'rider_id', 'pickUp', 'dropOff', 'departure'],
+      raw: true
+    })
+    route.rider_id = req.body.riderId
+    socket.emit(
+      'confirmRoute',
+      { route: route, riderName: req.body.riderName }
+    )
+
+    res.sendStatus(201);
+  } catch (err) {
+    res.status(204).send(err);
+  }
+}
+
+const cancelRoute = async (req, res) => {
+  const socket = req.app.get('socket')
+  try {
+    const route = await Routes.findOne({
+      where: { id: req.body.id },
+      attributes: ['driver_id'],
+      raw: true
+    })
+    route.rider_id = null;
+    const driverId = route.driver_id
+    socket.emit(
+      'cancelRoute',
+      { driverId: driverId, riderName: req.body.riderName }
+    )
+    res.sendStatus(201);
+  } catch (err) {
+    res.status(204).send(err);
+  }
+}
+
+
 
 module.exports = {
   // insert function names here
   selectRoute,
   findNearbyRoutes,
   addRiderToRoute,
-  removeRiderFromRoute
+  removeRiderFromRoute,
+  confirmRoute,
+  cancelRoute
 };

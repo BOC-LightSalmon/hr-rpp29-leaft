@@ -23,19 +23,19 @@ const Rider = (props) => {
 
 
   useEffect(() => {
-    axios.get('/api/riders/rides', { 
+    axios.get('/api/riders/rides', {
       params: {
         riderLocation: riderLocation
-      } 
-      }).then(res => {
-        console.log('🦨', res.data)
-        setNearbyRides(res.data);
-        //console.log(nearbyRides)
-      })
+      }
+    }).then(res => {
+      console.log('🦨', res.data)
+      setNearbyRides(res.data);
+      //console.log(nearbyRides)
+    })
       .catch(err => {
         console.log('err in back to client', err);
       })
-      // eslint-disable-next-line
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -74,9 +74,20 @@ const Rider = (props) => {
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
-      associateRiderWithRide(whichListItemClicked, userid)
-      setRideConfirmed(true);
-      setShowConfirmationModal(true);
+      const routeId = nearbyRides[whichListItemClicked].id
+      const riderId = 2;
+      //need to change to login rider id and name
+      axios.put('/api/riders/confirm', { id: routeId, riderId: riderId, riderName: 'User2' })
+        .then(() => {
+          setRideConfirmed(true);
+          setShowConfirmationModal(true);
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      // associateRiderWithRide(whichListItemClicked, userid)
+      // setRideConfirmed(true);
+      // setShowConfirmationModal(true);
       // need to put riderid on route row
     } else {
       setRideSelected(false);
@@ -99,14 +110,23 @@ const Rider = (props) => {
 
   // needs to remove riderid from route
   const handleRideCancellation = () => {
-    setShowCancelRideModal(false);
-    setRideSelected(false);
-    setRideConfirmed(false);
-    // removes rideid from db
+    const riderName = 'Sushi' //should be login user name
+    const routeId = nearbyRides[whichListItemClicked].id;
+    axios.put('/api/riders/cancel', { id: routeId, riderName: riderName })
+      .then(() => {
+        setShowCancelRideModal(false);
+        setRideSelected(false);
+        setRideConfirmed(false);
+        // removes rideid from db
 
-    setMarkerClicked(false);
-    setWhichMarkerClicked(false);
-    setReRender(!reRender);
+        setMarkerClicked(false);
+        setWhichMarkerClicked(false);
+        setReRender(!reRender);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
   }
 
   const riderConfirmationModal = (
@@ -133,12 +153,12 @@ const Rider = (props) => {
       {/* <button onClick={props.riderHandle}>BACK</button> */}
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
       {!rideSelected ?
-      <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
-      <SelectedRide
-      ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
-      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
-      handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
-      rideConfirmed={rideConfirmed} />
+        <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
+        <SelectedRide
+          ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
+          handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
+          handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
+          rideConfirmed={rideConfirmed} />
       }
 
     </div>

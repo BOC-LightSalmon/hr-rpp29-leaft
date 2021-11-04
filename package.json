@@ -20,7 +20,8 @@
     "passport-local": "^1.0.0",
     "react-router-dom": "^5.3.0",
     "sass": "^1.43.4",
-    "sequelize": "^6.8.0"
+    "sequelize": "^6.8.0",
+    "socket.io": "^4.3.1"
   },
   "devDependencies": {
     "concurrently": "^6.3.0"

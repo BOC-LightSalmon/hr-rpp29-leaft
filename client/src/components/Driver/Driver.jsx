@@ -5,6 +5,10 @@ import Map from './Map';
 import RoutesList from './RoutesList';
 import './driver.scss';
 import Navbar from '../Navbar/Navbar';
+import socketClient from "socket.io-client";
+import Confirm from './Confirm';
+import Cancel from './Cancel';
+
 
 class Driver extends React.Component {
   constructor(props) {
@@ -15,23 +19,67 @@ class Driver extends React.Component {
       routes: [],
       selectedRoute: {},
       driverName: 'testDriverName',
-      loaded: false
+      loaded: false,
+      confirm: false,
+      cancel: false,
+      notificationData: null
     };
 
     this.getRoutes = this.getRoutes.bind(this);
     this.selectRoute = this.selectRoute.bind(this);
     this.showForm = this.showForm.bind(this);
     this.closeForm = this.closeForm.bind(this);
+    this.connectToSocket = this.connectToSocket.bind(this);
+    this.handleConfirmation = this.handleConfirmation.bind(this)
+    this.handleCancellation = this.handleCancellation.bind(this)
   }
 
   componentDidMount() {
+    this.connectToSocket()
+
     this.getRoutes();
 
     document.addEventListener('click', (e) => {
       if (this.state.modal && !e.target.closest('.driver-modal') && e.target.id !== 'make-new-route') {
         this.closeForm();
       }
-    }, false);
+    }, false); 
+  }
+
+  connectToSocket () {
+    const socket = socketClient('http://localhost:5000')
+
+    socket.on('confirmRoute', (data) => {
+      //number 1 need to change to login user id
+      if (data.route.driver_id === 1) {
+        this.setState({
+          notificationData: data,
+          confirm: true
+        })
+      }
+    })
+
+    socket.on('cancelRoute', (data) => {
+      //number 1 need to change to login user id
+      if (data.driverId === 1) {
+        this.setState({
+          notificationData: data,
+          cancel: true
+        })
+      }
+    })
+  }
+
+  handleConfirmation() {
+    this.setState({
+      confirm: !this.state.confirm
+    })
+  }
+
+  handleCancellation() {
+    this.setState({
+      cancel: !this.state.cancel
+    })
   }
 
   showForm() {
@@ -75,7 +123,6 @@ class Driver extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     if (this.state.loaded) {
       return(
         <div id="driver-container">
@@ -87,6 +134,14 @@ class Driver extends React.Component {
             <button onClick={this.showForm} id="make-new-route">Make New Route</button>
           </div>
           {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm}/>}
+          {this.state.confirm && <Confirm
+            handleConfirmation={this.handleConfirmation}
+            notificationData={this.state.notificationData}
+          />}
+           {this.state.cancel && <Cancel
+            handleCancellation={this.handleCancellation}
+            notificationData={this.state.notificationData}
+          />}
         </div>
       );
     } else {
