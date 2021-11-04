@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Navbar from '../Navbar/Navbar';
 import MapContainer from './MapContainer';
 import './RideBtmPanel.scss';
 import RideList from './RideList';
 import SelectedRide from './SelectedRide';
+import { AuthContext } from '../../App';
 import axios from 'axios';
 
 const Rider = (props) => {
@@ -21,6 +22,16 @@ const Rider = (props) => {
   const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
   const [whichListItemClicked, setWhichListItemClicked] = useState(null);
   const [confirmedRide, setConfirmedRide] = useState({}); // this is the confirmed ride, its pulled from the database, using same route, just filtering the response of that route to only rides with rider id === user id
+
+  const userData = useContext(AuthContext);
+  
+  /*
+  ************************************************************
+
+   userData is App state. Access user Id with 'userData.id'
+
+  ************************************************************
+  */
 
 
   useEffect(() => {
@@ -127,7 +138,7 @@ const Rider = (props) => {
 
   return (
     <div>
-      <Navbar userId={props.userId} />
+      <Navbar />
       {showConfirmationModal ? riderConfirmationModal : null}
 
       {showCancelRideModal ? cancelRideModal : null}
