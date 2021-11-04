@@ -53,14 +53,33 @@ const createRoute = (req, res) => {
 
 const getRoutes = async (req, res) => {
   const driver_id = req.query.driver_id;
+  const currentDate = new Date();
 
-  const routes = await Route.findAll({
+  let routes = await Route.findAll({
     where: {
       driver_id
     }
   });
 
-  // implement filtering + deleting routes by date + time here using PUT request on all relevant route ids
+  const toDelete = [];
+
+  routes = routes.filter(route => {
+    const routeDate = new Date(`${route.dataValues.date} ${route.dataValues.departure}`);
+    const today = new Date(route.dataValues.date).toISOString().slice(0,10).replace(/-/g,"");
+    const currDateString = currentDate.toISOString().slice(0,10).replace(/-/g,"");
+
+    if (routeDate < currentDate) {
+      toDelete.push(route.dataValues.id);
+    }
+
+    return routeDate >= currentDate && today === currDateString;
+  });
+
+  Route.destroy({
+    where: {
+      id: toDelete
+    }
+  });
 
   res.send(routes);
 };
