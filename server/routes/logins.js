@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const session = require('express-session');
 const storeMysql = require('express-mysql-session')(session);
-const option = require('../../db/configStore.js');
+const option = require('../../db/config_store.js');
 const initialize = require('../controllers/passport_config.js');
 initialize(passport);
 
