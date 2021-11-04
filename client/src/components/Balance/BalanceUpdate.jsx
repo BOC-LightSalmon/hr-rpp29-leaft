@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Navbar from '../Navbar/Navbar';
 import CurrentBalance from "./CurrentBalance";
 import BalanceAPIutils from './BalanceAPIutils';
+import { AuthContext } from '../../App';
 
-function BalanceUpdate({ userId }) {
+function BalanceUpdate() {
   const [currentBalance, setCurrentBalance] = useState(0);
   const [amount, setAmount] = useState('');
   const [displayError, setDisplayError] = useState(false);
@@ -12,8 +13,10 @@ function BalanceUpdate({ userId }) {
   const [ deposited, setDeposited] = useState('');
   const [ withdrawn, setWithdrawn] = useState('');
 
+  const userData = useContext(AuthContext);
+
   const getUserBalance = async () => {
-      const { data } = await BalanceAPIutils.getBalance(userId)
+      const { data } = await BalanceAPIutils.getBalance(userData.id)
       setCurrentBalance(data);
   }
 
@@ -24,7 +27,7 @@ function BalanceUpdate({ userId }) {
   const handleDeposit = async () => {
     setSuccessDeposit(false);
     setSuccessWithdrawal(false);
-    const { status } = await BalanceAPIutils.deposit(userId, amount);
+    const { status } = await BalanceAPIutils.deposit(userData.id, amount);
 
     if (status === 201) {
       setDeposited(amount);
@@ -42,7 +45,7 @@ function BalanceUpdate({ userId }) {
       setDisplayError(true);
     } else {
       setDisplayError(false)
-      const { status } = await BalanceAPIutils.withdraw(userId, amount);
+      const { status } = await BalanceAPIutils.withdraw(userData.id, amount);
 
       if (status === 201) {
         setWithdrawn(amount)
@@ -55,7 +58,7 @@ function BalanceUpdate({ userId }) {
 
   return (
     <div className="balance">
-      <Navbar userId={userId} />
+      <Navbar />
       <CurrentBalance currentBalance={currentBalance}/>
       <div className="balance-form">
         <div>

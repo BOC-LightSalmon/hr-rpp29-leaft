@@ -11,6 +11,8 @@ import BalanceTransfer from './components/Balance/BalanceTransfer.jsx';
 import BalanceUpdate from './components/Balance/BalanceUpdate.jsx';
 import './App.scss';
 
+export const AuthContext = React.createContext();
+
 
 class App extends React.Component {
   constructor() {
@@ -60,8 +62,7 @@ class App extends React.Component {
 
 
   render() {
-    const { id, first_name } = this.state;
-    const userInfo = { id, first_name };
+    const { id } = this.state;
 
     // const { signUp, login } = this.state;
 
@@ -83,29 +84,30 @@ class App extends React.Component {
 
     return (
       <Router>
-        <Switch>
+          <Switch>
 
-          <Route exact path="/login">
-            <Login login={this.handleLogin} redirect={this.handleRedirect}/>
-          </Route>
+            <Route exact path="/login">
+              <Login login={this.handleLogin} redirect={this.handleRedirect}/>
+            </Route>
 
-          <Route exact path="/register">
-            <Register login={this.handleLogin}/>
-          </Route>
+            <Route exact path="/register">
+              <Register login={this.handleLogin}/>
+            </Route>
 
-          <PrivateRoute exact path="/" component={Main} userId={id} />
-          <PrivateRoute exact path="/driver" component={Driver} userId={userInfo} />
-          <PrivateRoute exact path="/rider" component={Rider} userId={id} />
-          <PrivateRoute exact path="/balance-update" component={BalanceUpdate} userId={id} />
-          <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} userId={id} />
+          <AuthContext.Provider value={this.state} >
+            <PrivateRoute exact path="/" component={Main} userId={id} />
+            <PrivateRoute exact path="/driver" component={Driver} userId={id} />
+            <PrivateRoute exact path="/rider" component={Rider} userId={id} />
+            <PrivateRoute exact path="/balance-update" component={BalanceUpdate} userId={id} />
+            <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} userId={id} />
+          </AuthContext.Provider>
 
-          <Route path="/">
-            <div>404 Not Found</div>
-          </Route>
+            <Route path="/">
+              <div>404 Not Found</div>
+            </Route>
 
-        </Switch>
-      </Router>
-
+          </Switch>
+        </Router>
     )
   }
 }

@@ -5,6 +5,7 @@ import Map from './Map';
 import RoutesList from './RoutesList';
 import './driver.scss';
 import Navbar from '../Navbar/Navbar';
+import { AuthContext } from '../../App';
 
 class Driver extends React.Component {
   constructor(props) {
@@ -77,16 +78,32 @@ class Driver extends React.Component {
 
   render() {
     if (this.state.loaded) {
-      return(
-        <div id="driver-container">
-          <Navbar userId={this.props.userId} />
-          <div id="driver-wrapper">
-            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
-            <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
-            <button onClick={this.showForm} id="make-new-route">Make New Route</button>
-          </div>
-          {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm} userId={this.state.userId}/>}
-        </div>
+      return (
+        <AuthContext.Consumer >
+          {userData => { // userData is App state
+           return (
+             <div id="driver-container">
+              {/*
+              *****************************************************
+
+              You can access anything from App state like this:
+
+              <div>{userData.id}</div>
+
+              *****************************************************
+              */}
+
+              <Navbar />
+              <div id="driver-wrapper">
+                <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
+                <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
+                <button onClick={this.showForm} id="make-new-route">Make New Route</button>
+              </div>
+              {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm}/>}
+            </div>
+           )
+          }}
+        </AuthContext.Consumer>
       );
     } else {
       return(
