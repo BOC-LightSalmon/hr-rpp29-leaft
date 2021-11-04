@@ -1,0 +1,31 @@
+#register {
+  label, input{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 1.5em;
+    height: 2em;
+    width: 97%;
+  }
+
+  .register-buttons {
+    margin: auto;
+    margin-top: 2em;
+    color: white;
+    display: block;
+    background-color: rgb(20, 213, 104);
+    width: 12em;
+    height: 4em;
+    line-height: 4em;
+    border: none;
+    border-radius: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  #already-have-account {
+    padding-top: 20px;
+    text-align: center;
+  }
+}

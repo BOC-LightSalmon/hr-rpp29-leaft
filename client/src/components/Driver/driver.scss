@@ -1,0 +1,111 @@
+#driver-container {
+  #driver-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  #routes-list-wrapper {
+    margin-bottom: 30px;
+    padding: 30px 10px 10px 30px;
+  }
+
+  #routes-list-intro {
+    margin-top: -40px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    width: 90vw;
+    max-width: 90vw;
+  }
+
+  #routes-list {
+    overflow: auto;
+    height: 30vh;
+    width: 90vw;
+    max-width: 90vw;
+  }
+
+  .list-item {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+  }
+
+  thead {
+    position: sticky;
+    top: 0px;
+    background-color: white;
+  }
+
+  #table-header {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: rgb(177, 177, 177);
+    width: inherit;
+  }
+
+  td {
+    overflow-wrap: anywhere;
+  }
+
+  #pick-up {
+    margin-left: 25px;
+  }
+
+  #drop-off {
+    margin-left: 10px;
+  }
+
+  #departure {
+    margin-right: 10px;
+  }
+
+  .table-row:hover {
+    cursor: pointer;
+  }
+
+  .cancel {
+    color: red;
+    font-weight: bold;
+    margin-right: 10px;
+
+  }
+
+  .cancel:hover {
+    cursor: pointer;
+  }
+
+  #make-new-route {
+    margin: auto;
+    margin-top: 2em;
+    color: white;
+    display: block;
+    background-color: rgb(20, 213, 104);
+    width: 12em;
+    height: 4em;
+    border: none;
+    border-radius: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .arrow {
+    border: solid black;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 6px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    margin-left: 20px;
+    position: absolute;
+    top: 2%;
+    left: 1%;
+    z-index: 1;
+  }
+}

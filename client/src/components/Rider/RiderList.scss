@@ -1,0 +1,124 @@
+.RideList {
+    justify-content: center;
+    align-items: center;
+}
+
+#greetingContainer {
+    height: 15%;
+    max-height: 150px;
+    width: fit-content;
+    margin: 7% 0 5% 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#greetingContainerGreeting {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+#greetingContainerQuestion {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+#list {
+    height: fit-content;
+    width: fit-content;
+    min-width: 375px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12%;
+    overflow-y: scroll;
+    align-items: center;
+}
+
+.listItem {
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    justify-content:center;
+    margin: 10px 0;
+
+    &:hover{
+        color: green;
+        cursor: pointer;
+      }
+}
+
+.locationIcon {
+    height: 100%;
+    max-height: 50px;
+    font-size: 36px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.destinationDetails {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.destinationListName {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.destinationListPickupDetails {
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.locationIcon {
+    display: none;
+}
+
+
+
+@media (min-width: 480px){
+    .locationIcon {
+        display: block;
+    }
+
+    #list {
+        margin-bottom: 0%;
+        align-items: flex-start;
+        width: 45%;
+    }
+
+    #listItem {
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 0 15%;
+    }
+
+    #greetingContainer {
+        margin: 3% 0;
+    }
+}
+
+@media (min-width: 768px){
+
+}
+
+@media (min-width: 1024px){
+
+
+
+}
+
+@media (min-width: 1200px){
+
+
+
+}
+
+// 320px — 480px for mobile devices, 
+// 481px — 768px for iPads & tablets,
+// 769px — 1024px for small screens like laptop, 
+// 1025px — 1200px for large screens like Desktops,
+// 1201px and above for extra large screens like TV.

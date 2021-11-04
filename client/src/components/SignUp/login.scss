@@ -1,0 +1,48 @@
+#login-register {
+  #register-button {
+    margin: auto;
+    margin-top: 2em;
+    color: white;
+    display: block;
+    background-color: rgb(20, 213, 104);
+    width: 12em;
+    height: 4em;
+    line-height: 4em;
+    border: none;
+    border-radius: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    &:hover {
+      color: white;
+    }
+  }
+
+  #login-submit-button {
+    margin: auto;
+    margin-top: 2em;
+    color: white;
+    display: block;
+    background-color: rgb(20, 213, 104);
+    width: 12em;
+    height: 4em;
+    border: none;
+    border-radius: 2em;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  label, input{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 1.5em;
+    height: 2.5em;
+    width: 97%;
+  }
+
+  #new-here {
+    margin-top: 40px;
+    text-align: center;
+  }
+}
