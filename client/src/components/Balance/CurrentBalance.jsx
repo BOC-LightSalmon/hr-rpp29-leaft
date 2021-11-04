@@ -1,11 +1,12 @@
 import React from 'react';
+import './balance.scss'
 
 function CurrentBalance({ currentBalance }) {
 
   return (
     <div data-testid="current-balance">
-      <h3 data-testid="balance-header">Balance:</h3>
-      <h5>$ {currentBalance}</h5>
+      <h3 data-testid="balance-header">Current Balance:</h3>
+      <h1>$ {currentBalance}</h1>
     </div>
   )
 }

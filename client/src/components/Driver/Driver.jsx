@@ -4,6 +4,7 @@ import RouteForm from './RouteForm';
 import Map from './Map';
 import RoutesList from './RoutesList';
 import './driver.scss';
+import Navbar from '../Navbar/Navbar';
 
 class Driver extends React.Component {
   constructor(props) {
@@ -74,10 +75,12 @@ class Driver extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if (this.state.loaded) {
       return(
         <div id="driver-container">
-          <p><i onClick={this.props.driverHandle} className="arrow left"></i></p>
+          <Navbar userId={this.props.userId} />
+          {/* <p><i onClick={this.props.driverHandle} className="arrow left"></i></p> */}
           <div id="driver-wrapper">
             <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
             <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
