@@ -60,7 +60,8 @@ class App extends React.Component {
 
 
   render() {
-    const { id } = this.state;
+    const { id, first_name } = this.state;
+    const userInfo = { id, first_name };
 
     // const { signUp, login } = this.state;
 
@@ -83,7 +84,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
- 
+
           <Route exact path="/login">
             <Login login={this.handleLogin} redirect={this.handleRedirect}/>
           </Route>
@@ -93,7 +94,7 @@ class App extends React.Component {
           </Route>
 
           <PrivateRoute exact path="/" component={Main} userId={id} />
-          <PrivateRoute exact path="/driver" component={Driver} userId={id} />
+          <PrivateRoute exact path="/driver" component={Driver} userId={userInfo} />
           <PrivateRoute exact path="/rider" component={Rider} userId={id} />
           <PrivateRoute exact path="/balance-update" component={BalanceUpdate} userId={id} />
           <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} userId={id} />

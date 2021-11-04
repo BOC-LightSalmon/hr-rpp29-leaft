@@ -14,7 +14,8 @@ class Driver extends React.Component {
       formModal: false,
       routes: [],
       selectedRoute: {},
-      driverName: 'testDriverName',
+      driverName: this.props.userId.first_name,
+      userId: this.props.userId.id,
       loaded: false
     };
 
@@ -75,18 +76,16 @@ class Driver extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     if (this.state.loaded) {
       return(
         <div id="driver-container">
           <Navbar userId={this.props.userId} />
-          {/* <p><i onClick={this.props.driverHandle} className="arrow left"></i></p> */}
           <div id="driver-wrapper">
             <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
             <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
             <button onClick={this.showForm} id="make-new-route">Make New Route</button>
           </div>
-          {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm}/>}
+          {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm} userId={this.state.userId}/>}
         </div>
       );
     } else {
