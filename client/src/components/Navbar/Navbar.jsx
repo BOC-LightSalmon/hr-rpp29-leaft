@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../App';
 import { NavBarData } from './navbarData';
 import BalanceAPIutils from '../Balance/BalanceAPIutils';
 import { Link } from 'react-router-dom';
@@ -6,12 +7,14 @@ import { FaBars } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import './navbar.scss';
 
-function Navbar({ userId }) {
+function Navbar() {
   const [ sidebar, setSidebar] = useState(false);
-  const [ currentBalance, setCurrentBalance ] = useState('')
+  const [ currentBalance, setCurrentBalance ] = useState('');
+
+  const userData = useContext(AuthContext);
 
   const getUserBalance = async () => {
-    const { data } = await BalanceAPIutils.getBalance(userId)
+    const { data } = await BalanceAPIutils.getBalance(userData.id)
     setCurrentBalance(data);
   }
 
