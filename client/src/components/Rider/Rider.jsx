@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Navbar from '../Navbar/Navbar';
 import MapContainer from './MapContainer';
 import './RideBtmPanel.scss';
 import RideList from './RideList';
@@ -126,11 +127,11 @@ const Rider = (props) => {
 
   return (
     <div>
+      <Navbar userId={props.userId} />
       {showConfirmationModal ? riderConfirmationModal : null}
       {showCancelRideModal ? cancelRideModal : null}
       {/* <button onClick={props.riderHandle}>BACK</button> */}
-      <i onClick={props.riderHandle} className="arrow left"></i>
-      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} whichListItemClicked={whichListItemClicked} handleMarkerClick={handleMarkerClick} rideSelected={rideSelected} rideConfirmed={rideConfirmed} />
+      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
       {!rideSelected ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
       <SelectedRide
