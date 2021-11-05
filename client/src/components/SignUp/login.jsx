@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import Main from '../Main.jsx';
@@ -78,7 +78,11 @@ class Login extends React.Component {
         </div>
       )
     } else {
-      return (<Main loginHandle={() => this.setState({ isLoggedIn: false })} />)
+      // return (<Main loginHandle={() => this.setState({ isLoggedIn: false })} />)
+      return (
+        <Redirect to="/" />
+      )
+
     }
   }
 }
