@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../App.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 import CurrentBalance from './CurrentBalance.jsx';
 import BalanceAPIutils from './BalanceAPIutils'
 
-function BalanceTransfer({ userId }) {
+function BalanceTransfer() {
   const [ currentBalance, setCurrentBalance ] = useState(0);
   const [ amount, setAmount ] = useState('');
   const [ driverEmail, setDriverEmail ] = useState('');
@@ -13,10 +14,10 @@ function BalanceTransfer({ userId }) {
   const [ displaySuccessMessage, setDisplaySuccessMessage ] = useState(false);
   const [ displayTipForm, setDisplayTipForm ] = useState(true);
 
-
+  const userData = useContext(AuthContext);
 
   const getUserBalance = async () => {
-      const { data } = await BalanceAPIutils.getBalance(userId)
+      const { data } = await BalanceAPIutils.getBalance(userData.id)
       setCurrentBalance(data);
   }
 
@@ -29,7 +30,7 @@ function BalanceTransfer({ userId }) {
         setDisplayBalanceError(true)
       } else {
         setDisplayBalanceError(false)
-        await BalanceAPIutils.transfer(userId, driverEmail, amount)
+        await BalanceAPIutils.transfer(userData.id, driverEmail, amount)
         setDisplaySuccessMessage(true)
         setDisplayTipForm(false)
         getUserBalance()
@@ -57,7 +58,7 @@ function BalanceTransfer({ userId }) {
 
   return (
     <div className="balance">
-      <Navbar userId={userId} />
+      <Navbar />
       <CurrentBalance currentBalance={currentBalance}/>
       {displayTipForm &&
         <div>
