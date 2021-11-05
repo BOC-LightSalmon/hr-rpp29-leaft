@@ -5,6 +5,7 @@ import Map from './Map';
 import RoutesList from './RoutesList';
 import './driver.scss';
 import Navbar from '../Navbar/Navbar';
+import { AuthContext } from '../../App';
 
 class Driver extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Driver extends React.Component {
       formModal: false,
       routes: [],
       selectedRoute: {},
-      driverName: 'testDriverName',
+      userId: this.props.userId,
       loaded: false
     };
 
@@ -53,7 +54,7 @@ class Driver extends React.Component {
   }
 
   getRoutes() {
-    axios.get('/api/drivers/routes')
+    axios.get(`/api/drivers/routes?driver_id=${this.state.userId}`)
     .then(res => {
       let data = res.data;
 
@@ -75,19 +76,23 @@ class Driver extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     if (this.state.loaded) {
-      return(
-        <div id="driver-container">
-          <Navbar userId={this.props.userId} />
-          {/* <p><i onClick={this.props.driverHandle} className="arrow left"></i></p> */}
-          <div id="driver-wrapper">
-            <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
-            <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
-            <button onClick={this.showForm} id="make-new-route">Make New Route</button>
-          </div>
-          {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm}/>}
-        </div>
+      return (
+        <AuthContext.Consumer >
+          {userData => {
+           return (
+             <div id="driver-container">
+              <Navbar />
+              <div id="driver-wrapper">
+                <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
+                <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={userData.first_name} selectRoute={this.selectRoute} />
+                <button onClick={this.showForm} id="make-new-route">Make New Route</button>
+              </div>
+              {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm} userId={userData.id}/>}
+            </div>
+           )
+          }}
+        </AuthContext.Consumer>
       );
     } else {
       return(

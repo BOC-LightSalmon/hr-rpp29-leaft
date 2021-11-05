@@ -23,6 +23,12 @@ jobs:
           echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
           echo MAPS_API_KEY=${{ secrets.MAPS_API_KEY }} >> .env
           echo MAPS_SERVER_API_KEY=${{ secrets.MAPS_SERVER_API_KEY }} >> .env
+          
+          echo Host=localhost >> .env
+          echo User=${{ secrets.USER }} >> .env
+          echo Database=${{ secrets.DATABASE }} >> .env
+          echo Secret=${{ secrets.SECRET }} >> .env
+          
           cat .env
           
       - name: Install node dependencies

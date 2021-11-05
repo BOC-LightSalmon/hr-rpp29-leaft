@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Navbar from '../Navbar/Navbar';
 import MapContainer from './MapContainer';
 import './RideBtmPanel.scss';
 import RideList from './RideList';
 import SelectedRide from './SelectedRide';
+import { AuthContext } from '../../App';
 import axios from 'axios';
 
 const Rider = (props) => {
@@ -21,12 +22,22 @@ const Rider = (props) => {
   const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
   const [whichListItemClicked, setWhichListItemClicked] = useState(null);
 
+  const userData = useContext(AuthContext);
+
+  /*
+  ************************************************************
+
+   userData is App state. Access user Id with 'userData.id'
+
+  ************************************************************
+  */
+
 
   useEffect(() => {
-    axios.get('/api/riders/rides', { 
+    axios.get('/api/riders/rides', {
       params: {
         riderLocation: riderLocation
-      } 
+      }
       }).then(res => {
         console.log('🦨', res.data)
         setNearbyRides(res.data);
@@ -39,7 +50,7 @@ const Rider = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(props.userid);
+    console.log(props.userId);
     setUserid(setUserid);
   }, [props.userid]);
 
@@ -127,7 +138,7 @@ const Rider = (props) => {
 
   return (
     <div>
-      <Navbar userId={props.userId} />
+      <Navbar />
       {showConfirmationModal ? riderConfirmationModal : null}
       {showCancelRideModal ? cancelRideModal : null}
       {/* <button onClick={props.riderHandle}>BACK</button> */}

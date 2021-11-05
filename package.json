@@ -15,10 +15,12 @@
     "body-parser": "^1.18.3",
     "dotenv": "^10.0.0",
     "express": "^4.16.4",
+    "express-mysql-session": "^2.1.7",
+    "express-session": "^1.17.2",
     "mysql2": "^2.3.2",
+    "package-lock-only": "0.0.4",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
-    "react-router-dom": "^5.3.0",
     "sass": "^1.43.4",
     "sequelize": "^6.8.0"
   },
