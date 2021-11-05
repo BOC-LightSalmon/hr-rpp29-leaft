@@ -52,12 +52,24 @@ const Rider = (props) => {
       userid: userData.id 
     })
       .then(res => {
-        console.log(res)
+        console.log('🪴', res)
       })
       .catch(err => {
         console.log('err in back to client', err);
       })
-  }
+  };
+
+  const removeRiderFromRide = (routeId) => {
+    axios.put('/api/riders/rides/removeRider', { 
+      routeId
+    })
+    .then(res => {
+      console.log('🦚', res)
+    })
+    .catch(err => {
+      console.log('err in back to client', err);
+    })
+  };
 
   const handleMarkerClick = (key) => {
     setMarkerClicked(true);
@@ -109,7 +121,9 @@ const Rider = (props) => {
     setShowCancelRideModal(false);
     setRideSelected(false);
     setRideConfirmed(false);
+
     // removes rideid from db
+    removeRiderFromRide(nearbyRides[whichMarkerClicked].id);
 
     setMarkerClicked(false);
     setWhichMarkerClicked(false);

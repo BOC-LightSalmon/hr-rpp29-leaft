@@ -42,25 +42,26 @@ const addRiderToRoute = async (req, res) => {
       {where: {id: req.body.routeId}}
     );
     console.log('🐕‍🦺', result);
-    res.status(200)
+    res.status(200).send(result);
   } catch(err) {
     console.log('🦫', err)
-    res.status(400);
+    res.status(400).send(err);
   }
 }
 
 const removeRiderFromRoute = async (req, res) => {
-  Route.update(
-    {rider_id: null},
-    {id: req.body.routeId}
-  )
-  .then(result => {
-    console.log(result);
-    res.status(200)
-  })
-  .catch(err => {
-    res.status(400);
-  })
+  console.log('🦩', req.body);
+  try {
+    const result = await Route.update(
+      {rider_id: null},
+      {where: {id: req.body.routeId}}
+    );
+    console.log('🍄', result);
+    res.status(200).send(result);
+  } catch(err) {
+    console.log('🌱', err)
+    res.status(400).send(err);
+  }
 }
 
 module.exports = {
