@@ -1,17 +1,24 @@
+require('dotenv').config();
 const router = require('express').Router();
 const User = require('../../db/models/users.js');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const session = require('express-session');
 const storeMysql = require('express-mysql-session')(session);
-const option = require('../../db/config_store.js');
 const initialize = require('../controllers/passport_config.js');
 initialize(passport);
 
+const option = {
+  host: process.env.Host,
+	port: 3306,
+	user: process.env.User,
+	password: process.env.DB_PASSWORD,
+	database: process.env.Database
+}
 
 const store = new storeMysql(option);
 router.use(session({
-  secret: 'secret',
+  secret: process.env.Secret,
   resave: false,
   saveUninitialized: false,
   store: store,
