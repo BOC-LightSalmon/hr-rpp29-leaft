@@ -5,10 +5,9 @@ import './routeForm.scss'
 class RouteForm extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       // change driver ID to login user ID
-      // driver_id: 1,
+      driver_id: this.props.userData.id,
       pickUp: '',
       dropOff: '',
       departure: '',

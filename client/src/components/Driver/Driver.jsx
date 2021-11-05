@@ -10,15 +10,15 @@ import Confirm from './Confirm';
 import Cancel from './Cancel';
 import { AuthContext } from '../../App';
 
+
 class Driver extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       formModal: false,
       routes: [],
       selectedRoute: {},
-      driverName: 'testDriverName',
+      userData: {},
       loaded: false,
       confirm: false,
       cancel: false,
@@ -36,7 +36,6 @@ class Driver extends React.Component {
 
   componentDidMount() {
     this.connectToSocket()
-
     this.getRoutes();
 
     document.addEventListener('click', (e) => {
@@ -48,10 +47,9 @@ class Driver extends React.Component {
 
   connectToSocket() {
     const socket = socketClient('http://localhost:5000')
-
+    const driverId = this.props.userId
     socket.on('confirmRoute', (data) => {
-      //number 1 need to change to login user id
-      if (data.route.driver_id === 1) {
+      if (data.route.driver_id === driverId) {
         this.setState({
           notificationData: data,
           confirm: true
@@ -60,8 +58,7 @@ class Driver extends React.Component {
     })
 
     socket.on('cancelRoute', (data) => {
-      //number 1 need to change to login user id
-      if (data.driverId === 1) {
+      if (data.driverId === driverId) {
         this.setState({
           notificationData: data,
           cancel: true
@@ -123,6 +120,7 @@ class Driver extends React.Component {
   }
 
   render() {
+
     if (this.state.loaded) {
       return (
         <AuthContext.Consumer >
@@ -145,14 +143,20 @@ class Driver extends React.Component {
                   <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
                   <button onClick={this.showForm} id="make-new-route">Make New Route</button>
                 </div>
-                {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm} />}
+                {this.state.modal && <RouteForm
+                  getRoutes={this.getRoutes}
+                  closeForm={this.closeForm}
+                  userData={userData}
+                />}
                 {this.state.confirm && <Confirm
                   handleConfirmation={this.handleConfirmation}
                   notificationData={this.state.notificationData}
+                  userData={userData}
                 />}
                 {this.state.cancel && <Cancel
                   handleCancellation={this.handleCancellation}
                   notificationData={this.state.notificationData}
+                  userData={userData}
                 />}
               </div>
             )
@@ -167,4 +171,5 @@ class Driver extends React.Component {
   }
 }
 
+//Driver.contextType = AuthContext;
 export default Driver;

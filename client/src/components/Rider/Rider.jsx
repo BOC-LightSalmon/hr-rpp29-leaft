@@ -32,7 +32,6 @@ const Rider = (props) => {
   ************************************************************
   */
 
-
   useEffect(() => {
     axios.get('/api/riders/rides', {
       params: {
@@ -55,15 +54,15 @@ const Rider = (props) => {
   }, [props.userid]);
 
 
-  const associateRiderWithRide = (routeId, riderId) => {
-    axios.put('/api/riders/rides/associateRider', { routeId, userid })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log('err in back to client', err);
-      })
-  }
+  // const associateRiderWithRide = (routeId, riderId) => {
+  //   axios.put('/api/riders/rides/associateRider', { routeId, userid })
+  //     .then(res => {
+  //       console.log(res)
+  //     })
+  //     .catch(err => {
+  //       console.log('err in back to client', err);
+  //     })
+  // }
 
   const handleMarkerClick = (key) => {
     setMarkerClicked(true);
@@ -85,10 +84,11 @@ const Rider = (props) => {
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
-      const routeId = nearbyRides[whichListItemClicked].id
-      const riderId = 2;
+      const routeId = nearbyRides[whichListItemClicked].id;
+      const riderId = userData.id;
+      const riderName = userData.first_name + ' ' +  userData.last_name;
       //need to change to login rider id and name
-      axios.put('/api/riders/confirm', { id: routeId, riderId: riderId, riderName: 'User2' })
+      axios.put('/api/riders/confirm', { id: routeId, riderId: riderId, riderName: riderName })
         .then(() => {
           setRideConfirmed(true);
           setShowConfirmationModal(true);
@@ -121,7 +121,7 @@ const Rider = (props) => {
 
   // needs to remove riderid from route
   const handleRideCancellation = () => {
-    const riderName = 'Sushi' //should be login user name
+    const riderName = userData.first_name + userData.last_name;
     const routeId = nearbyRides[whichListItemClicked].id;
     axios.put('/api/riders/cancel', { id: routeId, riderName: riderName })
       .then(() => {

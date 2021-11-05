@@ -66,15 +66,15 @@ const removeRiderFromRoute = async (req, res) => {
 }
 
 const confirmRoute = async (req, res) => {
+  const socket = req.app.get('socket')
   try {
-    const socket = req.app.get('socket')
-    console.log(req.app.get.toString())
+    await Routes.update({rider_id: req.body.riderId}, {where: {id: req.body.id}})
+
     const route = await Routes.findOne({
       where: { id: req.body.id },
-      attributes: ['driver_id', 'rider_id', 'pickUp', 'dropOff', 'departure'],
-      raw: true
+      attributes: ['driver_id', 'rider_id', 'pickUp', 'dropOff', 'departure']
     })
-    route.rider_id = req.body.riderId
+ 
     socket.emit(
       'confirmRoute',
       { route: route, riderName: req.body.riderName }
