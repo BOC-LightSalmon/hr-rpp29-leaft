@@ -114,6 +114,11 @@ router.get('/', (req, res) => {
   console.log(req.user);
 })
 
+router.get('/checkAuth', (req, res) => {
+  if(req.isAuthenticated) {
+    res.send(req.user)
+  }
+})
 // function checkAuth(req, res, next) {
 //   console.log('we are called');
 //   if(req.isAuthenticated()){

@@ -10,12 +10,13 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import BalanceTransfer from './components/Balance/BalanceTransfer.jsx';
 import BalanceUpdate from './components/Balance/BalanceUpdate.jsx';
 import './App.scss';
+import axios from 'axios'
 
 export const AuthContext = React.createContext();
 
 
 class App extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.signUpHandle = this.signUpHandle.bind(this);
     this.loginHandle = this.loginHandle.bind(this);
@@ -28,9 +29,10 @@ class App extends React.Component {
       email: '',
       first_name: '',
       last_name: '',
-      id: '',
+      id: this.props?.id || '',
       balance: ''
     }
+    console.log(this.props);
   }
   handleLogin(data) {
     console.log(data)
@@ -59,11 +61,17 @@ class App extends React.Component {
       login: !this.state.login
     })
   }
-
+  componentWillMount() {
+    console.log('hi');
+    this.setState({
+      id: this.props.id
+    })
+  }
 
   render() {
     const { id } = this.state;
-
+    console.log("iddddddddd",id);
+    console.log(this.state)
     // const { signUp, login } = this.state;
 
     // if(this.state.redirect === '/register') {
@@ -81,11 +89,10 @@ class App extends React.Component {
     // if (login === true) {
     //   return (<Main loginHandle={this.loginHandle}/>)
     // }
-
     return (
       <Router>
           <Switch>
-  
+
             <Route exact path="/login">
               <Login login={this.handleLogin} redirect={this.handleRedirect}/>
             </Route>

@@ -7,9 +7,9 @@ function PrivateRoute({ component: Component, userId, ...rest }) {
   const { id } = useContext(AuthContext);
 
   return (
-    
-    <Route 
-      {...rest} 
+
+    <Route
+      {...rest}
       render={props => {
         return id ? <Component userId={userId} {...props} /> : <Redirect to="/login"/>
       }}
