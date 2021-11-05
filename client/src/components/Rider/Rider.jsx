@@ -23,7 +23,7 @@ const Rider = (props) => {
   const [whichListItemClicked, setWhichListItemClicked] = useState(null);
 
   const userData = useContext(AuthContext);
-  
+
   /*
   ************************************************************
 
@@ -37,11 +37,11 @@ const Rider = (props) => {
       params: {
         riderLocation: riderLocation
       }
-    }).then(res => {
-      console.log('🦨', res.data)
-      setNearbyRides(res.data);
-      //console.log(nearbyRides)
-    })
+      }).then(res => {
+        console.log('🦨', res.data)
+        setNearbyRides(res.data);
+        //console.log(nearbyRides)
+      })
       .catch(err => {
         console.log('err in back to client', err);
       })
@@ -49,7 +49,7 @@ const Rider = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(props.userid);
+    console.log(props.userId);
     setUserid(setUserid);
   }, [props.userid]);
 
