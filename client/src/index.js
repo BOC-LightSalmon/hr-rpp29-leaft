@@ -4,17 +4,21 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
-let id;
+
 (function checkAuth() {
   axios.get('/api/logins/checkAuth').then((results) => {
-    id = results.data.id;
-    console.log(id);
-    return Promise.resolve(id).then((id) => id);
-  }).then((id) => {
-    console.log('id in render', id);
+    return Promise.resolve(results.data)
+  }).then((data) => {
     ReactDOM.render(
       <React.StrictMode>
-        <App id={id}/>
+        <App data={data}/>
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+  }).catch((err) => {
+    ReactDOM.render(
+      <React.StrictMode>
+        <App />
       </React.StrictMode>,
       document.getElementById('root')
     );

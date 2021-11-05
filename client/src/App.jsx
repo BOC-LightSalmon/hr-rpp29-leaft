@@ -17,7 +17,7 @@ export const AuthContext = React.createContext();
 
 class App extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.signUpHandle = this.signUpHandle.bind(this);
     this.loginHandle = this.loginHandle.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
@@ -26,21 +26,20 @@ class App extends React.Component {
       signUp: false,
       login: false,
       redirect: '/register',
-      email: '',
-      first_name: '',
-      last_name: '',
-      id: this.props?.id || '',
-      balance: ''
+      email: this.props.data?.email || '',
+      first_name: this.props.data?.first_name || '',
+      last_name: this.props.data?.last_name ||'',
+      id: this.props.data?.id || '',
+      balance: this.props.data?.balance || 0
     }
-    console.log(this.props);
+
   }
   handleLogin(data) {
     console.log(data)
     for(var keys in data) {
-      console.log('keys =', data[keys]);
       this.setState({
         [keys]: data[keys] === null ? 0 : data[keys]
-      },() => console.log(this.state))
+      })
     }
   }
 
@@ -61,12 +60,12 @@ class App extends React.Component {
       login: !this.state.login
     })
   }
-  componentWillMount() {
-    console.log('hi');
-    this.setState({
-      id: this.props.id
-    })
-  }
+  // UNSAFE_componentWillMount() {
+  //   console.log('hi');
+  //   this.setState({
+  //     id: this.props.id
+  //   })
+  // }
 
   render() {
     const { id } = this.state;

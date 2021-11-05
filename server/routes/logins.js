@@ -103,20 +103,24 @@ router.post('/login', (req, res, next) => {
     }
   })(req, res);
 })
-router.get('/test', (req, res) => {
-  console.log("session", req.session)
-  console.log("user🤢", req.user);
-})
 
-router.get('/', (req, res) => {
-  console.log('testing123')
-  console.log(req.session);
-  console.log(req.user);
-})
+
+
 
 router.get('/checkAuth', (req, res) => {
-  if(req.isAuthenticated) {
-    res.send(req.user)
+  if(req.isAuthenticated()) {
+
+    const {first_name, last_name, email, id, balance} = req.user;
+        const obj = {}
+        obj.first_name = first_name;
+        obj.last_name = last_name;
+        obj.email = email;
+        obj.id = id;
+        obj.balance = balance
+    res.send(obj)
+  } else {
+    console.log('heelloo')
+    res.send(401)
   }
 })
 // function checkAuth(req, res, next) {

@@ -49,11 +49,7 @@ class Login extends React.Component {
     //   })
     // })
   }
-  test() {
-    axios.get('/api/logins/test').then((res) => {
-      console.log(res)
-    })
-  }
+
   render() {
     if(!this.state.isLoggedIn) {
       return(
