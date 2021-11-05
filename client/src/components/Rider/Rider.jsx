@@ -21,27 +21,24 @@ const Rider = (props) => {
   const [markerClicked, setMarkerClicked] = useState(false);
   const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
   const [whichListItemClicked, setWhichListItemClicked] = useState(null);
-  const [confirmedRide, setConfirmedRide] = useState({}); // this is the confirmed ride, its pulled from the database, using same route, just filtering the response of that route to only rides with rider id === user id
+  const [confirmedRide, setConfirmedRide] = useState({}); // this is the confirmed ride, its pulled from the database, using same route, just filtering the response of that route to only rides with rider id !== null (will probably need to change it later to rider id === user id)
 
   const userData = useContext(AuthContext);
-  
-  /*
-  ************************************************************
-
-   userData is App state. Access user Id with 'userData.id'
-
-  ************************************************************
-  */
-
+  console.log('userData.id', userData.id);
 
   useEffect(() => {
     axios.get('/api/riders/rides', { 
       params: {
+        userId: userData.id,
         riderLocation: riderLocation
       } 
       }).then(res => {
-        console.log('🦨', res.data)
+        console.log('🦨', res.data);
         setNearbyRides(res.data);
+        const confirmed = res.data.filter(ride => ride.rider_id === userData.id);
+        console.log('🦧', confirmed);
+        setConfirmedRide(confirmed[0]); // here we are assuming that the user can only pick ONE ride.
+        
       })
       .catch(err => {
         console.log('err in back to client', err);
@@ -55,8 +52,11 @@ const Rider = (props) => {
   }, [props.userid]);
 
 
-  const associateRiderWithRide = (routeId, riderId) => {
-    axios.put('/api/riders/rides/associateRider', { routeId, userid })
+  const associateRiderWithRide = (routeId) => {
+    axios.put('/api/riders/rides/associateRider', { 
+      routeId,
+      userid: userData.id 
+    })
       .then(res => {
         console.log(res)
       })
@@ -75,6 +75,7 @@ const Rider = (props) => {
 
 
   const handleSelectRide = key => {
+    console.log('🦀', nearbyRides[key]);
     setRideSelected(true);
     setWhichListItemClicked(key);
     setWhichMarkerClicked(key);
@@ -85,7 +86,7 @@ const Rider = (props) => {
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
-      associateRiderWithRide(whichListItemClicked, userid)
+      // associateRiderWithRide(nearbyRides[whichMarkerClicked].id)
       setRideConfirmed(true);
       setShowConfirmationModal(true);
       // need to put riderid on route row
@@ -145,14 +146,28 @@ const Rider = (props) => {
 
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
 
-      {!rideSelected && !rideConfirmed ?
+      {console.log('🐎', rideConfirmed, confirmedRide)}
+      {/* {console.log('🐙', Object.keys(confirmedRide).length !== 0)} */}
+      {Object.keys(confirmedRide).length !== 0 ? <SelectedRide 
+      ride={confirmedRide}
+      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
+      handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
+      rideConfirmed={rideConfirmed} /> : (!rideSelected && !rideConfirmed ?
+      <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
+      <SelectedRide
+      ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
+      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
+      handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
+      rideConfirmed={rideConfirmed} />)}
+
+      {/* {!rideSelected && !rideConfirmed ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
       <SelectedRide
       ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
       handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} />
-      }
+      } */}
 
     </div>
   );

@@ -3,10 +3,6 @@ const Route = require('../../db/models/routes');
 const Users = require('../../db/models/users');
 const { Op } = require('sequelize');
 
-const selectRoute = async (req, res) => {
-  // write function to interact with database
-}
-
 // define more controllers for driver actions
 const findNearbyRoutes = async (req, res) => {
   const minLat = JSON.parse(req.query.riderLocation).lat - .35;
@@ -17,7 +13,10 @@ const findNearbyRoutes = async (req, res) => {
   try {
     const nearbyRoutes = await Route.findAll({
       where: {
-        [Op.and]: [{latPickUp: {[Op.between]: [minLat, maxLat]}}, {lngPickUp: {[Op.between]: [minLng, maxLng]}}]
+        confirmed: false,
+        // drive_id: { [sequelize.Op.not]: userData.id },
+        latPickUp: { [Op.between]: [minLat, maxLat] },
+        lngPickUp: { [Op.between]: [minLng, maxLng] }
       },
       include: [
         {
@@ -34,12 +33,10 @@ const findNearbyRoutes = async (req, res) => {
   }
 }
 
-
-
-const addRiderToRoute = async (req, res) => {
+const addRiderToRoute = (req, res) => {
   console.log(req.body);
   Routes.update(
-    {rider_id: req.body.riderId},
+    {rider_id: req.body.userId},
     {id: req.body.routeId}
   )
   .then(result => {
