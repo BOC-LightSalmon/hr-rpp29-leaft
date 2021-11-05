@@ -23,7 +23,7 @@ const Rider = (props) => {
   const [whichListItemClicked, setWhichListItemClicked] = useState(null);
 
   const userData = useContext(AuthContext);
-  
+
   /*
   ************************************************************
 
@@ -34,10 +34,10 @@ const Rider = (props) => {
 
 
   useEffect(() => {
-    axios.get('/api/riders/rides', { 
+    axios.get('/api/riders/rides', {
       params: {
         riderLocation: riderLocation
-      } 
+      }
       }).then(res => {
         console.log('🦨', res.data)
         setNearbyRides(res.data);
@@ -50,7 +50,7 @@ const Rider = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(props.userid);
+    console.log(props.userId);
     setUserid(setUserid);
   }, [props.userid]);
 

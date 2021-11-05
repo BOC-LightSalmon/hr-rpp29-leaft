@@ -10,13 +10,14 @@ import PrivateRoute from './components/PrivateRoute.jsx';
 import BalanceTransfer from './components/Balance/BalanceTransfer.jsx';
 import BalanceUpdate from './components/Balance/BalanceUpdate.jsx';
 import './App.scss';
+import axios from 'axios'
 
 export const AuthContext = React.createContext();
 
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.signUpHandle = this.signUpHandle.bind(this);
     this.loginHandle = this.loginHandle.bind(this);
     this.handleRedirect = this.handleRedirect.bind(this);
@@ -25,20 +26,20 @@ class App extends React.Component {
       signUp: false,
       login: false,
       redirect: '/register',
-      email: '',
-      first_name: '',
-      last_name: '',
-      id: '',
-      balance: ''
+      email: this.props.data?.email || '',
+      first_name: this.props.data?.first_name || '',
+      last_name: this.props.data?.last_name ||'',
+      id: this.props.data?.id || '',
+      balance: this.props.data?.balance || 0
     }
+
   }
   handleLogin(data) {
     console.log(data)
     for(var keys in data) {
-      console.log('keys =', data[keys]);
       this.setState({
         [keys]: data[keys] === null ? 0 : data[keys]
-      },() => console.log(this.state))
+      })
     }
   }
 
@@ -59,11 +60,17 @@ class App extends React.Component {
       login: !this.state.login
     })
   }
-
+  // UNSAFE_componentWillMount() {
+  //   console.log('hi');
+  //   this.setState({
+  //     id: this.props.id
+  //   })
+  // }
 
   render() {
     const { id } = this.state;
-
+    console.log("iddddddddd",id);
+    console.log(this.state)
     // const { signUp, login } = this.state;
 
     // if(this.state.redirect === '/register') {
@@ -81,7 +88,6 @@ class App extends React.Component {
     // if (login === true) {
     //   return (<Main loginHandle={this.loginHandle}/>)
     // }
-
     return (
       <Router>
           <Switch>
