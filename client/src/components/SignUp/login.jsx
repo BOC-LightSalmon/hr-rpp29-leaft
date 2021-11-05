@@ -33,7 +33,7 @@ class Login extends React.Component {
   }
   submitForm(e) {
     e.preventDefault();
-    
+
     axios.post('/api/logins/login', this.state).then((results) => {
       this.props.login(results.data);
       this.setState({
@@ -48,6 +48,11 @@ class Login extends React.Component {
     //     errorMessage: err.response.data
     //   })
     // })
+  }
+  test() {
+    axios.get('/api/logins/test').then((res) => {
+      console.log(res)
+    })
   }
   render() {
     if(!this.state.isLoggedIn) {
@@ -70,6 +75,8 @@ class Login extends React.Component {
           <NavLink id="register-button" to="/register">Register</NavLink>
           {/* <button id="register-button" onClick={() => {
             this.props.redirect('/register');
+          }}>Register</button>
+          <button onClick={this.test.bind(this)}>test</button>
           }}>Register</button> */}
           {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
         </div>

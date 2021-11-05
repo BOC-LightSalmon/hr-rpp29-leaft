@@ -1,3 +1,4 @@
 node_modules
 .env
 client/build
+db/config_store.js

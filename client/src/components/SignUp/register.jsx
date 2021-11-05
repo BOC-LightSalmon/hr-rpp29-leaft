@@ -19,7 +19,9 @@ class Register extends React.Component {
       success: false
     }
   }
-
+  componentDidMount() {
+    axios.get('/api/logins/')
+  }
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value
