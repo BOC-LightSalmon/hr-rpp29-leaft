@@ -37,6 +37,7 @@ const Rider = (props) => {
         console.log('🦧', confirmed);
         if (confirmed.length > 0) {
           setConfirmedRide(confirmed[0]); // here we are assuming that the user can only pick ONE ride.
+          setRideConfirmed(true);
         } 
         
       })
@@ -123,7 +124,7 @@ const Rider = (props) => {
     setRideConfirmed(false);
 
     // removes rideid from db
-    removeRiderFromRide(nearbyRides[whichMarkerClicked].id);
+    removeRiderFromRide((nearbyRides[whichMarkerClicked]) ? nearbyRides[whichMarkerClicked].id : confirmedRide.id);
 
     setMarkerClicked(false);
     setWhichMarkerClicked(false);
@@ -156,9 +157,10 @@ const Rider = (props) => {
       <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
 
       {console.log('🐎', rideConfirmed, confirmedRide)}
-      {/* {console.log('🐙', Object.keys(confirmedRide).length !== 0)} */}
-      {Object.keys(confirmedRide).length !== 0 ? <SelectedRide 
-      ride={confirmedRide}
+      {console.log('🐙', Object.keys(confirmedRide).length)}
+
+      {/* {Object.keys(confirmedRide).length > 0 ? <SelectedRide 
+      ride={confirmedRide} confirmedRide={confirmedRide}
       handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} /> : (!rideSelected && !rideConfirmed ?
@@ -167,16 +169,17 @@ const Rider = (props) => {
       ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
       handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
-      rideConfirmed={rideConfirmed} />)}
-
-      {/* {!rideSelected && !rideConfirmed ?
+      rideConfirmed={rideConfirmed} />)} */}
+  {console.log('🪶', !rideSelected && !rideConfirmed)}
+  {console.log('🦚', nearbyRides, whichMarkerClicked, whichListItemClicked)}
+      {!rideSelected && !rideConfirmed ?
       <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
-      <SelectedRide
-      ride={nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]}
+      <SelectedRide confirmedRide={confirmedRide}
+      ride={(whichListItemClicked !== null || whichMarkerClicked !== null) ? (nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]) : confirmedRide}
       handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
       handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
       rideConfirmed={rideConfirmed} />
-      } */}
+      }
 
     </div>
   );
