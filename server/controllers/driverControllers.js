@@ -4,6 +4,13 @@ const Route = require('../../db/models/routes');
 
 const createRoute = (req, res) => {
   const data = req.body;
+  const routeDate = new Date(`${data.date} ${data.departure}`);
+  const currDate = new Date();
+
+  if (routeDate < currDate) {
+    res.send('This date/time has already passed. Please try a different date/time!');
+    return;
+  }
 
   const makeGeocodeRequest = (type) => {
     const API_KEY = process.env.MAPS_SERVER_API_KEY;

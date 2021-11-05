@@ -24,7 +24,7 @@ class RouteForm extends React.Component {
 
     axios.post('/api/drivers/create', this.state)
       .then((result) => {
-        if (result.data === 'Coordinates out of range. Please try another route!') {
+        if (typeof result.data === 'string' && result.data !== 'Created') {
           alert(result.data);
           return;
         }
