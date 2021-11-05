@@ -85,7 +85,7 @@ class App extends React.Component {
     return (
       <Router>
           <Switch>
-  
+
             <Route exact path="/login">
               <Login login={this.handleLogin} redirect={this.handleRedirect}/>
             </Route>

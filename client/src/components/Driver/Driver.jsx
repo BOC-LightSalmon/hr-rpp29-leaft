@@ -15,7 +15,7 @@ class Driver extends React.Component {
       formModal: false,
       routes: [],
       selectedRoute: {},
-      driverName: 'testDriverName',
+      userId: this.props.userId,
       loaded: false
     };
 
@@ -54,7 +54,7 @@ class Driver extends React.Component {
   }
 
   getRoutes() {
-    axios.get('/api/drivers/routes')
+    axios.get(`/api/drivers/routes?driver_id=${this.state.userId}`)
     .then(res => {
       let data = res.data;
 
@@ -79,26 +79,16 @@ class Driver extends React.Component {
     if (this.state.loaded) {
       return (
         <AuthContext.Consumer >
-          {userData => { // userData is App state
+          {userData => {
            return (
              <div id="driver-container">
-              {/* 
-              *****************************************************
-
-              You can access anything from App state like this:
-               
-              <div>{userData.id}</div> 
-               
-              *****************************************************
-              */}
-
               <Navbar />
               <div id="driver-wrapper">
                 <Map routes={this.state.routes} selectedRoute={this.state.selectedRoute} />
-                <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={this.state.driverName} selectRoute={this.selectRoute} />
+                <RoutesList routes={this.state.routes} getRoutes={this.getRoutes} driverName={userData.first_name} selectRoute={this.selectRoute} />
                 <button onClick={this.showForm} id="make-new-route">Make New Route</button>
               </div>
-              {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm}/>}
+              {this.state.modal && <RouteForm getRoutes={this.getRoutes} closeForm={this.closeForm} userId={userData.id}/>}
             </div>
            )
           }}
