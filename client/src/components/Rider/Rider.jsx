@@ -15,7 +15,6 @@ const Rider = (props) => {
   const [rideConfirmed, setRideConfirmed] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showCancelRideModal, setShowCancelRideModal] = useState(false);
-  const [userid, setUserid] = useState('');
   const [reRender, setReRender] = useState(false);
   // eslint-disable-next-line
   const [markerClicked, setMarkerClicked] = useState(false);
@@ -29,7 +28,6 @@ const Rider = (props) => {
   useEffect(() => {
     axios.get('/api/riders/rides', { 
       params: {
-        userId: userData.id,
         riderLocation: riderLocation
       } 
       }).then(res => {
@@ -37,7 +35,9 @@ const Rider = (props) => {
         setNearbyRides(res.data);
         const confirmed = res.data.filter(ride => ride.rider_id === userData.id);
         console.log('🦧', confirmed);
-        setConfirmedRide(confirmed[0]); // here we are assuming that the user can only pick ONE ride.
+        if (confirmed.length > 0) {
+          setConfirmedRide(confirmed[0]); // here we are assuming that the user can only pick ONE ride.
+        } 
         
       })
       .catch(err => {
@@ -45,12 +45,6 @@ const Rider = (props) => {
       })
       // eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    console.log(props.userid);
-    setUserid(setUserid);
-  }, [props.userid]);
-
 
   const associateRiderWithRide = (routeId) => {
     axios.put('/api/riders/rides/associateRider', { 
@@ -86,7 +80,8 @@ const Rider = (props) => {
   const handleConfirmationPageBtnPress = e => {
     const value = e.target.innerText;
     if (value === 'Confirm') {
-      // associateRiderWithRide(nearbyRides[whichMarkerClicked].id)
+      console.log('🐳', whichMarkerClicked, nearbyRides[whichMarkerClicked]);
+      associateRiderWithRide(nearbyRides[whichMarkerClicked].id)
       setRideConfirmed(true);
       setShowConfirmationModal(true);
       // need to put riderid on route row

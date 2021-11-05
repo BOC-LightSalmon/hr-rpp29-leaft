@@ -3,6 +3,10 @@ const Route = require('../../db/models/routes');
 const Users = require('../../db/models/users');
 const { Op } = require('sequelize');
 
+const selectRoute = async (req, res) => {
+  // write function to interact with database
+}
+
 // define more controllers for driver actions
 const findNearbyRoutes = async (req, res) => {
   const minLat = JSON.parse(req.query.riderLocation).lat - .35;
@@ -13,10 +17,7 @@ const findNearbyRoutes = async (req, res) => {
   try {
     const nearbyRoutes = await Route.findAll({
       where: {
-        confirmed: false,
-        // drive_id: { [sequelize.Op.not]: userData.id },
-        latPickUp: { [Op.between]: [minLat, maxLat] },
-        lngPickUp: { [Op.between]: [minLng, maxLng] }
+        [Op.and]: [{latPickUp: {[Op.between]: [minLat, maxLat]}}, {lngPickUp: {[Op.between]: [minLng, maxLng]}}]
       },
       include: [
         {
@@ -28,28 +29,28 @@ const findNearbyRoutes = async (req, res) => {
     ]
     });
     res.status(200).send(nearbyRoutes);
-  } catch (err) {
+  } catch(err) {
     res.status(400).send(err);
   }
 }
 
-const addRiderToRoute = (req, res) => {
-  console.log(req.body);
-  Routes.update(
-    {rider_id: req.body.userId},
-    {id: req.body.routeId}
-  )
-  .then(result => {
-    console.log(result);
+const addRiderToRoute = async (req, res) => {
+  console.log('🦜', req.body);
+  try {
+    const result = await Route.update(
+      {rider_id: req.body.userid},
+      {where: {id: req.body.routeId}}
+    );
+    console.log('🐕‍🦺', result);
     res.status(200)
-  })
-  .catch(err => {
+  } catch(err) {
+    console.log('🦫', err)
     res.status(400);
-  })
+  }
 }
 
 const removeRiderFromRoute = async (req, res) => {
-  Routes.update(
+  Route.update(
     {rider_id: null},
     {id: req.body.routeId}
   )
