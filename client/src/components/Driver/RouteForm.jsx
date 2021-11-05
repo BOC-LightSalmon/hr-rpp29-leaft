@@ -5,7 +5,6 @@ import './routeForm.scss'
 class RouteForm extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       driver_id: this.props.userId,
       pickUp: '',
