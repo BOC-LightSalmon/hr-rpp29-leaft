@@ -20,7 +20,7 @@ const findNearbyRoutes = async (req, res) => {
     const nearbyRoutes = await Routes.findAll({
       where: {
         driver_id: { [Op.not]: userId},
-        rider_id: { [Op.eq]: null},
+        rider_id: {[Op.or]: [userId, null]},
         latPickUp: { [Op.between]: [minLat, maxLat] },
         lngPickUp: { [Op.between]: [minLng, maxLng] }
       },
