@@ -8,7 +8,7 @@ require('../db/index');
 const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
-  cors: {origin: "*"}
+  cors: {origin: "http://18.188.220.4"}
 })
 io.on('connection', socket => {
   app.set('socket', socket)
