@@ -36,7 +36,7 @@ class Driver extends React.Component {
   }
 
   componentDidMount() {
-    this.connectToSocket()
+    this.connectToSocket();
     this.getRoutes();
 
     document.addEventListener('click', (e) => {
@@ -106,9 +106,10 @@ class Driver extends React.Component {
         data.forEach(route => {
           route.pickUpCoords = { lat: Number(route.latPickUp), lng: Number(route.lngPickUp) };
           route.dropOffCoords = { lat: Number(route.latDropOff), lng: Number(route.lngDropOff) };
+          route.dateTime = new Date(`${route.date} ${route.departure}`).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short'});
         });
 
-        data.sort((a, b) => Number(a.departure.replace(':', '')) - Number(b.departure.replace(':', '')));
+        data.sort((a, b) => new Date(a.dateTime) - new Date(b.dateTime));
 
         this.setState({
           routes: data,
