@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
-const port = process.env.REACT_APP_SERVER_PORT;
+const port = process.env.PORT;
 const http = require('http');
 require('../db/index');
 
