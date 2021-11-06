@@ -79,7 +79,7 @@ const getRoutes = async (req, res) => {
       toDelete.push(route.dataValues.id);
     }
 
-    return routeDate >= currentDate && today === currDateString;
+    return routeDate >= currentDate;
   });
 
   Route.destroy({

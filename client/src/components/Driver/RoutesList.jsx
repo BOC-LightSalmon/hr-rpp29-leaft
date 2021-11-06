@@ -54,11 +54,9 @@ class RoutesList extends React.Component {
   }
 
   render() {
-    const date = new Date().toLocaleString('default', { month: 'long', weekday: 'long', day: 'numeric', year: 'numeric' });
-
     return(
       <div id="routes-list-wrapper">
-        <div id="routes-list-intro">Hi, {this.props.driverName}! Here are your listed routes for today, {date}:</div>
+        <div id="routes-list-intro">Hi, {this.props.driverName}! Here are your upcoming routes:</div>
         <div id="routes-list">
           <Table routes={this.props.routes} cancelRoute={this.cancelRoute} showRoute={this.showRoute}/>
         </div>

@@ -15,7 +15,7 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
     },
     {
       Header: 'Departure',
-      accessor: 'departure'
+      accessor: 'dateTime'
     }
   ], []);
 
