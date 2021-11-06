@@ -101,11 +101,10 @@ const cancelRoute = async (req, res) => {
       attributes: ['driver_id'],
       raw: true
     })
- 
     
     socket.emit(
       'cancelRoute',
-      { driverId: driverId, riderName: req.body.riderName }
+      { driverId: route.driver_id, riderName: req.body.riderName }
     )
     res.sendStatus(201);
   } catch (err) {
