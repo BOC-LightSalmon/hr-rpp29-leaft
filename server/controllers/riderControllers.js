@@ -89,13 +89,14 @@ const confirmRoute = async (req, res) => {
 const cancelRoute = async (req, res) => {
   const socket = req.app.get('socket')
   try {
+    await Routes.update({rider_id: null}, {where: { id: req.body.id }})
     const route = await Routes.findOne({
-      where: { id: req.body.id },
+      where: { id: req.body.id},
       attributes: ['driver_id'],
       raw: true
     })
-    route.rider_id = null;
-    const driverId = route.driver_id
+ 
+    
     socket.emit(
       'cancelRoute',
       { driverId: driverId, riderName: req.body.riderName }

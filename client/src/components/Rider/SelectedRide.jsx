@@ -20,15 +20,16 @@ const SelectedRide = props => {
                     <li><span className="rideDetail">Driver's Name: </span>{props.ride.driver ? props.ride.driver.first_name : 'Nate'}</li>
                 </ul>
             </div>
-            {!props.rideConfirmed ?
-                <div className="btnsContainer">
-                    <button id="CancelConfirmationBtn" className="pageBtn cancelRideBtn" onClick={props.handleConfirmationPageBtnPress}>Cancel</button>
-                    <button id="confirmRideBtn" className="riderBtn pageBtn" onClick={props.handleConfirmationPageBtnPress}>Confirm</button>
-                </div> :
+            {props.rideConfirmed ?
                 <div className="btnsContainer">
                     <button className="pageBtn cancelRideBtn" onClick={props.handlePostConfirmationCanellationBtnPress}>Cancel</button>
                     <button id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</button>
-                </div>
+                </div> : 
+                <div className="btnsContainer">
+                    <button id="CancelConfirmationBtn" className="pageBtn cancelRideBtn" onClick={props.handleConfirmationPageBtnPress}>Cancel</button>
+                    <button id="confirmRideBtn" className="riderBtn pageBtn" onClick={props.handleConfirmationPageBtnPress}>Confirm</button>
+                </div> 
+                
             }
         </div>
     );
