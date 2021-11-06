@@ -1,14 +1,14 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
-const port = process.env.PORT;
+const port = process.env.REACT_APP_SERVER_PORT;
 const http = require('http');
 require('../db/index');
 
 const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
-  cors: {origin: "http://18.188.220.4"}
+  cors: {origin: "http://localhost:3000"}
 })
 io.on('connection', socket => {
   app.set('socket', socket)
