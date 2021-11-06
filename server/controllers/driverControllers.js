@@ -72,14 +72,12 @@ const getRoutes = async (req, res) => {
 
   routes = routes.filter(route => {
     const routeDate = new Date(`${route.dataValues.date} ${route.dataValues.departure}`);
-    const today = new Date(route.dataValues.date).toISOString().slice(0,10).replace(/-/g,"");
-    const currDateString = currentDate.toISOString().slice(0,10).replace(/-/g,"");
 
     if (routeDate < currentDate) {
       toDelete.push(route.dataValues.id);
     }
 
-    return routeDate >= currentDate && today === currDateString;
+    return routeDate >= currentDate;
   });
 
   Route.destroy({

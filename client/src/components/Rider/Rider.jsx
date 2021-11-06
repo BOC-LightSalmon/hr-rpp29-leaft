@@ -29,7 +29,8 @@ const Rider = (props) => {
   useEffect(() => {
     axios.get('/api/riders/rides', {
       params: {
-        riderLocation: riderLocation
+        riderLocation: riderLocation,
+        userId: userData.id
       }
       }).then(res => {
         console.log('🦨', res.data)
