@@ -31,9 +31,17 @@ class Login extends React.Component {
       email: e.target.value
     })
   }
+  // componentDidMount() {
+  //   axios.get('/api/logins/checkAuth').then(() => {
+  //     this.setState({
+  //       isLoggedIn: true
+  //     })
+  //   }).catch((err) => {
+  //     return
+  //   })
+  // }
   submitForm(e) {
     e.preventDefault();
-
     axios.post('/api/logins/login', this.state).then((results) => {
       this.props.login(results.data);
       this.setState({
