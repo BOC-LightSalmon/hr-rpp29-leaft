@@ -24,7 +24,6 @@ const Rider = (props) => {
   const [confirmedRide, setConfirmedRide] = useState({}); // this is the confirmed ride, its pulled from the database, using same route, just filtering the response of that route to only rides with rider id !== null (will probably need to change it later to rider id === user id)
 
   const userData = useContext(AuthContext);
-  console.log('userData.id', userData.id);
 
   useEffect(() => {
     axios.get('/api/riders/rides', {
