@@ -13,10 +13,16 @@ const findNearbyRoutes = async (req, res) => {
   const maxLat = JSON.parse(req.query.riderLocation).lat + .35;
   const minLng = JSON.parse(req.query.riderLocation).lng - .35;
   const maxLng = JSON.parse(req.query.riderLocation).lng + .35;
+  const userId = JSON.parse(req.query.userId);
+  console.log(`UserId: ${userId} is ${typeof userId}`);
+
   try {
     const nearbyRoutes = await Routes.findAll({
       where: {
-        [Op.and]: [{ latPickUp: { [Op.between]: [minLat, maxLat] } }, { lngPickUp: { [Op.between]: [minLng, maxLng] } }]
+        driver_id: { [Op.not]: userId},
+        rider_id: { [Op.eq]: null},
+        latPickUp: { [Op.between]: [minLat, maxLat] },
+        lngPickUp: { [Op.between]: [minLng, maxLng] }
       },
       include: [
         {
