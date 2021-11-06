@@ -123,6 +123,12 @@ router.get('/checkAuth', (req, res) => {
     res.send(401)
   }
 })
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.session.destroy();
+  res.end();
+})
 // function checkAuth(req, res, next) {
 //   console.log('we are called');
 //   if(req.isAuthenticated()){
