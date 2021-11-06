@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
 
+
 (function checkAuth() {
   axios.get('/api/logins/checkAuth').then((results) => {
     return Promise.resolve(results.data)
@@ -27,7 +28,7 @@ import axios from 'axios'
 
 // ReactDOM.render(
 //   <React.StrictMode>
-//     <App id={id}/>
+//     <App />
 //   </React.StrictMode>,
 //   document.getElementById('root')
 // );

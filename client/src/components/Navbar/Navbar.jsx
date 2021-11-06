@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import './navbar.scss';
+import axios from 'axios';
 
-function Navbar() {
+function Navbar(props) {
   const [ sidebar, setSidebar] = useState(false);
   const [ currentBalance, setCurrentBalance ] = useState('');
 
@@ -47,6 +48,9 @@ function Navbar() {
               </li>
             )
           })}
+          <li className='nav-text'><Link to='/login' onClick={() => axios.get('/api/logins/logout').then((res) => {
+            console.log(res);
+          })}><span>Logout</span></Link></li>
         </ul>
       </nav>
     </div>
