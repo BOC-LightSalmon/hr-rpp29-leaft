@@ -12,14 +12,14 @@ import axios from 'axios'
   }).then((data) => {
     ReactDOM.render(
       <React.StrictMode>
-        <App data={data}/>
+        <App data={data} isLoggedIn={true}/>
       </React.StrictMode>,
       document.getElementById('root')
     );
   }).catch((err) => {
     ReactDOM.render(
       <React.StrictMode>
-        <App />
+        <App isLoggedIn={false}/>
       </React.StrictMode>,
       document.getElementById('root')
     );
