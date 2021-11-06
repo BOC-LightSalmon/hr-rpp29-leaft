@@ -47,8 +47,7 @@ class Driver extends React.Component {
   }
 
   connectToSocket() {
-    const {REACT_APP_SERVER_PORT} = process.env
-    const socket = socketClient(`http://localhost:${REACT_APP_SERVER_PORT}`)
+    const socket = socketClient(`http://localhost:5000`)
     const driverId = this.props.userId
     socket.on('confirmRoute', (data) => {
       if (data.route.driver_id === driverId) {
