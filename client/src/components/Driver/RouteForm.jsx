@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import './routeForm.scss'
+import './routeForm.scss';
 
 class RouteForm extends React.Component {
   constructor(props) {

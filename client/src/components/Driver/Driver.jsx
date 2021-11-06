@@ -10,7 +10,6 @@ import Confirm from './Confirm';
 import Cancel from './Cancel';
 import { AuthContext } from '../../App';
 
-
 class Driver extends React.Component {
   constructor(props) {
     super(props);
@@ -119,7 +118,6 @@ class Driver extends React.Component {
   }
 
   render() {
-
     if (this.state.loaded) {
       return (
         <AuthContext.Consumer >
