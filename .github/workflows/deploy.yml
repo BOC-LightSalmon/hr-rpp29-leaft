@@ -31,6 +31,13 @@ jobs:
           
           cat .env
           
+      - name: Create React .env file
+        run: |
+          touch client/.env
+          echo REACT_APP_SOCKET_URL=http://18.188.220.4/ >> client/.env
+
+          cat .env
+          
       - name: Install node dependencies
         run: npm install
       
