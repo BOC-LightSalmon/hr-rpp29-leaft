@@ -16,6 +16,10 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
     {
       Header: 'Departure',
       accessor: 'dateTime'
+    },
+    {
+      Header: 'Confirmed',
+      accessor: 'confirmed'
     }
   ], []);
 

@@ -86,7 +86,7 @@ const getRoutes = async (req, res) => {
 
   await Route.destroy({
     where: {
-      id: toDelete
+      id: toDelete,
       seats: {
         [Op.lte]: 0
       }
