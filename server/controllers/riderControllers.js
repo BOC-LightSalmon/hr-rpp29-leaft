@@ -74,7 +74,9 @@ const removeRiderFromRoute = async (req, res) => {
 const confirmRoute = async (req, res) => {
   const socket = req.app.get('socket')
   try {
-    await Routes.update({rider_id: req.body.riderId}, {where: {id: req.body.id}})
+    await Routes.update(
+      {rider_id: req.body.riderId, confirmed: true}, 
+      {where: {id: req.body.id}})
 
     const route = await Routes.findOne({
       where: { id: req.body.id },
@@ -95,17 +97,16 @@ const confirmRoute = async (req, res) => {
 const cancelRoute = async (req, res) => {
   const socket = req.app.get('socket')
   try {
-    await Routes.update({rider_id: null}, {where: { id: req.body.id }})
+    await Routes.update({rider_id: null, confirmed: false}, {where: { id: req.body.id }})
     const route = await Routes.findOne({
       where: { id: req.body.id},
       attributes: ['driver_id'],
       raw: true
     })
- 
-    
+    console.log('route.driver_id', route.driver_id)
     socket.emit(
       'cancelRoute',
-      { driverId: driverId, riderName: req.body.riderName }
+      { driverId: route.driver_id, riderName: req.body.riderName }
     )
     res.sendStatus(201);
   } catch (err) {
