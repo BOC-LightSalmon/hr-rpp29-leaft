@@ -4,8 +4,7 @@ import CurrentBalance from "./CurrentBalance";
 import BalanceAPIutils from './BalanceAPIutils';
 import { AuthContext } from '../../App';
 
-function BalanceUpdate() {
-  const [currentBalance, setCurrentBalance] = useState(0);
+function BalanceUpdate({ handleBalanceUpdate }) {
   const [amount, setAmount] = useState('');
   const [displayError, setDisplayError] = useState(false);
   const [ successDeposit, setSuccessDeposit] = useState(false);
@@ -15,51 +14,57 @@ function BalanceUpdate() {
 
   const userData = useContext(AuthContext);
 
-  const getUserBalance = async () => {
-      const { data } = await BalanceAPIutils.getBalance(userData.id)
-      setCurrentBalance(data);
-  }
-
-  useEffect(() => {
-    getUserBalance();
-  }, [])
-
   const handleDeposit = async () => {
-    setSuccessDeposit(false);
-    setSuccessWithdrawal(false);
-    const { status } = await BalanceAPIutils.deposit(userData.id, amount);
+    try {
+      // check for blank amount and display message
 
-    if (status === 201) {
-      setDeposited(amount);
-      setSuccessDeposit(true);
+      setSuccessDeposit(false);
+      setSuccessWithdrawal(false);
+      const { status } = await BalanceAPIutils.deposit(userData.id, amount);
+  
+      if (status === 201) {
+        setDeposited(amount);
+        setSuccessDeposit(true);
+        const newBalance = userData.balance + parseFloat(amount);
+        handleBalanceUpdate(newBalance)
+      }
+  
+      setAmount('');
+
+    } catch(err) {
+      console.log(err)
     }
-
-    getUserBalance();
-    setAmount('');
   }
 
   const handleWithdrawal = async () => {
-    setSuccessDeposit(false);
-    setSuccessWithdrawal(false);
-    if (amount > currentBalance) {
-      setDisplayError(true);
-    } else {
-      setDisplayError(false)
-      const { status } = await BalanceAPIutils.withdraw(userData.id, amount);
-
-      if (status === 201) {
-        setWithdrawn(amount)
-        setSuccessWithdrawal(true)
+    try {
+      // check for blank amount and display message
+      
+      setSuccessDeposit(false);
+      setSuccessWithdrawal(false);
+      if (amount > userData.balance) {
+        setDisplayError(true);
+      } else {
+        setDisplayError(false)
+        const { status } = await BalanceAPIutils.withdraw(userData.id, amount);
+  
+        if (status === 201) {
+          setWithdrawn(amount);
+          setSuccessWithdrawal(true);
+          const newBalance = userData.balance - parseFloat(amount);
+          handleBalanceUpdate(newBalance);
+        }
       }
+      setAmount('');
+    } catch (err) {
+      console.log(err)
     }
-    getUserBalance();
-    setAmount('');
   }
 
   return (
     <div className="balance">
       <Navbar />
-      <CurrentBalance currentBalance={currentBalance}/>
+      <CurrentBalance currentBalance={userData.balance.toFixed(2)}/>
       <div className="balance-form">
         <div>
           <label className="balance-instructions">Enter amount to deposit or withdraw</label>
@@ -94,13 +99,13 @@ function BalanceUpdate() {
       {successDeposit &&
         <div className="balance-message-container">
           <div className="balance-message balance-success">SUCCESS!</div>
-          <div className="balance-message balance-success">$ {parseInt(deposited).toFixed(2)} has been added to your account</div>
+          <div className="balance-message balance-success">$ {parseFloat(deposited).toFixed(2)} has been added to your account</div>
         </div>
       }
       {successWithdrawal &&
         <div className="balance-message-container">
           <div className="balance-message balance-success">SUCCESS!</div>
-          <div className="balance-message balance-success">$ {withdrawn} has been withdrawn from your account</div>
+          <div className="balance-message balance-success">$ {parseFloat(withdrawn).toFixed(2)} has been withdrawn from your account</div>
         </div>
       }
     </div>
