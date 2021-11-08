@@ -25,15 +25,12 @@ class RouteForm extends React.Component {
     let data = this.state;
     delete data.error;
 
-    console.log('submitHandle', data);
-
     axios.post('/api/drivers/create', data)
       .then((result) => {
         if (typeof result.data === 'string' && result.data !== 'Created') {
           this.setState({
             error: result.data
           });
-
           return;
         }
 
