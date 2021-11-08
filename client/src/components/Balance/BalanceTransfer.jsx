@@ -62,7 +62,7 @@ function BalanceTransfer({ handleBalanceUpdate }) {
   return (
     <div className="balance">
       <Navbar />
-      <CurrentBalance currentBalance={userData.balance}/>
+      <CurrentBalance currentBalance={userData.balance.toFixed(2)}/>
       {displayTipForm &&
         <div>
           <div className="balance-form">
