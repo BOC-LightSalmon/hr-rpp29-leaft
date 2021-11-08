@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../App.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 import CurrentBalance from './CurrentBalance.jsx';
 import BalanceAPIutils from './BalanceAPIutils'
 
-function BalanceTransfer() {
-  const [ currentBalance, setCurrentBalance ] = useState(0);
+function BalanceTransfer({ handleBalanceUpdate }) {
+  // const [ currentBalance, setCurrentBalance ] = useState(0);
   const [ amount, setAmount ] = useState('');
   const [ driverEmail, setDriverEmail ] = useState('');
   const [ displayBalanceError, setDisplayBalanceError ] = useState(false);
@@ -16,26 +16,29 @@ function BalanceTransfer() {
 
   const userData = useContext(AuthContext);
 
-  const getUserBalance = async () => {
-      const { data } = await BalanceAPIutils.getBalance(userData.id)
-      setCurrentBalance(data);
-  }
+  // const getUserBalance = async () => {
+  //     const { data } = await BalanceAPIutils.getBalance(userData.id)
+  //     setCurrentBalance(data);
+  // }
 
   const handleSend = async () => {
     try {
       setDisplaySuccessMessage(false)
       setDisplaySelfError(false);
       setDisplayNotFoundError(false);
-      if (amount > currentBalance) {
+      if (amount > userData.balance) {
         setDisplayBalanceError(true)
       } else {
         setDisplayBalanceError(false)
         await BalanceAPIutils.transfer(userData.id, driverEmail, amount)
         setDisplaySuccessMessage(true)
         setDisplayTipForm(false)
-        getUserBalance()
+        // getUserBalance()
+        handleBalanceUpdate(userData.balance - parseFloat(amount))
+
       }
     } catch (err) {
+      console.log(err.message)
       if (err.response.status === 405) {
         setDisplaySelfError(true)
       }
@@ -50,16 +53,16 @@ function BalanceTransfer() {
     setDisplaySuccessMessage(false)
   }
 
-  useEffect(() => {
-    getUserBalance();
-  }, [])
+  // useEffect(() => {
+  //   getUserBalance();
+  // }, [])
 
 
 
   return (
     <div className="balance">
       <Navbar />
-      <CurrentBalance currentBalance={currentBalance}/>
+      <CurrentBalance currentBalance={userData.balance}/>
       {displayTipForm &&
         <div>
           <div className="balance-form">

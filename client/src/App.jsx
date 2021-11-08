@@ -61,7 +61,7 @@ class App extends React.Component {
             <PrivateRoute exact path="/driver" component={Driver} userId={id} />
             <PrivateRoute exact path="/rider" component={Rider} userId={id} />
             <PrivateRoute exact path="/balance-update" component={BalanceUpdate} handleBalanceUpdate={this.handleBalanceUpdate} />
-            <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} />
+            <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} handleBalanceUpdate={this.handleBalanceUpdate}/>
           </AuthContext.Provider>
 
             <Route path="/">

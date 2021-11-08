@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Navbar from '../Navbar/Navbar';
 import CurrentBalance from "./CurrentBalance";
 import BalanceAPIutils from './BalanceAPIutils';
@@ -39,7 +39,7 @@ function BalanceUpdate({ handleBalanceUpdate }) {
   const handleWithdrawal = async () => {
     try {
       // check for blank amount and display message
-      
+
       setSuccessDeposit(false);
       setSuccessWithdrawal(false);
       if (amount > userData.balance) {
