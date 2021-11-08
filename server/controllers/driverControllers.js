@@ -77,16 +77,19 @@ const getRoutes = async (req, res) => {
   routes = routes.filter(route => {
     const routeDate = new Date(`${route.dataValues.date} ${route.dataValues.departure}`);
 
-    if (routeDate < currentDate || route.seats <= 0) {
+    if (routeDate < currentDate) {
       toDelete.push(route.dataValues.id);
     }
 
     return routeDate >= currentDate;
   });
 
-  Route.destroy({
+  await Route.destroy({
     where: {
       id: toDelete
+      seats: {
+        [Op.lte]: 0
+      }
     }
   });
 
