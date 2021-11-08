@@ -47,8 +47,8 @@ class Driver extends React.Component {
 
   connectToSocket() {
     const REACT_APP_SOCKET_URL = process.env;
-    const socket = socketClient(REACT_APP_SOCKET_URL)
-    const driverId = this.props.userId
+    const socket = socketClient(REACT_APP_SOCKET_URL);
+    const driverId = this.props.userId;
     socket.on('confirmRoute', (data) => {
       if (data.route.driver_id === driverId) {
         this.setState({
@@ -56,7 +56,7 @@ class Driver extends React.Component {
           confirm: true
         })
       }
-    })
+    });
 
     socket.on('cancelRoute', (data) => {
       if (data.driverId === driverId) {
@@ -66,19 +66,19 @@ class Driver extends React.Component {
           cancel: true
         })
       }
-    })
+    });
   }
 
   handleConfirmation() {
     this.setState({
       confirm: !this.state.confirm
-    })
+    });
   }
 
   handleCancellation() {
     this.setState({
       cancel: !this.state.cancel
-    })
+    });
   }
 
   showForm() {
