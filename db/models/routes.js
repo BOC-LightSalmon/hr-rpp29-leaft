@@ -18,8 +18,7 @@ const Route = db.define('route', {
   latPickUp: Sequelize.DECIMAL(10,8),
   lngPickUp: Sequelize.DECIMAL(11,8),
   latDropOff: Sequelize.DECIMAL(10,8),
-  lngDropOff: Sequelize.DECIMAL(11,8),
-  confirmed: Sequelize.BOOLEAN
+  lngDropOff: Sequelize.DECIMAL(11,8)
 });
 
 Route.belongsTo(User, {

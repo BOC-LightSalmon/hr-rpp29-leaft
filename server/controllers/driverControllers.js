@@ -1,6 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const Route = require('../../db/models/routes');
+const { Op } = require('sequelize');
 
 const createRoute = (req, res) => {
   const data = req.body;
@@ -64,7 +65,10 @@ const getRoutes = async (req, res) => {
 
   let routes = await Route.findAll({
     where: {
-      driver_id
+      driver_id,
+      seats: {
+        [Op.gt]: 0
+      }
     }
   });
 

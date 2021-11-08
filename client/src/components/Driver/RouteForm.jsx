@@ -11,7 +11,8 @@ class RouteForm extends React.Component {
       dropOff: '',
       departure: '',
       seats: '',
-      date: ''
+      date: '',
+      error: ''
     };
 
     this.submitHandle = this.submitHandle.bind(this);
@@ -21,10 +22,18 @@ class RouteForm extends React.Component {
   submitHandle(event) {
     event.preventDefault();
 
-    axios.post('/api/drivers/create', this.state)
+    let data = this.state;
+    delete data.error;
+
+    console.log('submitHandle', data);
+
+    axios.post('/api/drivers/create', data)
       .then((result) => {
         if (typeof result.data === 'string' && result.data !== 'Created') {
-          alert(result.data);
+          this.setState({
+            error: result.data
+          });
+
           return;
         }
 
@@ -38,9 +47,10 @@ class RouteForm extends React.Component {
 
   handleChange(event) {
     const key = event.target.id;
+
     this.setState({
       [key]: event.target.value
-    })
+    });
   }
 
   render() {
@@ -90,6 +100,8 @@ class RouteForm extends React.Component {
           </table>
           <input id="submit_button" type="submit" value="Submit Ride" />
         </form>
+        <br></br>
+        {this.state.error && <h5>{this.state.error}</h5>}
       </div>
     );
   }
