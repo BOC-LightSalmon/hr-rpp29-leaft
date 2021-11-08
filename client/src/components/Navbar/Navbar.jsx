@@ -1,28 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../App';
 import { NavBarData } from './navbarData';
-import BalanceAPIutils from '../Balance/BalanceAPIutils';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 import './navbar.scss';
 import axios from 'axios';
 
-function Navbar(props) {
+function Navbar() {
   const [ sidebar, setSidebar] = useState(false);
-  const [ currentBalance, setCurrentBalance ] = useState('');
-
   const userData = useContext(AuthContext);
-
-  const getUserBalance = async () => {
-    const { data } = await BalanceAPIutils.getBalance(userData.id)
-    setCurrentBalance(data);
-  }
-
-  useEffect(() => {
-    getUserBalance();
-  }, [])
-
+  
   const toggleSidebar = () => setSidebar(!sidebar);
 
   return (
@@ -43,7 +31,7 @@ function Navbar(props) {
             return (
               <li key={index} className={item.cName}>
                 <Link to={item.path}>
-                  <span>{item.title === 'Balance' ? `${item.title}: $${currentBalance}` : item.title}</span>
+                  <span>{item.title === 'Balance' ? `${item.title}: $${userData.balance.toFixed(2)}` : item.title}</span>
                 </Link>
               </li>
             )
