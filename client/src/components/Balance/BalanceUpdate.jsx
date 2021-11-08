@@ -9,6 +9,7 @@ function BalanceUpdate({ handleBalanceUpdate }) {
   const [displayError, setDisplayError] = useState(false);
   const [ successDeposit, setSuccessDeposit] = useState(false);
   const [ successWithdrawal, setSuccessWithdrawal] = useState(false);
+  const [ displayZeroError , setDisplayZeroError ] = useState(false)
   const [ deposited, setDeposited] = useState('');
   const [ withdrawn, setWithdrawn] = useState('');
 
@@ -16,10 +17,17 @@ function BalanceUpdate({ handleBalanceUpdate }) {
 
   const handleDeposit = async () => {
     try {
-      // check for blank amount and display message
-
+      setDisplayZeroError(false);
+      setDisplayError(false)
       setSuccessDeposit(false);
       setSuccessWithdrawal(false);
+
+      if (!amount) {
+        setDisplayZeroError(true);
+        return
+      }
+
+
       const { status } = await BalanceAPIutils.deposit(userData.id, amount);
   
       if (status === 201) {
@@ -38,10 +46,16 @@ function BalanceUpdate({ handleBalanceUpdate }) {
 
   const handleWithdrawal = async () => {
     try {
-      // check for blank amount and display message
-
+      setDisplayZeroError(false);
       setSuccessDeposit(false);
       setSuccessWithdrawal(false);
+
+      if (!amount) {
+        setDisplayZeroError(true);
+        return
+      }
+
+
       if (amount > userData.balance) {
         setDisplayError(true);
       } else {
@@ -67,16 +81,28 @@ function BalanceUpdate({ handleBalanceUpdate }) {
       <CurrentBalance currentBalance={userData.balance.toFixed(2)}/>
       <div className="balance-form">
         <div>
-          <label className="balance-instructions">Enter amount to deposit or withdraw</label>
+          <label className={"balance-instructions"}>Enter amount to deposit or withdraw</label>
         </div>
         <div>
           <input
+            className={displayZeroError || displayError ? "tip-amount input-error" : "tip-amount"}
             value={amount}
             type="number"
             min="0.00"
             step="0.01"
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+                setAmount(e.target.value);
+                setDisplayZeroError(false);
+                setDisplayError(false)
+              }
+            }
           />
+          {displayError &&
+            <div className="balance-message balance-error" id="balance-error">You cannot withdraw more than your current balance</div>
+          }
+          {displayZeroError &&
+            <div className="balance-error">Please enter a valid amount to transfer</div>
+          }
         </div>
       </div>
       <div>
@@ -93,9 +119,6 @@ function BalanceUpdate({ handleBalanceUpdate }) {
           >Withdraw
         </button>
       </div>
-      {displayError &&
-        <div className="balance-message balance-error" id="balance-error">You cannot withdraw more than your current balance</div>
-      }
       {successDeposit &&
         <div className="balance-message-container">
           <div className="balance-message balance-success">SUCCESS!</div>

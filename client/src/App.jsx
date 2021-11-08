@@ -56,13 +56,13 @@ class App extends React.Component {
               <Register login={this.handleLogin}/>
             </Route>
 
-          <AuthContext.Provider value={this.state} >
-            <PrivateRoute exact path="/" component={Main} userId={id} />
-            <PrivateRoute exact path="/driver" component={Driver} userId={id} />
-            <PrivateRoute exact path="/rider" component={Rider} userId={id} />
-            <PrivateRoute exact path="/balance-update" component={BalanceUpdate} handleBalanceUpdate={this.handleBalanceUpdate} />
-            <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} handleBalanceUpdate={this.handleBalanceUpdate}/>
-          </AuthContext.Provider>
+            <AuthContext.Provider value={this.state} >
+              <PrivateRoute exact path="/" component={Main} userId={id} />
+              <PrivateRoute exact path="/driver" component={Driver} userId={id} />
+              <PrivateRoute exact path="/rider" component={Rider} userId={id} />
+              <PrivateRoute exact path="/balance-update" component={BalanceUpdate} handleBalanceUpdate={this.handleBalanceUpdate} />
+              <PrivateRoute exact path="/balance-transfer" component={BalanceTransfer} handleBalanceUpdate={this.handleBalanceUpdate}/>
+            </AuthContext.Provider>
 
             <Route path="/">
               <div>404 Not Found</div>
