@@ -27,6 +27,8 @@ describe('<Driver />', () => {
     );
   });
 
+  afterEach(cleanup);
+
   it('should render', () => {
     expect(Component).toBeTruthy();
   });
@@ -53,6 +55,8 @@ describe('<Map />', () => {
     );
   });
 
+  afterEach(cleanup);
+
   it('should render', () => {
     expect(Component).toBeTruthy();
   });
@@ -71,12 +75,22 @@ describe('<RoutesList />', () => {
     );
   });
 
+  afterEach(cleanup);
+
   it('should render', () => {
     expect(Component).toBeTruthy();
   });
 
   it('should display Pick-Up header', () => {
     expect(screen.getByText('Pick-Up')).toBeInTheDocument();
+  });
+
+  it('should change color of routes in list upon click', () => {
+    const route = Component.container.getElementsByTagName('td')[2];
+
+    fireEvent.click(route);
+
+    expect(route.style['background-color']).toBe('');
   });
 });
 
@@ -93,6 +107,8 @@ describe('<RouteForm />', () => {
       </AuthContext.Provider>
     );
   });
+
+  afterEach(cleanup);
 
   it('should render', () => {
     expect(Component).toBeTruthy();
@@ -111,6 +127,14 @@ describe('<RouteForm />', () => {
 
     expect(input.value).toBe('1:00PM');
   });
+
+  it('should not submit data or close form after clicking Submit Route button if no form data', () => {
+    const button = Component.container.querySelector('#submit_button');
+
+    fireEvent.click(button);
+
+    expect(button).toBeInTheDocument();
+  });
 });
 
 describe('<Table />', () => {
@@ -126,6 +150,8 @@ describe('<Table />', () => {
       </AuthContext.Provider>
     );
   });
+
+  afterEach(cleanup);
 
   it('should render', () => {
     expect(Component).toBeTruthy();
@@ -161,6 +187,8 @@ describe('<Confirm />', () => {
     );
   });
 
+  afterEach(cleanup);
+
   it('should render', () => {
     expect(Component).toBeTruthy();
   });
@@ -188,6 +216,8 @@ describe('<Cancel />', () => {
       </AuthContext.Provider>
     );
   });
+
+  afterEach(cleanup);
 
   it('should render', () => {
     expect(Component).toBeTruthy();
