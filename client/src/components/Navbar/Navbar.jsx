@@ -29,7 +29,7 @@ function Navbar() {
           </li>
           {NavBarData.map((item, index) => {
             return (
-              <li key={index} className={item.cName}>
+              <li data-testid={`navbar-${item.title}`} key={index} className={item.cName}>
                 <Link to={item.path}>
                   <span>{item.title === 'Balance' ? `${item.title}: $${userData.balance.toFixed(2)}` : item.title}</span>
                 </Link>

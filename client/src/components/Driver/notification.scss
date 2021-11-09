@@ -17,22 +17,23 @@
   h2 {
     text-align: center;
   }
-  
+
   div {
     margin-top: 1em;
-  } 
-  
+  }
+
   button {
     margin: auto;
     margin-top: 2em;
     color: white;
-    display: block; 
+    display: block;
     background-color: rgb(20, 213, 104);
     width: 12em;
     height: 4em;
     border: none;
     border-radius: 2em;
     text-transform: uppercase;
+    font-weight: bold;
   }
 }
 

@@ -4,8 +4,8 @@ import './balance.scss'
 function CurrentBalance({ currentBalance }) {
 
   return (
-    <div data-testid="current-balance">
-      <h3 data-testid="balance-header">Current Balance:</h3>
+    <div>
+      <h3>Current Balance:</h3>
       <h1>$ {currentBalance}</h1>
     </div>
   )

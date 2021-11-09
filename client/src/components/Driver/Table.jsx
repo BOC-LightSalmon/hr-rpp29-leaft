@@ -55,26 +55,14 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row);
-
-          if (row.original.confirmed) {
-            return(
-              <tr {...row.getRowProps()} className="table-row">
-                <td className="cancel" onClick={cancelRoute} id={row.original.id}>X</td>
-                {row.cells.map((cell) => {
-                  return <td {...cell.getCellProps()} onClick={showRoute}><b>{cell.render('Cell')}</b></td>
-                })}
-              </tr>
-            );
-          } else {
-            return(
-              <tr {...row.getRowProps()} className="table-row">
-                <td className="cancel" onClick={cancelRoute} id={row.original.id}>X</td>
-                {row.cells.map((cell) => {
-                  return <td {...cell.getCellProps()} onClick={showRoute}>{cell.render('Cell')}</td>
-                })}
-              </tr>
-            );
-          }
+          return(
+            <tr {...row.getRowProps()} className="table-row">
+              <td className="cancel" onClick={cancelRoute} id={row.original.id}>X</td>
+              {row.cells.map((cell) => {
+                return <td {...cell.getCellProps()} onClick={showRoute} className={row.original.confirmed ? "confirmed-route" : ""}>{cell.render('Cell')}</td>
+              })}
+            </tr>
+          );
         })}
       </tbody>
     </table>

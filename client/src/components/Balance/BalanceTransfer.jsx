@@ -5,7 +5,6 @@ import CurrentBalance from './CurrentBalance.jsx';
 import BalanceAPIutils from './BalanceAPIutils'
 
 function BalanceTransfer({ handleBalanceUpdate }) {
-  // const [ currentBalance, setCurrentBalance ] = useState(0);
   const [ amount, setAmount ] = useState('');
   const [ driverEmail, setDriverEmail ] = useState('');
   const [ displayBalanceError, setDisplayBalanceError ] = useState(false);
@@ -13,30 +12,33 @@ function BalanceTransfer({ handleBalanceUpdate }) {
   const [ displayNotFoundError, setDisplayNotFoundError ] = useState(false);
   const [ displaySuccessMessage, setDisplaySuccessMessage ] = useState(false);
   const [ displayTipForm, setDisplayTipForm ] = useState(true);
+  const [ displayZeroError, setDisplayZeroError ] = useState(false);
 
   const userData = useContext(AuthContext);
-
-  // const getUserBalance = async () => {
-  //     const { data } = await BalanceAPIutils.getBalance(userData.id)
-  //     setCurrentBalance(data);
-  // }
 
   const handleSend = async () => {
     try {
       setDisplaySuccessMessage(false)
       setDisplaySelfError(false);
       setDisplayNotFoundError(false);
+      setDisplayZeroError(false)
       if (amount > userData.balance) {
-        setDisplayBalanceError(true)
-      } else {
-        setDisplayBalanceError(false)
-        await BalanceAPIutils.transfer(userData.id, driverEmail, amount)
-        setDisplaySuccessMessage(true)
-        setDisplayTipForm(false)
-        // getUserBalance()
-        handleBalanceUpdate(userData.balance - parseFloat(amount))
+        setDisplayBalanceError(true);
+        return
+      } 
 
-      }
+      if (!amount) {
+        setDisplayZeroError(true);
+        return
+      } 
+
+      setDisplayBalanceError(false)
+      await BalanceAPIutils.transfer(userData.id, driverEmail, amount)
+      setDisplaySuccessMessage(true)
+      setDisplayTipForm(false)
+      handleBalanceUpdate(userData.balance - parseFloat(amount))
+
+      
     } catch (err) {
       console.log(err.message)
       if (err.response.status === 405) {
@@ -53,12 +55,6 @@ function BalanceTransfer({ handleBalanceUpdate }) {
     setDisplaySuccessMessage(false)
   }
 
-  // useEffect(() => {
-  //   getUserBalance();
-  // }, [])
-
-
-
   return (
     <div className="balance">
       <Navbar />
@@ -69,19 +65,47 @@ function BalanceTransfer({ handleBalanceUpdate }) {
             <div>
               <label className="balance-instructions">Enter email address of driver</label>
               <input
+                data-testid="driver-email"
+                className={displayNotFoundError ? "input-error" : ""}
                 value={driverEmail}
-                onChange={(e) => setDriverEmail(e.target.value)}
+                onChange={(e) => {
+                  setDriverEmail(e.target.value)
+                  setDisplayNotFoundError(false)
+                }
+              }
               />
+              {displayNotFoundError &&
+                <div>
+                  <div className="balance-error">There is no user found with this email address</div>
+                  <div className="balance-error">Please Try Again</div>
+                </div>
+              }
             </div>
             <div>
               <label className="balance-instructions">Enter Tip Amount</label>
               <input
+                data-testid="tip-amount"
+                className={displayZeroError || displayBalanceError ? "input-error" : ""}
                 value={amount}
                 type="number"
                 min="0.00"
                 step="0.01"
-                onChange={(e) => setAmount(e.target.value)}
+                onChange={(e) => {
+                    setAmount(e.target.value)
+                    setDisplayBalanceError(false);
+                    setDisplayZeroError(false);
+                  }
+                }
               />
+              {displayZeroError &&
+                <div className="balance-error">Please enter a valid Tip amount</div>
+              }
+              {displayBalanceError &&
+                <div className="balance-error">You cannot send more than your current balance</div>
+              }
+              {displaySelfError &&
+                <div className="balance-error">You cannot send money to yourself</div>
+              }
             </div>
           </div>
           <div>
@@ -89,23 +113,11 @@ function BalanceTransfer({ handleBalanceUpdate }) {
           </div>
         </div>
       }
-      {displayBalanceError &&
-        <div className="balance-error">You cannot send more than your current balance</div>
-      }
-      {displaySelfError &&
-        <div className="balance-error">You cannot send money to yourself</div>
-      }
-      {displayNotFoundError &&
-        <div>
-          <div className="balance-error">There is no user found with this email address</div>
-          <div className="balance-error">Please Try Again</div>
-        </div>
-      }
       {displaySuccessMessage &&
         <div>
-          <div>Success!</div>
-          <div>You just send $ {amount} to {driverEmail}</div>
-          <button type="button" onClick={handleBackToFormClick}>Back to Tip Form</button>
+          <div className="balance-success">Success!</div>
+          <div className="balance-success">You just send $ {parseFloat(amount).toFixed(2)} to {driverEmail}</div>
+          <button className="transfer-button" type="button" onClick={handleBackToFormClick}>Back to Tip Form</button>
         </div>
       }
     </div>

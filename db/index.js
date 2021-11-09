@@ -6,7 +6,6 @@ const Route = require('./models/routes');
   await db.authenticate();
   console.log('connected to leaft db');
   await db.sync({
-    alter: true,
     logging: false
   });
 })()

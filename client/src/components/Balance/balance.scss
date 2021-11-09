@@ -34,10 +34,19 @@
     height: 3em;
     width: 90%;
     max-width: 500px;
+    &:focus {
+      outline: none;
+    }
   }
 
   .balance-error {
-    // need styling here
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: red;
+  }
+
+  .input-error {
+    border: 2px solid red;
   }
 
   .balance-message-container {
@@ -53,6 +62,12 @@
   .balance-instructions {
     text-align: center;
     margin-top: 3rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+
+  .balance-success {
+    text-align: center;
     font-size: 1.3rem;
     font-weight: bold;
   }
