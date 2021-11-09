@@ -15,13 +15,12 @@ const Rider = (props) => {
   const [rideConfirmed, setRideConfirmed] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [showCancelRideModal, setShowCancelRideModal] = useState(false);
-  const [userid, setUserid] = useState('');
   const [reRender, setReRender] = useState(false);
   // eslint-disable-next-line
   const [markerClicked, setMarkerClicked] = useState(false);
   const [whichMarkerClicked, setWhichMarkerClicked] = useState(null);
   const [whichListItemClicked, setWhichListItemClicked] = useState(null);
-  const [confirmedRide, setConfirmedRide] = useState({}); // this is the confirmed ride, its pulled from the database, using same route, just filtering the response of that route to only rides with rider id !== null (will probably need to change it later to rider id === user id)
+  const [confirmedRide, setConfirmedRide] = useState({});
 
   const userData = useContext(AuthContext);
 
@@ -32,11 +31,8 @@ const Rider = (props) => {
         userId: userData.id
       }
       }).then(res => {
-        console.log('🦨', res.data)
         setNearbyRides(res.data);
-        //console.log(nearbyRides)
         const confirmed = res.data.filter(ride => ride.rider_id === userData.id);
-        console.log('🦧', confirmed);
         if (confirmed.length > 0) {
           setConfirmedRide(confirmed[0]); // here we are assuming that the user can only pick ONE ride.
           setRideConfirmed(true);
@@ -48,16 +44,6 @@ const Rider = (props) => {
     // eslint-disable-next-line
   }, []);
 
-  // const associateRiderWithRide = (routeId, riderId) => {
-  //   axios.put('/api/riders/rides/associateRider', { routeId, userid })
-  //     .then(res => {
-  //       console.log(res)
-  //     })
-  //     .catch(err => {
-  //       console.log('err in back to client', err);
-  //     })
-  // }
-
   const handleMarkerClick = (key) => {
     setMarkerClicked(true);
     setReRender(!reRender);
@@ -65,7 +51,6 @@ const Rider = (props) => {
 
     setRideSelected(true);
   }
-
 
   const handleSelectRide = key => {
     setRideSelected(true);
@@ -90,16 +75,11 @@ const Rider = (props) => {
         .catch(err => {
           console.log(err)
         })
-      // associateRiderWithRide(whichListItemClicked, userid)
-      // setRideConfirmed(true);
-      // setShowConfirmationModal(true);
-      // need to put riderid on route row
     } else {
       setRideSelected(false);
       setMarkerClicked(false);
       setWhichMarkerClicked(null);
       setReRender(!reRender);
-      // map needs to go back to route departure view
     }
   }
 
@@ -116,7 +96,6 @@ const Rider = (props) => {
   // needs to remove riderid from route
   const handleRideCancellation = () => {
     const riderName = userData.first_name + ' ' + userData.last_name;
-    // const routeId = nearbyRides[whichListItemClicked].id;
     const routeId = (nearbyRides[whichMarkerClicked]) ? nearbyRides[whichMarkerClicked].id : confirmedRide.id;
     axios.put('/api/riders/cancel', { id: routeId, riderName: riderName })
       .then(() => {
