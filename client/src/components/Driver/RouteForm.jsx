@@ -55,7 +55,7 @@ class RouteForm extends React.Component {
       <div className="driver-modal">
         <div id="close-button" onClick={this.props.closeForm}>X</div>
         <h2 id="form_title">Enter your ride info: </h2>
-        <div id="form-note">Note: your pick-up and drop-off locations will be publicly viewable. Please only input public/general addresses (e.g. Union Square, NY)</div>
+        <div id="form-note">Note: your pick-up and drop-off locations will be publicly viewable. Please only input public addresses (e.g. Union Square, NY)</div>
         <form className="route_form" onSubmit={this.submitHandle}>
           <label>
             Pick-Up Location:
@@ -96,9 +96,8 @@ class RouteForm extends React.Component {
             </tbody>
           </table>
           <input id="submit_button" type="submit" value="Submit Ride" />
+          {this.state.error && <h5 className="error">{this.state.error}</h5>}
         </form>
-        <br></br>
-        {this.state.error && <h5>{this.state.error}</h5>}
       </div>
     );
   }
