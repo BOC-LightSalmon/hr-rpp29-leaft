@@ -4,7 +4,7 @@ import { AuthContext } from "../../App";
 import CurrentBalance from "./CurrentBalance";
 import BalanceUpdate from "./BalanceUpdate";
 import BalanceTransfer from "./BalanceTransfer";
-import { render, screen } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 
@@ -18,11 +18,10 @@ describe('Current Balance', () => {
 })
 
 describe('Balance Update', () => {
+  let Component;
 
-  
-
-  it('renders the correct balance', () => {
-    render(
+  beforeEach(() => {
+    Component = render(
       <AuthContext.Provider value={{ balance: 5 }}>
         <Router>
           <BalanceUpdate />
@@ -30,16 +29,32 @@ describe('Balance Update', () => {
       </AuthContext.Provider>
     )
   })
+
+  afterEach(cleanup);
+
+  it('should be able to type into the input', () => {
+    const inputElement = screen.getByTestId('transfer-amount')
+    screen.debug()
+  })
 })
 
+
 describe('Balance Transfer', () => {
-  it('renders the correct balance', () => {
-    render(
+  let Component;
+
+  beforeEach(() => {
+    Component = render(
       <AuthContext.Provider value={{ balance: 5 }}>
         <Router>
           <BalanceTransfer />
         </Router>
       </AuthContext.Provider>
     )
+  })
+
+  afterEach(cleanup);
+
+  it('renders the correct balance', () => {
+    expect(Component).toBeTruthy();
   })
 })

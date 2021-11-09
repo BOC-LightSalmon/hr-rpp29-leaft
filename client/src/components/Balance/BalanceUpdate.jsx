@@ -85,6 +85,7 @@ function BalanceUpdate({ handleBalanceUpdate }) {
         </div>
         <div>
           <input
+            data-testid="transfer-amount"
             className={displayZeroError || displayError ? "tip-amount input-error" : "tip-amount"}
             value={amount}
             type="number"
