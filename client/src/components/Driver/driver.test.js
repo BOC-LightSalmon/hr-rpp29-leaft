@@ -6,7 +6,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 import dummyRoutes from './dummyData';
 
-import Driver from './driver.test';
+import Driver from './Driver';
 import Map from './Map';
 import RoutesList from './RoutesList';
 import RouteForm from './RouteForm';

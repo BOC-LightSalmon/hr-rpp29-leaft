@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Main from './components/Main.jsx';
 import Login from './components/SignUp/login.jsx';
 import Register from './components/SignUp/register.jsx';
-import Driver from './components/Driver/driver.test.js';
+import Driver from './components/Driver/Driver.jsx';
 import Rider from './components/Rider/Rider.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 import BalanceTransfer from './components/Balance/BalanceTransfer.jsx';
