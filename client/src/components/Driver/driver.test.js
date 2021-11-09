@@ -43,7 +43,13 @@ describe('<Map />', () => {
 
   beforeEach(() => {
     document.body.innerHTML = `
-    <div id="routes-list"></div>
+    <div role="table">
+      <div>
+        <div>
+          <div id="routes-list">routesList</div>
+        </div>
+      </div>
+    </div>
     `;
 
     Component = render(
@@ -59,6 +65,12 @@ describe('<Map />', () => {
 
   it('should render', () => {
     expect(Component).toBeTruthy();
+  });
+
+  it('should fire off rerender event listener when route list is clicked', () => {
+    fireEvent.click(screen.getByText('routesList'));
+
+    expect(screen.getByText('routesList')).toBeInTheDocument();
   });
 });
 
