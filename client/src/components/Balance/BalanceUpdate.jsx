@@ -54,24 +54,24 @@ function BalanceUpdate({ handleBalanceUpdate }) {
       setSuccessDeposit(false);
       setSuccessWithdrawal(false);
 
-      if (!amount) {
+      if (!input) {
         setDisplayZeroError(true);
         return
       }
 
 
-      if (amount > userData.balance) {
+      if (input > userData.balance) {
         setDisplayError(true);
         return
       }
       
       setDisplayError(false)
-      const { status } = await BalanceAPIutils.withdraw(userData.id, amount);
+      const { status } = await BalanceAPIutils.withdraw(userData.id, input);
 
       if (status === 201) {
-        setWithdrawn(amount);
+        setWithdrawn(input);
         setSuccessWithdrawal(true);
-        const newBalance = userData.balance - parseFloat(amount);
+        const newBalance = userData.balance - parseFloat(input);
         handleBalanceUpdate(newBalance);
       }
       

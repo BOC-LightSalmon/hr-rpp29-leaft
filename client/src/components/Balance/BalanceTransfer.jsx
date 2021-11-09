@@ -65,6 +65,7 @@ function BalanceTransfer({ handleBalanceUpdate }) {
             <div>
               <label className="balance-instructions">Enter email address of driver</label>
               <input
+                data-testid="driver-email"
                 className={displayNotFoundError ? "input-error" : ""}
                 value={driverEmail}
                 onChange={(e) => {
@@ -83,6 +84,7 @@ function BalanceTransfer({ handleBalanceUpdate }) {
             <div>
               <label className="balance-instructions">Enter Tip Amount</label>
               <input
+                data-testid="tip-amount"
                 className={displayZeroError || displayBalanceError ? "input-error" : ""}
                 value={amount}
                 type="number"

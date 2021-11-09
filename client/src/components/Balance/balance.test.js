@@ -4,7 +4,7 @@ import { AuthContext } from "../../App";
 import CurrentBalance from "./CurrentBalance";
 import BalanceUpdate from "./BalanceUpdate";
 import BalanceTransfer from "./BalanceTransfer";
-import { render, screen, cleanup, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
 
@@ -32,20 +32,11 @@ describe('Balance Update', () => {
 
   afterEach(cleanup);
 
+
   it('should be able to type into the input', () => {
     const inputElement = screen.getByTestId('transfer-amount');
     fireEvent.change(inputElement, { target: { value: 10}});
     expect(inputElement.value).toBe('10');
-  })
-
-  it('should have empty input after \'Depoist\' is clicked', async () => {
-    const depositButton = screen.getByRole('button', { name: 'Deposit'});
-    let inputElement = screen.getByTestId('transfer-amount');
-    fireEvent.change(inputElement, { target: { value: 10}});
-    fireEvent.click(depositButton);
-    inputElement = await (waitFor(() => screen.findByTestId('transfer-amount')))
-
-    expect(inputElement.value).toBe('');
   })
 
   it('should display an error on page load', () => {
@@ -78,14 +69,6 @@ describe('Balance Update', () => {
     expect(errorMessage).toBeInTheDocument();
   })
 
-  // it('should update the blance on the page in real time after a deposit', () => {
-  //   const inputElement = screen.getByTestId('transfer-amount');
-  //   const depositButton = screen.getByRole('button', { name: 'Deposit'});
-  //   fireEvent.change(inputElement, { target: { value: 10}});
-  //   fireEvent.click(depositButton);
-  //   const balance = screen.getByRole('heading', {name: "$ 15.00"});
-  //   expect(balance).toBeInTheDocument()
-  // })
 })
 
 describe('Balance Transfer', () => {
@@ -105,5 +88,24 @@ describe('Balance Transfer', () => {
 
   it('renders the correct balance', () => {
     expect(Component).toBeTruthy();
+  })
+
+  it('should be able to type into the email input', () => {
+    const inputElement = screen.getByTestId('driver-email');
+    fireEvent.change(inputElement, { target: { value: 'a@a.com'}});
+    expect(inputElement.value).toBe('a@a.com');
+  })
+
+  it('should be able to type into the tip amount input', () => {
+    const inputElement = screen.getByTestId('driver-email');
+    fireEvent.change(inputElement, { target: { value: 10}});
+    expect(inputElement.value).toBe('10');
+  })
+
+  it('should display an error when clicking \'Send Tip\' if the input field is empty', () => {
+    const sendButton = screen.getByRole('button', { name: 'Send Tip'});
+    fireEvent.click(sendButton);
+    const errorMessage = screen.getByText('Please enter a valid Tip amount');
+    expect(errorMessage).toBeInTheDocument();
   })
 })
