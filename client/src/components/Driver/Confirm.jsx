@@ -1,11 +1,12 @@
-import './notification.scss'
+import './notification.scss';
 
 const Confirm = (props) => {
-  const { pickUp, dropOff, departure } = props.notificationData.route
-  const riderName = props.notificationData.riderName
+  const { pickUp, dropOff, departure } = props.notificationData.route;
+  const riderName = props.notificationData.riderName;
   const driverName = `${props.userData.first_name} ${props.userData.last_name}`;
+
   return (
-    <div id='notification'>
+    <div id="notification">
       <h2>Confirmation</h2>
       <div>Hi <strong> {driverName} </strong></div>
       <div>
@@ -16,8 +17,8 @@ const Confirm = (props) => {
       <div><strong>Departure Time: </strong> {departure}</div>
 
       <button onClick={props.handleConfirmation}>Confirm Ride</button>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
 export default Confirm;
