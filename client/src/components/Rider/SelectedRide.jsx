@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 import date from 'date-and-time';
 import ordinal from 'date-and-time/plugin/ordinal';
 import meridiem from 'date-and-time/plugin/meridiem';
@@ -23,7 +24,8 @@ const SelectedRide = props => {
             {props.rideConfirmed ?
                 <div className="btnsContainer">
                     <button className="pageBtn cancelRideBtn" onClick={props.handlePostConfirmationCanellationBtnPress}>Cancel</button>
-                    <button id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</button>
+                    <NavLink to="balance-transfer" id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</NavLink>
+                    {/* <button id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</button> */}
                 </div> : 
                 <div className="btnsContainer">
                     <button id="CancelConfirmationBtn" className="pageBtn cancelRideBtn" onClick={props.handleConfirmationPageBtnPress}>Cancel</button>
