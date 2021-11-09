@@ -12,12 +12,15 @@ describe('Current Balance', () => {
   
   it('displays the correct balance', () => {
     render(<CurrentBalance currentBalance={'5.00'}/>);
-    const balance = screen.getByRole('heading', { name: /\$ 5.00/i});
-    expect(balance).toBeInTheDocument();
+    const balance = screen.getByRole('heading', {name: "$ 5.00"});
+    expect(balance.textContent).toBe('$ 5.00')
   })
 })
 
 describe('Balance Update', () => {
+
+  
+
   it('renders the correct balance', () => {
     render(
       <AuthContext.Provider value={{ balance: 5 }}>
