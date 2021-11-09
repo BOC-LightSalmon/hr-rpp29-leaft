@@ -5,39 +5,41 @@ import BalanceAPIutils from './BalanceAPIutils';
 import { AuthContext } from '../../App';
 
 function BalanceUpdate({ handleBalanceUpdate }) {
-  const [amount, setAmount] = useState('');
-  const [displayError, setDisplayError] = useState(false);
-  const [ successDeposit, setSuccessDeposit] = useState(false);
-  const [ successWithdrawal, setSuccessWithdrawal] = useState(false);
+  const [ amount, setAmount ] = useState('');
+  const [ displayError, setDisplayError ] = useState(false);
+  const [ successDeposit, setSuccessDeposit ] = useState(false);
+  const [ successWithdrawal, setSuccessWithdrawal ] = useState(false);
   const [ displayZeroError , setDisplayZeroError ] = useState(false)
-  const [ deposited, setDeposited] = useState('');
-  const [ withdrawn, setWithdrawn] = useState('');
+  const [ deposited, setDeposited ] = useState('');
+  const [ withdrawn, setWithdrawn ] = useState('');
 
   const userData = useContext(AuthContext);
 
   const handleDeposit = async () => {
     try {
+      const input = amount;
+      setAmount('');
       setDisplayZeroError(false);
       setDisplayError(false)
       setSuccessDeposit(false);
       setSuccessWithdrawal(false);
 
-      if (!amount) {
+      if (!input) {
         setDisplayZeroError(true);
         return
       }
 
 
-      const { status } = await BalanceAPIutils.deposit(userData.id, amount);
+      const { status } = await BalanceAPIutils.deposit(userData.id, input);
   
       if (status === 201) {
-        setDeposited(amount);
+        setDeposited(input);
         setSuccessDeposit(true);
-        const newBalance = userData.balance + parseFloat(amount);
+        const newBalance = userData.balance + parseFloat(input);
         handleBalanceUpdate(newBalance)
       }
   
-      setAmount('');
+     
 
     } catch(err) {
       console.log(err)
@@ -46,6 +48,8 @@ function BalanceUpdate({ handleBalanceUpdate }) {
 
   const handleWithdrawal = async () => {
     try {
+      const input = amount;
+      setAmount('');
       setDisplayZeroError(false);
       setSuccessDeposit(false);
       setSuccessWithdrawal(false);
@@ -58,18 +62,19 @@ function BalanceUpdate({ handleBalanceUpdate }) {
 
       if (amount > userData.balance) {
         setDisplayError(true);
-      } else {
-        setDisplayError(false)
-        const { status } = await BalanceAPIutils.withdraw(userData.id, amount);
-  
-        if (status === 201) {
-          setWithdrawn(amount);
-          setSuccessWithdrawal(true);
-          const newBalance = userData.balance - parseFloat(amount);
-          handleBalanceUpdate(newBalance);
-        }
+        return
       }
-      setAmount('');
+      
+      setDisplayError(false)
+      const { status } = await BalanceAPIutils.withdraw(userData.id, amount);
+
+      if (status === 201) {
+        setWithdrawn(amount);
+        setSuccessWithdrawal(true);
+        const newBalance = userData.balance - parseFloat(amount);
+        handleBalanceUpdate(newBalance);
+      }
+      
     } catch (err) {
       console.log(err)
     }
