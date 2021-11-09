@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthContext } from '../../App';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 import dummyRoutes from './dummyData';
@@ -74,16 +74,21 @@ describe('<RoutesList />', () => {
   it('should render', () => {
     expect(Component).toBeTruthy();
   });
+
+  it('should display Pick-Up header', () => {
+    expect(screen.getByText('Pick-Up')).toBeInTheDocument();
+  });
 });
 
 describe('<RouteForm />', () => {
   let Component;
+  let closeFormMock = jest.fn();
 
   beforeEach(() => {
     Component = render(
       <AuthContext.Provider value={{ test: 'test' }}>
         <Router>
-          <RouteForm userId={1}/>
+          <RouteForm userId={1} closeForm={closeFormMock}/>
         </Router>
       </AuthContext.Provider>
     );
@@ -91,17 +96,32 @@ describe('<RouteForm />', () => {
 
   it('should render', () => {
     expect(Component).toBeTruthy();
+  });
+
+  it('should call closeForm prop function after clicking X', () => {
+    fireEvent.click(screen.getByText('X'));
+
+    expect(closeFormMock).toBeCalled();
+  });
+
+  it('should call handleChange function upon text input', () => {
+    const input = Component.container.querySelector('#pickUp');
+
+    fireEvent.change(input, { target: { value: '1:00PM'}});
+
+    expect(input.value).toBe('1:00PM');
   });
 });
 
 describe('<Table />', () => {
   let Component;
+  let cancelRouteMock = jest.fn();
 
   beforeEach(() => {
     Component = render(
       <AuthContext.Provider value={{ test: 'test' }}>
         <Router>
-          <Table routes={dummyRoutes}/>
+          <Table routes={dummyRoutes} cancelRoute={cancelRouteMock}/>
         </Router>
       </AuthContext.Provider>
     );
@@ -109,6 +129,12 @@ describe('<Table />', () => {
 
   it('should render', () => {
     expect(Component).toBeTruthy();
+  });
+
+  it('should call cancelRoute prop function after clicking X on route', () => {
+    fireEvent.click(screen.getAllByText('X')[0]);
+
+    expect(cancelRouteMock).toBeCalled();
   });
 });
 
