@@ -23,11 +23,15 @@ class Register extends React.Component {
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value
-    },() => console.log(this.state))
+    })
   }
 
   register(e) {
     e.preventDefault();
+    if(!this.checkForm()) {
+      alert('Please Fill Out The Entire form');
+      return;
+    };
     const {errorMessage, ...rest} = this.state;
     axios.post('/api/logins/register', rest).then((res) =>{
       this.props.login(res.data);
@@ -43,6 +47,15 @@ class Register extends React.Component {
     })
   }
 
+   checkForm() {
+    for(var keys in this.state) {
+      if(this.state[keys] === '' && keys !== 'errorMessage') {
+        return false;
+      }
+    }
+    console.log('testing')
+    return true;
+   }
   render() {
     if (this.state.success) {
       return (
@@ -57,19 +70,19 @@ class Register extends React.Component {
           })
         }} onSubmit={(e) => this.register(e)}>
           <label htmlFor='firstName'>First Name</label>
-          <input type='text' id='firstName' onChange={e => this.handleChange(e)}></input>
+          <input type='text' id='firstName' onChange={e => this.handleChange(e)} required></input>
           <br></br>
           <label htmlFor='lastName'>Last Name</label>
-          <input type='text' id='lastName' onChange={e => this.handleChange(e)}></input>
+          <input type='text' id='lastName' onChange={e => this.handleChange(e)} required></input>
           <br></br>
           <label htmlFor='email'>Email</label>
-          <input type='email' id='email'onChange={e => this.handleChange(e)}></input>
+          <input type='email' id='email'onChange={e => this.handleChange(e)} required></input>
           <br></br>
           <label htmlFor='phone'>Phone Number</label>
-          <input type='phone' id='phone'onChange={e => this.handleChange(e)}></input>
+          <input type='tel' id='phone'onChange={e => this.handleChange(e)} required></input>
           <br></br>
           <label htmlFor='password'>Password</label>
-          <input type='password' id='password'onChange={e => this.handleChange(e)}></input>
+          <input type='password' id='password' minLength='6' onChange={e => this.handleChange(e)} required></input>
           <br></br>
           <input className="register-buttons" type='submit' value='Submit'></input>
         </form>

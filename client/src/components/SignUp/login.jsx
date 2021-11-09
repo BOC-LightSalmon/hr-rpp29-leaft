@@ -42,6 +42,9 @@ class Login extends React.Component {
   // }
   submitForm(e) {
     e.preventDefault();
+    if(this.state.email === '' || this.state.password === '') {
+      alert('Please Fill Out The Entire Form');
+    }
     axios.post('/api/logins/login', this.state).then((results) => {
       this.props.login(results.data);
       this.setState({
@@ -50,12 +53,12 @@ class Login extends React.Component {
       // redirect to main
 
     })
-    // .catch((err) =>  {
-    //   console.log(err.response);
-    //   this.setState({
-    //     errorMessage: err.response.data
-    //   })
-    // })
+    .catch((err) =>  {
+      console.log(err.response);
+      this.setState({
+        errorMessage: err.response.data
+      })
+    })
   }
 
   render() {
@@ -68,10 +71,10 @@ class Login extends React.Component {
           })
         }} onSubmit={e => this.submitForm(e)}>
           <label htmlFor='login_email'>Email:</label>
-          <input type='email' id='login_email' name='email' onChange={e => this.handleEmail(e)}></input>
+          <input type='email' id='login_email' name='email' onChange={e => this.handleEmail(e)} required></input>
           <br></br>
           <label htmlFor='login_password'>Password:</label>
-          <input type='password' id='login_password' name='password' onChange={e => this.handlePassword(e)}></input>
+          <input type='password' id='login_password' name='password' minLength='6' onChange={e => this.handlePassword(e)} required></input>
           <br></br>
           <input type='submit' value='Submit' id="login-submit-button"></input>
         </form>
