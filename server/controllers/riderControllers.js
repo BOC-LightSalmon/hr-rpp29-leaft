@@ -76,8 +76,9 @@ const confirmRoute = async (req, res) => {
   try {
     await Routes.update(
       {rider_id: req.body.riderId, confirmed: true}, 
-      {where: {id: req.body.id}})
+      {where: {id: req.body.id}});
 
+    await Routes.decrement({seats: 1}, {where: {id: req.body.id}});
     const route = await Routes.findOne({
       where: { id: req.body.id },
       attributes: ['driver_id', 'rider_id', 'pickUp', 'dropOff', 'departure']
@@ -97,7 +98,10 @@ const confirmRoute = async (req, res) => {
 const cancelRoute = async (req, res) => {
   const socket = req.app.get('socket')
   try {
-    await Routes.update({rider_id: null, confirmed: false}, {where: { id: req.body.id }})
+    await Routes.update({rider_id: null, confirmed: false}, {where: { id: req.body.id }});
+
+    await Routes.increment({seats: 1}, {where: {id: req.body.id}});
+    
     const route = await Routes.findOne({
       where: { id: req.body.id},
       attributes: ['driver_id'],

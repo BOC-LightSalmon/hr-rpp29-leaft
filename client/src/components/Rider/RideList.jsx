@@ -8,7 +8,6 @@ date.plugin(ordinal);
 date.plugin(meridiem);
 
 const RideList = props => {
-
     const nearbyRides = props.nearbyRides.map((ride, key) => {
         let unformattedDate = new Date(`${ride.date} ${ride.departure}`);
         let formattedDateTime = date.format(unformattedDate, 'dddd, MMM DDD hh:mm a');
