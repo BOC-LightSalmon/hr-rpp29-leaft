@@ -141,7 +141,7 @@ describe('<RouteForm />', () => {
   });
 
   it('should not submit data or close form after clicking Submit Route button if no form data', () => {
-    const button = Component.container.querySelector('#submit_button');
+    const button = Component.container.querySelector('#submit-button');
 
     fireEvent.click(button);
 

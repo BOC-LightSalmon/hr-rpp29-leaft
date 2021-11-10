@@ -1,7 +1,7 @@
 import './notification.scss';
 
 const Cancel = (props) => {
-  const driverName = `${props.userData.first_name} ${props.userData.last_name}`;
+  const driverName = props.userData.first_name;
   const riderName = props.notificationData.riderName;
 
   return (

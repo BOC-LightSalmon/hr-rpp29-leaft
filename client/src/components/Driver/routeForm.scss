@@ -13,21 +13,49 @@
   padding: 10px;
   opacity: 0.99;
   box-shadow: 2px 2px rgb(199, 199, 199);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  #form_title {
+  .route-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #form-title {
     text-align: center;
   }
 
-  label, input{
+  label {
+    margin-top: 0.5em;
+    border-radius: 1.5em;
+    height: 2.5em;
+    width: 95%;
+  }
+
+  input {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     border-radius: 1.5em;
     height: 2.5em;
-    width: 97%;
-    margin-left: 4px;
+    width: 95%;
   }
 
-  #submit_button {
+  #driver-form-table {
+    font-family: inherit;
+    font-size: 20;
+    width: 95%;
+  }
+
+  #date, #departure, #seats {
+    width: 90%;
+  }
+
+  #submit-button {
     margin: auto;
     margin-top: 1em;
     color: white;
@@ -41,7 +69,7 @@
     font-weight: bold;
   }
 
-  .route_form td {
+  .route-form td {
     width: 40%;
   }
 
