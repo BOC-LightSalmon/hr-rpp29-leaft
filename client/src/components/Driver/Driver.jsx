@@ -49,12 +49,13 @@ class Driver extends React.Component {
     const REACT_APP_SOCKET_URL = process.env;
     const socket = socketClient(REACT_APP_SOCKET_URL);
     const driverId = this.props.userId;
+
     socket.on('confirmRoute', (data) => {
       if (data.route.driver_id === driverId) {
         this.setState({
           notificationData: data,
           confirm: true
-        })
+        });
       }
     });
 
@@ -64,7 +65,7 @@ class Driver extends React.Component {
           notificationData: data,
           confirm: false,
           cancel: true
-        })
+        });
       }
     });
   }

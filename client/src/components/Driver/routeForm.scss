@@ -18,7 +18,7 @@
   justify-content: center;
   align-items: center;
 
-  .route_form {
+  .route-form {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@
     align-items: center;
   }
 
-  #form_title {
+  #form-title {
     text-align: center;
   }
 
@@ -55,7 +55,7 @@
     width: 90%;
   }
 
-  #submit_button {
+  #submit-button {
     margin: auto;
     margin-top: 1em;
     color: white;
@@ -69,7 +69,7 @@
     font-weight: bold;
   }
 
-  .route_form td {
+  .route-form td {
     width: 40%;
   }
 

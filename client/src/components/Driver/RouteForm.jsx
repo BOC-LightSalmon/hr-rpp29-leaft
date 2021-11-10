@@ -31,6 +31,7 @@ class RouteForm extends React.Component {
           this.setState({
             error: result.data
           });
+
           return;
         }
 
@@ -54,9 +55,9 @@ class RouteForm extends React.Component {
     return (
       <div className="driver-modal">
         <div id="close-button" onClick={this.props.closeForm}>X</div>
-        <h2 id="form_title">Enter your ride info: </h2>
+        <h2 id="form-title">Enter your ride info: </h2>
         <div id="form-note">Note: your pick-up and drop-off locations will be publicly viewable. Please only input public addresses (e.g. Union Square, NY)</div>
-        <form className="route_form" onSubmit={this.submitHandle}>
+        <form className="route-form" onSubmit={this.submitHandle}>
           <label>
             Pick-Up Location:
             <br></br>
@@ -95,7 +96,7 @@ class RouteForm extends React.Component {
               </tr>
             </tbody>
           </table>
-          <input id="submit_button" type="submit" value="Submit Ride" />
+          <input id="submit-button" type="submit" value="Submit Ride" />
           {this.state.error && <h5 className="error">{this.state.error}</h5>}
         </form>
       </div>

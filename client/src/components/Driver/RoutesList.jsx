@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-
 import Table from './Table';
 
 class RoutesList extends React.Component {
