@@ -63,12 +63,13 @@ class Register extends React.Component {
       )
     }
     return(
-      <div id="register">
+      <div id='fPage'>
         <div className="wave">
     <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
         <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" className="shape-fill"></path>
     </svg>
 </div>
+      <div id="register">
         <form onChange={() => {
           this.setState({
             errorMessage: ''
@@ -90,14 +91,22 @@ class Register extends React.Component {
           <input type='password' id='password' minLength='6' onChange={e => this.handleChange(e)} required></input>
           <br></br>
           <input className="register-buttons" type='submit' value='Submit'></input>
-          <h5 id="already-have-account">Already Have An Account?</h5>
-        <NavLink className="register-buttons" id='nav' to="/login">Sign In</NavLink>
         </form>
+          <div className='footer'>
 
         {/* <button className="register-buttons" onClick={() => {
           this.props.redirect('/login')
         }}>Sign In</button> */}
         {this.state.errorMessage !== '' && <h5>{this.state.errorMessage}</h5>}
+      </div>
+        <div class="custom-shape-divider-bottom-1636512691">
+        <h5 id="already-have-account">Already Have An Account? <NavLink  id='nav' to="/login">Sign In</NavLink></h5>
+
+  <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+  </svg>
+</div>
+        </div>
       </div>
     )
   }

@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #register {
     display: flex;
     justify-content: center;
@@ -33,27 +39,27 @@
     padding-top: 20px;
     text-align: center;
   }
-  .wave {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-    transform: rotate(180deg);
-    z-index: -1;
+
+.custom-shape-divider-bottom-1636512691 {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: -1;
 }
 
-.wave svg {
-    position: relative;
-    display: block;
-    width: calc(148% + 1.3px);
-    height: 106px;
-    z-index: -1;
+.custom-shape-divider-bottom-1636512691 svg {
+  position: relative;
+  display: block;
+  width: calc(179% + 1.3px);
+  height: 117px;
+  z-index: -1;
 }
 
-.wave .shape-fill {
-    fill: #3ACA52;
+.custom-shape-divider-bottom-1636512691 .shape-fill {
+  fill: #3ACA52;
 }
 }
 form {
@@ -63,9 +69,47 @@ form {
   flex-direction: column;
   align-items: center;
   position: relative;
-  top: 15vh;
 }
 #nav {
   width: 100%;
 
 }
+
+#already-have-account{
+  z-index: 100;
+  position: relative;
+  // display: inline;
+  top: 5.4em;
+
+}
+#nav {
+  // position: absolute;
+  // display: inline;
+  // bottom: 10%;
+}
+.wave {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  z-index: -1;
+}
+
+.wave svg {
+  position: relative;
+  display: block;
+  width: calc(148% + 1.3px);
+  height: 106px;
+  z-index: -1;
+}
+
+.wave .shape-fill {
+  fill: #3ACA52;
+}
+
+// #fPage {
+//   height: 100vh;
+// }
