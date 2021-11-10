@@ -4,6 +4,7 @@ import { NavBarData } from './navbarData';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
+import { RiLogoutBoxFill } from 'react-icons/ri';
 import './navbar.scss';
 import axios from 'axios';
 
@@ -31,6 +32,7 @@ function Navbar() {
             return (
               <li data-testid={`navbar-${item.title}`} key={index} className={item.cName}>
                 <Link to={item.path}>
+                  {item.icon}
                   <span>{item.title === 'Balance' ? `${item.title}: $${userData.balance.toFixed(2)}` : item.title}</span>
                 </Link>
               </li>
@@ -38,7 +40,9 @@ function Navbar() {
           })}
           <li className='nav-text'><Link to='/login' onClick={() => axios.get('/api/logins/logout').then((res) => {
             console.log(res);
-          })}><span>Logout</span></Link></li>
+          })}>
+            <RiLogoutBoxFill />
+            <span>Logout</span></Link></li>
         </ul>
       </nav>
     </div>
