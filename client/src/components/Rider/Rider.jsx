@@ -80,9 +80,8 @@ const Rider = (props) => {
     if (value === 'Confirm') {
       const routeId = (nearbyRides[whichMarkerClicked]) ? nearbyRides[whichMarkerClicked].id : confirmedRide.id;
       const riderId = userData.id;
-      const riderName = userData.first_name + ' ' +  userData.last_name;
       //need to change to login rider id and name
-      axios.put('/api/riders/confirm', { id: routeId, riderId: riderId, riderName: riderName })
+      axios.put('/api/riders/confirm', { id: routeId, riderId: riderId, riderName: userData.first_name })
         .then(() => {
           setRideConfirmed(true);
           setShowConfirmationModal(true);

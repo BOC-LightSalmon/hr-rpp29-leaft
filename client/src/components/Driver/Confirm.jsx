@@ -3,7 +3,7 @@ import './notification.scss';
 const Confirm = (props) => {
   const { pickUp, dropOff, departure } = props.notificationData.route;
   const riderName = props.notificationData.riderName;
-  const driverName = `${props.userData.first_name}`;
+  const driverName = props.userData.first_name;
 
   return (
     <div id="notification">
