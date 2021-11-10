@@ -9,7 +9,7 @@ import './navbar.scss';
 import axios from 'axios';
 
 function Navbar() {
-  const [ sidebar, setSidebar] = useState(false);
+  const [ sidebar, setSidebar ] = useState(false);
   const userData = useContext(AuthContext);
   
   const toggleSidebar = () => setSidebar(!sidebar);
