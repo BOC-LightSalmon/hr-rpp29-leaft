@@ -23,7 +23,7 @@ const Rider = (props) => {
   const [confirmedRide, setConfirmedRide] = useState({});
 
   const userData = useContext(AuthContext);
-
+  console.log('🖍', userData);
   useEffect(() => {
     axios.get('/api/riders/rides', {
       params: {
