@@ -2,29 +2,28 @@
   #driver-wrapper {
     display: flex;
     flex-direction: column;
-    align-content: space-between;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     width: 100%;
   }
 
   #routes-list-wrapper {
-    margin-bottom: 30px;
-    padding: 20px 10px 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   #routes-list-intro {
-    margin-top: -38px;
-    margin-bottom: 10px;
     font-weight: bold;
-    width: 90vw;
-    max-width: 90vw;
+    margin-bottom: 2.2vh;
   }
 
   #routes-list {
     overflow: auto;
-    height: 30vh;
-    width: 90vw;
-    max-width: 90vw;
+    height: 25vh;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .list-item {

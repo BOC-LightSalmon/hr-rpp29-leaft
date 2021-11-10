@@ -72,7 +72,7 @@ class RouteForm extends React.Component {
           </label>
           <br></br>
           <br></br>
-          <table>
+          <table id="driver-form-table">
             <tbody>
               <tr>
                 <td>Date:</td>
