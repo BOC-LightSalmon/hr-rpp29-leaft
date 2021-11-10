@@ -28,6 +28,7 @@ router.use(session({
 }))
 router.use(passport.initialize());
 router.use(passport.session());
+
 router.post('/register', (req, res) => {
   console.log(req.user)
   const {firstName, lastName, email, phone, password} = req.body;
@@ -42,10 +43,6 @@ router.post('/register', (req, res) => {
         console.log('11')
         return next(err)
       }
-      if(!user) {
-        console.log('22')
-        res.status(401).send('Incorrect Password');
-      }else {
         console.log('33')
         const {first_name, last_name, email, id, balance} = user;
         const obj = {}
@@ -61,7 +58,6 @@ router.post('/register', (req, res) => {
           }
         })
         res.send(obj);
-      }
     })(req, res);
   }).catch((err) => {
     console.log("😵", err.errors[0].message);
