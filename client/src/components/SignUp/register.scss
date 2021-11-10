@@ -71,22 +71,34 @@ form {
   position: relative;
 }
 #nav {
-  width: 100%;
+  // margin: auto;
+  //   margin-top: 2em;
+    color: white;
+    // display: block;
+    margin-left: 2em;
+    background-color: rgba(186, 219, 200, 0.3);
+    width: 12em;
+    height: 4em;
+    // line-height: 4em;
+    border: none;
+    border-radius: 2em;
+    text-transform: uppercase;
+    // font-weight: bold;
+    text-decoration: none;
+    text-align: center;
 
 }
 
-#already-have-account{
-  z-index: 100;
+  #already-have-account{
+
   position: relative;
   // display: inline;
   top: 5.4em;
-
 }
-#nav {
-  // position: absolute;
-  // display: inline;
-  // bottom: 10%;
-}
+// #nav {
+//   width: 12em;
+//   z-index: 1;
+// }
 .wave {
   position: relative;
   top: 0;
