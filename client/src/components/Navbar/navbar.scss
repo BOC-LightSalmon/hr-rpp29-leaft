@@ -75,7 +75,7 @@ $hover: #0a6b34;
       grid-template-columns: 1fr;
       grid-template-rows: repeat(6, 9%);
       width: 300px;
-      height: 100vh;
+      height: calc(100vh - 64px);
       top: 64px;
       position: absolute;
       right: -100%;
