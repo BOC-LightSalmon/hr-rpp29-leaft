@@ -25,7 +25,6 @@ const SelectedRide = props => {
                 <div className="btnsContainer">
                     <button className="pageBtn cancelRideBtn" onClick={props.handlePostConfirmationCanellationBtnPress}>Cancel</button>
                     <NavLink to="balance-transfer" id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</NavLink>
-                    {/* <button id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</button> */}
                 </div> : 
                 <div className="btnsContainer">
                     <button id="CancelConfirmationBtn" className="pageBtn cancelRideBtn" onClick={props.handleConfirmationPageBtnPress}>Cancel</button>
