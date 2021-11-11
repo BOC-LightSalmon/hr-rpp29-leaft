@@ -64,16 +64,18 @@ function BalanceTransfer({ handleBalanceUpdate }) {
           <div className="balance-form">
             <div>
               <label className="balance-instructions">Enter email address of driver</label>
-              <input
-                data-testid="driver-email"
-                className={displayNotFoundError ? "input-error" : ""}
-                value={driverEmail}
-                onChange={(e) => {
-                  setDriverEmail(e.target.value)
-                  setDisplayNotFoundError(false)
+              <div>
+                <input
+                  data-testid="driver-email"
+                  className={displayNotFoundError ? "input-error" : ""}
+                  value={driverEmail}
+                  onChange={(e) => {
+                    setDriverEmail(e.target.value)
+                    setDisplayNotFoundError(false)
+                  }
                 }
-              }
-              />
+                />
+              </div>
               {displayNotFoundError &&
                 <div>
                   <div className="balance-error">There is no user found with this email address</div>
@@ -83,20 +85,22 @@ function BalanceTransfer({ handleBalanceUpdate }) {
             </div>
             <div>
               <label className="balance-instructions">Enter Tip Amount</label>
-              <input
-                data-testid="tip-amount"
-                className={displayZeroError || displayBalanceError ? "input-error" : ""}
-                value={amount}
-                type="number"
-                min="0.00"
-                step="0.01"
-                onChange={(e) => {
-                    setAmount(e.target.value)
-                    setDisplayBalanceError(false);
-                    setDisplayZeroError(false);
+              <div>
+                <input
+                  data-testid="tip-amount"
+                  className={displayZeroError || displayBalanceError ? "input-error" : ""}
+                  value={amount}
+                  type="number"
+                  min="0.00"
+                  step="0.01"
+                  onChange={(e) => {
+                      setAmount(e.target.value)
+                      setDisplayBalanceError(false);
+                      setDisplayZeroError(false);
+                    }
                   }
-                }
-              />
+                />
+              </div>
               {displayZeroError &&
                 <div className="balance-error">Please enter a valid Tip amount</div>
               }
