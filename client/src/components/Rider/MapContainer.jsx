@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
+import './MapContainer.scss';
 import currentLocation from './currentLocation.svg'
 import startLocation from './startLocation.svg';
 import endLocation from './endLocation.svg';
@@ -57,7 +58,7 @@ const MapContainer = (props) => {
 
     return (
         loaded ?
-        <div style={{ height: '50vh', width: '100%' }}>
+        <div id="MapContainer">
             <GoogleMapReact
             bootstrapURLKeys={{ key: key }}
             defaultCenter={center}

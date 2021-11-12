@@ -5,6 +5,7 @@ import './RideBtmPanel.scss';
 import RideList from './RideList';
 import SelectedRide from './SelectedRide';
 import { AuthContext } from '../../App';
+import './Rider.scss'
 import axios from 'axios';
 
 const Rider = (props) => {
@@ -131,23 +132,22 @@ const Rider = (props) => {
   );
 
   return (
-    <div>
+    <div id="Rider">
       <Navbar />
       {showConfirmationModal ? riderConfirmationModal : null}
 
       {showCancelRideModal ? cancelRideModal : null}
+      <div id="riderView">
+        <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
 
-      <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
-
-      {!rideSelected && !rideConfirmed ?
-      <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
-      <SelectedRide confirmedRide={confirmedRide}
-      ride={(whichListItemClicked !== null || whichMarkerClicked !== null) ? (nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]) : confirmedRide}
-      handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
-      handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
-      rideConfirmed={rideConfirmed} />
-      }
-
+        {!rideSelected && !rideConfirmed ?
+        <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
+        <SelectedRide confirmedRide={confirmedRide}
+        ride={(whichListItemClicked !== null || whichMarkerClicked !== null) ? (nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]) : confirmedRide}
+        handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
+        handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}
+        rideConfirmed={rideConfirmed} />}
+      </div>
     </div>
   );
 };
