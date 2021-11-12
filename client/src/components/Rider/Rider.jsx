@@ -138,11 +138,11 @@ const Rider = (props) => {
 
       {showCancelRideModal ? cancelRideModal : null}
       <div id="riderView">
-        <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} />
+        <MapContainer nearbyRides={nearbyRides} riderLocation={riderLocation} reRender={reRender} markerClicked={markerClicked} whichMarkerClicked={whichMarkerClicked} handleMarkerClick={handleMarkerClick} rideConfirmed={rideConfirmed} confirmedRide={confirmedRide} />
 
         {!rideSelected && !rideConfirmed ?
         <RideList nearbyRides={nearbyRides} handleSelectRide={handleSelectRide} /> :
-        <SelectedRide confirmedRide={confirmedRide}
+        <SelectedRide
         ride={(whichListItemClicked !== null || whichMarkerClicked !== null) ? (nearbyRides[whichMarkerClicked] ? nearbyRides[whichMarkerClicked] : nearbyRides[whichListItemClicked]) : confirmedRide}
         handleConfirmationPageBtnPress={handleConfirmationPageBtnPress}
         handlePostConfirmationCanellationBtnPress={handlePostConfirmationCanellationBtnPress}

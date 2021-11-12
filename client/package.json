@@ -54,5 +54,8 @@
   "main": "server.js",
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@iconify/react": "^3.1.0"
+  }
 }
