@@ -32,6 +32,8 @@ const MapContainer = (props) => {
                 strokeWeight: 5
             }});
 
+            directionsRenderer.setMap(map);
+
             const origin = {lat: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).latPickUp), lng: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).lngPickUp)};
             const destination = {lat: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).latDropOff), lng: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).lngDropOff)};
 
