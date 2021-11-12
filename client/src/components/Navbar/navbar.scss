@@ -1,78 +1,118 @@
 $primaryGreen: #15D568;
+$hover: #0a6b34;
 
-.navbar {
+.nav {
   background-color: $primaryGreen;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  //margin-bottom: 1rem;
-}
-
-.menu-bars {
-  margin-left: 2rem;
-  font-size: 2rem;
-  background: none;
-}
-
-.nav-menu {
-  background-color: $primaryGreen;
-  width: 275px;
-  height: 100vh;
+  position: relative;
+  height: 64px;
   display: flex;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  left: -100%;
-  transition: 850ms;
-  &.active {
-    left: 0;
-    transition: 350ms;
-  }
-  z-index: 1;
-}
-
-.nav-text {
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
-  padding-right: 16px;
-  list-style: none;
-  height: 60px;
-  & a {
-    text-decoration: none;
-    color: #f5f5f5;
-    font-size: 18px;
-    font-weight: bold;
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    border-radius: 4px;
-    &:hover {
-      background-color: #08632e;
-      color: #f5f5f5;
+  padding: 0;
+  z-index: 1000;
+
+  .logo {
+    height: 50px;
+    justify-self: start;
+    cursor: pointer;
+  }
+
+  .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(6, auto);
+    list-style: none;
+    justify-content: end;
+    width: 70vw;
+    margin-bottom: 0;
+
+    li {
+      padding: .7rem 1.2rem;
+      border-radius: 3px;
+      &:hover {
+        background-color: $hover;
+      }
     }
   }
+
+  .nav-icon {
+    color: white;
+  }
+
+  .navbar-icons {
+    display: none;
+  }
+
+  .nav-links {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+
+
+  }
+
+  .menu-icon {
+    display: none;
+  }
 }
 
-.nav-menu-items {
-  width: 100%;
-}
+@media screen and (max-width: 1075px) {
+  .nav {
+    position: relative;
+    z-index: 100;
 
-.navbar-toggle {
-  background-color: $primaryGreen;
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
+    .menu-icon {
+      font-size: 1.5rem;
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(-80%, 30%)
+    }
 
-.nav-icon {
-  color: #f5f5f5;
-}
+    .nav-menu {
+      background-color: $primaryGreen;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(6, 9%);
+      width: 300px;
+      height: calc(100vh - 64px);
+      top: 64px;
+      position: absolute;
+      left: 100%;
+      transition: 350ms;
+      z-index: 100;
+      padding-bottom: 3rem;
+    }
 
-span {
-  margin-left: .6rem;
+    .navbar-icons {
+      display: inline;
+    }
+
+    .nav-link-text {
+      margin-left: 1rem;
+    }
+  }
+
+  .nav-menu.active {
+    left: calc(100% - 300px);
+    transition: 350ms;
+    li {
+      border-radius: 3px;
+      &:hover {
+        background-color: $hover;
+      }
+    }
+    
+  }
+
+  .nav-links {
+    padding: 1rem;
+    display: table;
+  }
+
+  .logo {
+    position: absolute;
+    top: 7px;
+    left: 48px;
+  }
 }
