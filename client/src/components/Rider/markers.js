@@ -10,6 +10,7 @@ const StartMarker = ({ lat, lng, onClick }) => {
 };
 
 const EndMarker = ({ lat, lng }) => {
+    console.log('🧠', lat, lng)
     return (
         <div className="end-marker">
             <Icon icon="ri:leaf-fill" className="end-icon icon" />          
