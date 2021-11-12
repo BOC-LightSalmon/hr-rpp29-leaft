@@ -49,7 +49,7 @@ class Map extends React.Component {
       width: '100vw',
       height: '45vh',
       marginBottom: '30px',
-      marginTop: '-17px'
+      // marginTop: '-17px'
     };
 
     const selectedRoute = this.props.selectedRoute;
