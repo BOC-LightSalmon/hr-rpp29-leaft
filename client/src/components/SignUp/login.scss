@@ -5,6 +5,10 @@
 }
 
 #login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   #register-button {
     margin: auto;
     margin-top: 2em;
@@ -40,11 +44,12 @@
   }
 
   label, input{
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+    margin-top: 0.05em;
+    margin-bottom: 0.05em;
     border-radius: 1.5em;
-    height: 2.5em;
-    width: 97%;
+    height: 2em;
+    min-width: 75%;
+    max-width: 75%;
   }
 
   #new-here {
@@ -78,10 +83,11 @@
   position: absolute;
   bottom: 0;
 }
-#fpage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.fpage {
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-direction: column;
 }
 #nav1 {
   // margin: auto;
