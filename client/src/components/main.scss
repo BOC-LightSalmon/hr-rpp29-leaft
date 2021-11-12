@@ -33,7 +33,13 @@
 }
 
 #main-page-buttons {
-  padding-top: 220px;
   height: 100%;
   width: 100%;
+}
+
+#car-image img {
+  width: 100vw;
+  max-width: 500px;
+  margin: 3rem auto;
+  display: block;
 }

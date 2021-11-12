@@ -8,31 +8,31 @@ export const NavBarData = [
   {
     title: 'Home',
     path: '/',
-    cName: 'nav-text',
-    icon: <AiFillHome />
+    cName: 'nav-links',
+    icon: <AiFillHome className="navbar-icons"/>
   },
   {
     title: 'Driver',
     path: '/driver',
-    cName: 'nav-text',
-    icon: <AiFillCar />
+    cName: 'nav-links',
+    icon: <AiFillCar className="navbar-icons"/>
   },
   {
     title: 'Rider',
     path: '/rider',
-    cName: 'nav-text',
-    icon: <BsFillPersonPlusFill />
+    cName: 'nav-links',
+    icon: <BsFillPersonPlusFill className="navbar-icons"/>
   },
   {
     title: 'Balance',
     path: '/balance-update',
-    cName: 'nav-text',
-    icon: <AiFillDollarCircle />
+    cName: 'nav-links',
+    icon: <AiFillDollarCircle className="navbar-icons"/>
   },
   {
     title: 'Tip Driver',
     path: '/balance-transfer',
-    cName: 'nav-text',
-    icon: <FaHandHoldingUsd />
+    cName: 'nav-links',
+    icon: <FaHandHoldingUsd className="navbar-icons"/>
   }
 ]

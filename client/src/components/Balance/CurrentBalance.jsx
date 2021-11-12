@@ -4,7 +4,7 @@ import './balance.scss'
 function CurrentBalance({ currentBalance }) {
 
   return (
-    <div>
+    <div id="current-balance">
       <h3>Current Balance:</h3>
       <h1>$ {currentBalance}</h1>
     </div>
