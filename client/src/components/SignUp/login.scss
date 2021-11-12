@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #login-register {
   #register-button {
     margin: auto;
@@ -45,4 +51,68 @@
     margin-top: 40px;
     text-align: center;
   }
+  .custom-shape-divider-bottom-1636512691 {
+    position: relative;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    z-index: -1;
+  }
+
+  .custom-shape-divider-bottom-1636512691 svg {
+    position: relative;
+    display: block;
+    width: calc(179% + 1.3px);
+    height: 117px;
+    z-index: -1;
+  }
+
+  .custom-shape-divider-bottom-1636512691 .shape-fill {
+    fill: #3ACA52;
+  }
+}
+.footer1 {
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+}
+#fpage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#nav1 {
+  // margin: auto;
+  //   margin-top: 2em;
+    color: white;
+    // display: block;
+    margin-left: 2em;
+    background-color: rgba(186, 219, 200, 0.3);
+    width: 12em;
+    height: 4em;
+    // line-height: 4em;
+    border: none;
+    border-radius: 2em;
+    text-transform: uppercase;
+    // font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+
+}
+
+#new-here{
+
+  position: relative;
+  // display: inline;
+  top: 5.4em;
+}
+form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
