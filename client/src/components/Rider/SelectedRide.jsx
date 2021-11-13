@@ -10,6 +10,7 @@ date.plugin(meridiem);
 const SelectedRide = props => {
     let unformattedDate = new Date(`${props.ride.date} ${props.ride.departure}`);
     let formattedDateTime = date.format(unformattedDate, 'dddd, MMM DDD hh:mm a');
+
     return (
         <div className={"RiderBtmPanel"} id="SelectedRide">
             <div id="confirmationPage">
@@ -24,7 +25,7 @@ const SelectedRide = props => {
             {props.rideConfirmed ?
                 <div className="btnsContainer">
                     <button className="pageBtn cancelRideBtn" onClick={props.handlePostConfirmationCanellationBtnPress}>Cancel</button>
-                    <NavLink to="balance-transfer" id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</NavLink>
+                    <NavLink to={{pathname: "balance-transfer", email: props.ride.driver.email }} id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</NavLink>
                     {/* <button id="tipDriverBtn" className="riderBtn pageBtn">Tip Driver</button> */}
                 </div> : 
                 <div className="btnsContainer">

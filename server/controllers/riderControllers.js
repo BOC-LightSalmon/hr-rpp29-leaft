@@ -14,7 +14,6 @@ const findNearbyRoutes = async (req, res) => {
   const minLng = JSON.parse(req.query.riderLocation).lng - .35;
   const maxLng = JSON.parse(req.query.riderLocation).lng + .35;
   const userId = JSON.parse(req.query.userId);
-  console.log(`UserId: ${userId} is ${typeof userId}`);
 
   try {
     const nearbyRoutes = await Routes.findAll({
@@ -29,7 +28,7 @@ const findNearbyRoutes = async (req, res) => {
           model: Users,
           as: 'driver',
           where: {},
-          attributes: ['first_name']
+          attributes: ['first_name', 'email']
         }
       ]
     });
