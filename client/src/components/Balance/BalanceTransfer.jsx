@@ -34,7 +34,7 @@ function BalanceTransfer({handleBalanceUpdate, location}) {
         return
       } 
 
-      if (!amount) {
+      if (!amount || amount <= 0) {
         setDisplayZeroError(true);
         return
       } 
