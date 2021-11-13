@@ -4,7 +4,6 @@
 Catch a ride, save a leaf!
 
 ## Contributors
-
 - [Vinh Huynh](https://github.com/VinhH2402)
 - [Sunik Kim](https://github.com/sunikkim)
 - [Salma Noe](https://github.com/Sanoe9)
@@ -13,7 +12,6 @@ Catch a ride, save a leaf!
 - [Ryan Lott](https://github.com/ryanlott168)
 
 ## What is LEAFT?
-
 LEAFT is a full-stack application built under a 4 week constraint at the request of a hypothetical client at Hack Reactor. The app is a green-focused carpool/ridesharing service along the lines of Uber, Lyft, etc., but with the goal of reducing emissions and fostering community.
 
 ## What does LEAFT do?
@@ -24,7 +22,6 @@ The app offers two basic roles to every user: driver and rider. Drivers can subm
 Because drivers create the routes rather than riders, the app encourages carpooling for trips that were already planned, versus the creation of many new individual trips. This allows drivers and riders to build a sense of community while also reducing the number of redundant trips—and the associated carbon emissions!
 
 The app itself involves two main components, a large map that displays selected routes—including an optimized path between pick-up and drop-off locations—and a list of submitted routes. There is also a balance feature that allows users to deposit money into a LEAFT account, which can then be used to tip drivers and compensate them for gas.
-
 
 ## Tech Stack
 - **Design/UI/UX**
@@ -70,7 +67,6 @@ Users must create an account and log in to use LEAFT. After logging in, the user
 As a driver, the user can submit a new route by inputting a pick-up and drop-off location, as well as the pick-up date and time. The given addresses are then sent through a Google Maps geocoding API, which converts human-readable addresses into latitude and longitude coordinates. These coordinates are stored together with the rest of the route data in the database. The driver can also browse a list of their own routes and select any of them to display them on the map. Any route whose date/time has passed is automatically deleted from the database for convenience.
 
 As a rider, the user can see all driver-submitted routes within their area and select any of them. Upon selection, the route will display on the map with further details on pick-up and drop-off. The rider can then confirm that route, which will immediately notify the driver. After confirmation, the rider can also tip the driver using their account balance.
-
 
 ## Development Workflow
 Our team of 6 opted to utilize the Agile method of development. This involved team standup meetings at least 3 times a week to provide updates on specific features, bugs and technical decisions/dilemmas. It also involved an iterative style of development, where the team first identified the essential User Stories and Acceptance Criteria for an MVP version of the app before diving into the code itself. This was essential because of our short timeframe and the relative complexity of even a basic, functional version of the app as envisioned by the client. Finally, all teamwork was tracked and ticketed via [GitHub projects](https://github.com/BOC-LightSalmon/hr-rpp29-leaft/projects/1) to ensure efficiency and organization.
