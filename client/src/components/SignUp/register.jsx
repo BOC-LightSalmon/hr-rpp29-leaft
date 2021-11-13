@@ -70,28 +70,31 @@ class Register extends React.Component {
     </svg>
 </div>
       <div id="register">
-        <form onChange={() => {
-          this.setState({
-            errorMessage: ''
-          })
-        }} onSubmit={(e) => this.register(e)}>
-          <label htmlFor='firstName'>First Name:</label>
-          <input type='text' id='firstName' onChange={e => this.handleChange(e)} required></input>
-          <br></br>
-          <label htmlFor='lastName'>Last Name:</label>
-          <input type='text' id='lastName' onChange={e => this.handleChange(e)} required></input>
-          <br></br>
-          <label htmlFor='email'>Email:</label>
-          <input type='email' id='email'onChange={e => this.handleChange(e)} required></input>
-          <br></br>
-          <label htmlFor='phone'>Phone Number:</label>
-          <input type='tel' id='phone'onChange={e => this.handleChange(e)} required></input>
-          <br></br>
-          <label htmlFor='password'>Password:</label>
-          <input type='password' id='password' minLength='6' onChange={e => this.handleChange(e)} required></input>
-          <br></br>
-          <input className="register-buttons" type='submit' value='Submit'></input>
-        </form>
+        <h4>Create an Account</h4>
+        <div id="register-form">
+          <form onChange={() => {
+            this.setState({
+              errorMessage: ''
+            })
+          }} onSubmit={(e) => this.register(e)}>
+            {/* <label htmlFor='firstName'>First Name:</label> */}
+            <input type='text' id='firstName' placeholder="First Name:" onChange={e => this.handleChange(e)} required></input>
+            <br></br>
+            {/* <label htmlFor='lastName'>Last Name:</label> */}
+            <input type='text' id='lastName' placeholder="Last Name:" onChange={e => this.handleChange(e)} required></input>
+            <br></br>
+            {/* <label htmlFor='email'>Email:</label> */}
+            <input type='email' id='email' placeholder="Email:" onChange={e => this.handleChange(e)} required></input>
+            <br></br>
+            {/* <label htmlFor='phone'>Phone Number:</label> */}
+            <input type='tel' id='phone' placeholder="Phone Number:" onChange={e => this.handleChange(e)} required></input>
+            <br></br>
+            {/* <label htmlFor='password'>Password:</label> */}
+            <input type='password' id='password' placeholder="Password:" minLength='6' onChange={e => this.handleChange(e)} required></input>
+            <br></br>
+            <input className="register-buttons"  type='submit' value='Submit'></input>
+          </form>
+        </div>
           <div className='footer'>
 
         {/* <button className="register-buttons" onClick={() => {
