@@ -11,7 +11,7 @@ import axios from 'axios';
 const Rider = (props) => {
   // eslint-disable-next-line
   const [riderLocation, setRiderLocation] = useState({ lat: 40.7580, lng: -73.9855 });
-  const [nearbyRides, setNearbyRides] = useState([]); // this will be an array with all the columns (or not) of the Routes table, it will have all the info including pick up and dropoff locations, times where the riderLocation is equal to Ride.zip
+  const [nearbyRides, setNearbyRides] = useState([]);
   const [rideSelected, setRideSelected] = useState(false);
   const [rideConfirmed, setRideConfirmed] = useState(false);
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
@@ -24,6 +24,7 @@ const Rider = (props) => {
   const [confirmedRide, setConfirmedRide] = useState({});
 
   const userData = useContext(AuthContext);
+
   useEffect(() => {
     axios.get('/api/riders/rides', {
       params: {
@@ -34,8 +35,9 @@ const Rider = (props) => {
         setNearbyRides(res.data);
         const confirmed = res.data.filter(ride => ride.rider_id === userData.id);
         if (confirmed.length > 0) {
-          setConfirmedRide(confirmed[0]); // here we are assuming that the user can only pick ONE ride.
+          setConfirmedRide(confirmed[0]);
           setRideConfirmed(true);
+          setReRender(!reRender)
         } 
       })
       .catch(err => {
@@ -94,7 +96,9 @@ const Rider = (props) => {
 
   // needs to remove riderid from route
   const handleRideCancellation = () => {
+
     const routeId = (nearbyRides[whichMarkerClicked]) ? nearbyRides[whichMarkerClicked].id : confirmedRide.id;
+
     axios.put('/api/riders/cancel', { id: routeId, riderName: userData.first_name })
       .then(() => {
         setShowCancelRideModal(false);
