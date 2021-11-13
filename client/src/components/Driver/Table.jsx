@@ -39,9 +39,9 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
     data,
     defaultColumn
   },
-  useFlexLayout);
+    useFlexLayout);
 
-  return(
+  return (
     <table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
@@ -49,15 +49,18 @@ const Table = ({ routes, cancelRoute, showRoute }) => {
             {headerGroup.headers.map(column => (
               <th {...column.getHeaderProps()} id={column.Header.toLowerCase()}>{column.render('Header')}</th>
             ))}
-        </tr>
+          </tr>
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
         {rows.map((row, i) => {
           prepareRow(row);
-          return(
+          return (
             <tr {...row.getRowProps()} className="table-row">
-              <td className="cancel" onClick={cancelRoute} id={row.original.id}>X</td>
+              {row.original.confirmed ?
+               <td className="cancel" style={{color: 'green'}} id={row.original.id}>O</td> :
+                <td className="cancel" onClick={cancelRoute} id={row.original.id}>X</td>
+              }
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()} onClick={showRoute} className={row.original.confirmed ? "confirmed-route" : ""}>{cell.render('Cell')}</td>
               })}
