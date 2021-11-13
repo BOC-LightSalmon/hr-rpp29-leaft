@@ -52,20 +52,17 @@ class Driver extends React.Component {
 
     socket.on('confirmRoute', (data) => {
       if (data.route.driver_id === driverId) {
-        this.setState({
-          notificationData: data,
-          confirm: true
-        });
+        this.state.notificationData = data;
+        this.state.confirm = true;
+        this.getRoutes();
       }
     });
 
     socket.on('cancelRoute', (data) => {
       if (data.driverId === driverId) {
-        this.setState({
-          notificationData: data,
-          confirm: false,
-          cancel: true
-        });
+        this.state.notificationData = data;
+        this.state.cancel = true;
+        this.getRoutes();
       }
     });
   }

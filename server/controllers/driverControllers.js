@@ -72,28 +72,36 @@ const getRoutes = async (req, res) => {
     }
   });
 
+  routes = routes.filter(route => {
+    const routeDate = new Date(`${route.dataValues.date} ${route.dataValues.departure}`);
+
+    return routeDate >= currentDate;
+  });
+
+  clearOldRoutes();
+
+  res.send(routes);
+};
+
+const clearOldRoutes = async (req, res) => {
+  const routes = await Route.findAll();
+  const currentDate = new Date();
+
   const toDelete = [];
 
-  routes = routes.filter(route => {
+  routes.forEach(route => {
     const routeDate = new Date(`${route.dataValues.date} ${route.dataValues.departure}`);
 
     if (routeDate < currentDate) {
       toDelete.push(route.dataValues.id);
     }
-
-    return routeDate >= currentDate;
   });
 
   await Route.destroy({
     where: {
-      id: toDelete,
-      seats: {
-        [Op.lte]: 0
-      }
+      id: toDelete
     }
   });
-
-  res.send(routes);
 };
 
 const cancelRoute = async (req, res) => {

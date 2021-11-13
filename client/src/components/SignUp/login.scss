@@ -75,13 +75,14 @@
   }
 
   .custom-shape-divider-bottom-1636512691 .shape-fill {
-    fill: #3ACA52;
+    fill: #15D568;
   }
 }
 .footer1 {
   overflow: hidden;
   position: absolute;
   bottom: 0;
+  width: 100vw;
 }
 .fpage {
   // display: flex;
@@ -90,12 +91,13 @@
   // flex-direction: column;
 }
 #nav1 {
-  // margin: auto;
-  //   margin-top: 2em;
+    // margin: auto;
+    //   margin-top: 2em;
+    padding: .7rem;
     color: white;
     // display: block;
     margin-left: 2em;
-    background-color: rgba(186, 219, 200, 0.3);
+    background-color: rgba(224, 230, 226, 0.3);
     width: 12em;
     height: 4em;
     // line-height: 4em;
@@ -111,6 +113,7 @@
 #new-here{
 
   position: relative;
+  color: rgb(51, 51, 51);
   // display: inline;
   top: 5.4em;
 }

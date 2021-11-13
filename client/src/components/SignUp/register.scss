@@ -59,9 +59,10 @@
 }
 
 .custom-shape-divider-bottom-1636512691 .shape-fill {
-  fill: #3ACA52;
+  fill: #15D568;
 }
 }
+
 form {
   width: 100%;
   display: flex;
@@ -73,25 +74,25 @@ form {
 #nav {
   // margin: auto;
   //   margin-top: 2em;
-    color: white;
-    // display: block;
-    margin-left: 2em;
-    background-color: rgba(186, 219, 200, 0.3);
-    width: 12em;
-    height: 4em;
-    // line-height: 4em;
-    border: none;
-    border-radius: 2em;
-    text-transform: uppercase;
-    // font-weight: bold;
-    text-decoration: none;
-    text-align: center;
-
+  padding: .7rem;
+  color: white;
+  // display: block;
+  margin-left: 2em;
+  background-color: rgba(224, 230, 226, 0.3);
+  width: 12em;
+  height: 4em;
+  // line-height: 4em;
+  border: none;
+  border-radius: 2em;
+  text-transform: uppercase;
+  // font-weight: bold;
+  text-decoration: none;
+  text-align: center;
 }
 
-  #already-have-account{
-
+#already-have-account{
   position: relative;
+  color: rgb(51, 51, 51);
   // display: inline;
   top: 5.4em;
 }
@@ -119,7 +120,7 @@ form {
 }
 
 .wave .shape-fill {
-  fill: #3ACA52;
+  fill: #15D568;
 }
 
 .footer {
