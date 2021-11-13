@@ -57,7 +57,26 @@ The app itself involves two main components, a large map that displays selected 
 **Lesson learned:** Our team learned that environment variables stored in the React front-end are not secure in production and can be accessed by malicious users. We decided to 1) store our API key in an .env file in the back-end, and 2) restrict the API key itself to limit potential use by malicious users.
 
 ## Demo/Walkthrough
-![](https://drive.google.com/file/d/1oAqiesMR5tvSxN_Lje_iIuRlpSyNV0br/view?usp=sharing)
+Cancel route
+![](https://drive.google.com/uc?export=view&id=1oAqiesMR5tvSxN_Lje_iIuRlpSyNV0br)
+Select driver route
+![](https://drive.google.com/uc?export=view&id=1bzWGJ87aXJAtgVTwHfUOf3qpBX97EEWH)
+Tip driver
+![](https://drive.google.com/uc?export=view&id=1l09tZCvw6NbfdO6A1bNBpJyzMXf--516)
+Select and deselect route
+![](https://drive.google.com/uc?export=view&id=1BcDCRZUfmFQ5z9NDzQ0sWTc5TxsjoLoq)
+Cancel confirmed route
+![](https://drive.google.com/uc?export=view&id=1GN0TjizlyUZ4cKjo2HwWZ-xWg9Q99bOC)
+Withdraw funds
+![](https://drive.google.com/uc?export=view&id=1g2aqYyK-g3_FFqmRHkqqprwfI6e6k_op)
+Deposit funds
+![](https://drive.google.com/uc?export=view&id=1HWDAjSbXQKHHVghsMCujbEK8qaAmSb0J)
+Add route
+![](https://drive.google.com/uc?export=view&id=1lwh_zFNn1XgdyoWepQK-gj-EBSzNfD1Q)
+Login
+![](https://drive.google.com/uc?export=view&id=1pCWNyTNixuOpt3DXSFmY8jSaUryFksc5)
+Register
+![](https://drive.google.com/uc?export=view&id=1u-LOa6soiLDIPXPbLy-segkycTCm_RaN)
 
 ## How does LEAFT work?
 Users must create an account and log in to use LEAFT. After logging in, the user can select whether they want to be a driver or rider (a user can switch freely between the two roles).
