@@ -1,6 +1,4 @@
 # LEAFT
-![](./client/src/assets/logo.png)
-
 Catch a ride, save a leaf!
 
 ## Contributors
@@ -59,7 +57,7 @@ The app itself involves two main components, a large map that displays selected 
 **Lesson learned:** Our team learned that environment variables stored in the React front-end are not secure in production and can be accessed by malicious users. We decided to 1) store our API key in an .env file in the back-end, and 2) restrict the API key itself to limit potential use by malicious users.
 
 ## Demo/Walkthrough
-INSERT DEMO GIFS HERE
+![](https://drive.google.com/file/d/1oAqiesMR5tvSxN_Lje_iIuRlpSyNV0br/view?usp=sharing)
 
 ## How does LEAFT work?
 Users must create an account and log in to use LEAFT. After logging in, the user can select whether they want to be a driver or rider (a user can switch freely between the two roles).
