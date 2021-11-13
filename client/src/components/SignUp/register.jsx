@@ -75,19 +75,19 @@ class Register extends React.Component {
             errorMessage: ''
           })
         }} onSubmit={(e) => this.register(e)}>
-          <label htmlFor='firstName'>First Name</label>
+          <label htmlFor='firstName'>First Name:</label>
           <input type='text' id='firstName' onChange={e => this.handleChange(e)} required></input>
           <br></br>
-          <label htmlFor='lastName'>Last Name</label>
+          <label htmlFor='lastName'>Last Name:</label>
           <input type='text' id='lastName' onChange={e => this.handleChange(e)} required></input>
           <br></br>
-          <label htmlFor='email'>Email</label>
+          <label htmlFor='email'>Email:</label>
           <input type='email' id='email'onChange={e => this.handleChange(e)} required></input>
           <br></br>
-          <label htmlFor='phone'>Phone Number</label>
+          <label htmlFor='phone'>Phone Number:</label>
           <input type='tel' id='phone'onChange={e => this.handleChange(e)} required></input>
           <br></br>
-          <label htmlFor='password'>Password</label>
+          <label htmlFor='password'>Password:</label>
           <input type='password' id='password' minLength='6' onChange={e => this.handleChange(e)} required></input>
           <br></br>
           <input className="register-buttons" type='submit' value='Submit'></input>
