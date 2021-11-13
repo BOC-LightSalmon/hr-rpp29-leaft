@@ -73,12 +73,13 @@ describe('Balance Update', () => {
 
 describe('Balance Transfer', () => {
   let Component;
+  let location = {};
 
   beforeEach(() => {
     Component = render(
       <AuthContext.Provider value={{ balance: 5 }}>
         <Router>
-          <BalanceTransfer />
+          <BalanceTransfer location={location}/>
         </Router>
       </AuthContext.Provider>
     )

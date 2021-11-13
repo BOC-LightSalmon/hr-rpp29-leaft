@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../App.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 import CurrentBalance from './CurrentBalance.jsx';
 import BalanceAPIutils from './BalanceAPIutils'
 
-function BalanceTransfer({ handleBalanceUpdate }) {
+function BalanceTransfer({handleBalanceUpdate, location}) {
   const [ amount, setAmount ] = useState('');
   const [ driverEmail, setDriverEmail ] = useState('');
   const [ displayBalanceError, setDisplayBalanceError ] = useState(false);
@@ -15,6 +15,13 @@ function BalanceTransfer({ handleBalanceUpdate }) {
   const [ displayZeroError, setDisplayZeroError ] = useState(false);
 
   const userData = useContext(AuthContext);
+
+  useEffect(() => {
+    
+    if ('email' in location) {
+      setDriverEmail(location.email)
+    };
+  }, [location]);
 
   const handleSend = async () => {
     try {

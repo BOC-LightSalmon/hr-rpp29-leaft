@@ -24,7 +24,7 @@ const Rider = (props) => {
   const [confirmedRide, setConfirmedRide] = useState({});
 
   const userData = useContext(AuthContext);
-  
+
   useEffect(() => {
     axios.get('/api/riders/rides', {
       params: {
@@ -96,7 +96,7 @@ const Rider = (props) => {
 
   // needs to remove riderid from route
   const handleRideCancellation = () => {
-    const riderName = userData.first_name + ' ' + userData.last_name;
+
     const routeId = (nearbyRides[whichMarkerClicked]) ? nearbyRides[whichMarkerClicked].id : confirmedRide.id;
 
     axios.put('/api/riders/cancel', { id: routeId, riderName: userData.first_name })

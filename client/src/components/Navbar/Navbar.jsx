@@ -32,7 +32,7 @@ function Navbar({ isLoggedIn }) {
           <ul className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             {NavBarData.map((item, index) => {
               return (
-                <Link to={item.path} className={item.cName}>
+                <Link to={item.path} key={index} className={item.cName}>
                   <li data-testid={`navbar-${item.title}`} key={index} >
                     
                       {item.icon}
