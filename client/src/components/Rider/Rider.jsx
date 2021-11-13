@@ -37,6 +37,7 @@ const Rider = (props) => {
         if (confirmed.length > 0) {
           setConfirmedRide(confirmed[0]);
           setRideConfirmed(true);
+          setReRender(!reRender)
         } 
       })
       .catch(err => {
