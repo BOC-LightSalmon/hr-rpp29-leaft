@@ -1,0 +1,9 @@
+#app[data-theme="light"] {
+  --background: white;
+  --primaryGreen: green;
+}
+
+#app[data-theme="dark"] {
+  --background: #333;
+  --primaryGreen: red;
+}
