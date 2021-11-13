@@ -43,6 +43,7 @@
     border-radius: 1.5em;
     height: 2.5em;
     width: 95%;
+    text-indent: 0.2rem;
   }
 
   #driver-form-table {
@@ -81,6 +82,9 @@
     margin-top: 10px;
     color: rgb(20, 213, 104);
     font-weight: bold;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   #form-note {
