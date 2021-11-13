@@ -5,7 +5,7 @@ import CurrentBalance from './CurrentBalance.jsx';
 import BalanceAPIutils from './BalanceAPIutils'
 
 function BalanceTransfer({handleBalanceUpdate, location}) {
-  const [ amount, setAmount ] = useState('');
+  const [ amount, setAmount ] = useState('0');
   const [ driverEmail, setDriverEmail ] = useState('');
   const [ displayBalanceError, setDisplayBalanceError ] = useState(false);
   const [ displaySelfError, setDisplaySelfError ] = useState(false);
@@ -17,7 +17,7 @@ function BalanceTransfer({handleBalanceUpdate, location}) {
   const userData = useContext(AuthContext);
 
   useEffect(() => {
-    
+
     if ('email' in location) {
       setDriverEmail(location.email)
     };
@@ -29,12 +29,13 @@ function BalanceTransfer({handleBalanceUpdate, location}) {
       setDisplaySelfError(false);
       setDisplayNotFoundError(false);
       setDisplayZeroError(false)
+
       if (amount > userData.balance) {
         setDisplayBalanceError(true);
         return
       } 
 
-      if (!amount) {
+      if (amount < 1) {
         setDisplayZeroError(true);
         return
       } 
@@ -45,7 +46,7 @@ function BalanceTransfer({handleBalanceUpdate, location}) {
       setDisplayTipForm(false)
       handleBalanceUpdate(userData.balance - parseFloat(amount))
 
-      
+
     } catch (err) {
       console.log(err.message)
       if (err.response.status === 405) {
@@ -59,7 +60,9 @@ function BalanceTransfer({handleBalanceUpdate, location}) {
 
   const handleBackToFormClick = () => {
     setDisplayTipForm(true);
-    setDisplaySuccessMessage(false)
+    setDisplaySuccessMessage(false);
+    setDriverEmail('');
+    setAmount('0');
   }
 
   return (
