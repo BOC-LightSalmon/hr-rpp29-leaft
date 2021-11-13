@@ -16,12 +16,13 @@
 
   #routes-list-intro {
     font-weight: bold;
-    margin-bottom: 2.2vh;
+    margin-top: -1vh;
+    margin-bottom: 2vh;
   }
 
   #routes-list {
     overflow: auto;
-    height: 25vh;
+    height: 27vh;
     padding-left: 8px;
     padding-right: 8px;
   }
@@ -55,6 +56,7 @@
 
   #drop-off {
     margin-left: 10px;
+    margin-right: 10px;
   }
 
   #departure {
