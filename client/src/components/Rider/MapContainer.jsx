@@ -36,7 +36,7 @@ const MapContainer = (props) => {
 
             const origin = {lat: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).latPickUp), lng: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).lngPickUp)};
             const destination = {lat: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).latDropOff), lng: parseFloat((props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).lngDropOff)};
-
+            console.log('🫀', origin, destination);
             directionsService.route({
                 origin,
                 destination,
@@ -69,8 +69,6 @@ const MapContainer = (props) => {
                 {props.nearbyRides.map((nearbyRide, key) => <StartMarker lat={nearbyRide.latPickUp} lng={nearbyRide.lngPickUp} key={key} onClick={() => props.handleMarkerClick(key)} />)}
                 
                 {((props.markerClicked && props.whichMarkerClicked !== null) || props.rideConfirmed) ? <EndMarker lat={(props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).latDropOff} lng={(props.nearbyRides[props.whichMarkerClicked] ? props.nearbyRides[props.whichMarkerClicked] : props.confirmedRide).lngDropOff} /> : null}
-                
-                {/* {((props.rideSelected && props.whichListItemClicked) || props.rideConfirmed) ? <EndMarker lat={(props.nearbyRides[props.whichListItemClicked] ? props.nearbyRides[props.whichListItemClicked] : props.confirmedRide).latDropOff} lng={(props.nearbyRides[props.whichListItemClicked] ? props.nearbyRides[props.whichListItemClicked] : props.confirmedRide).lngDropOff} /> : null} */}
 
             </GoogleMapReact>
         </div> : <div>Loading...</div>

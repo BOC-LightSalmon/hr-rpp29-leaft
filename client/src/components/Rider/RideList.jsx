@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import date from 'date-and-time';
 import ordinal from 'date-and-time/plugin/ordinal';
 import meridiem from 'date-and-time/plugin/meridiem';
 import locationIcon from './location.svg';
+import { AuthContext } from '../../App';
 
 date.plugin(ordinal);
 date.plugin(meridiem);
 
 const RideList = props => {
+    const userData = useContext(AuthContext);
     const nearbyRides = props.nearbyRides.map((ride, key) => {
         let unformattedDate = new Date(`${ride.date} ${ride.departure}`);
         let formattedDateTime = date.format(unformattedDate, 'dddd, MMM DDD hh:mm a');
@@ -26,7 +28,7 @@ const RideList = props => {
     return (
         <div className="RideList RiderBtmPanel">
             <div id="greetingContainer">
-                <span id="greetingContainerGreeting">Nice to see you!</span>
+                <span id="greetingContainerGreeting">Nice to see you, {userData.first_name}!</span>
                 <span id="greetingContainerQuestion">Where are you going?</span>
             </div>
             <div id="list">
