@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import './MapContainer.scss';
 
-const StartMarker = ({ lat, lng, onClick }) => {
+const StartMarker = ({ lat, lng, onClick = () => {} }) => {
     return (
         <div className="start-marker" onClick={onClick}>
             <Icon icon="ri:leaf-fill" className="start-icon icon" />           
