@@ -7,7 +7,7 @@ Catch a ride, save a leaf!
 - [Salma Noe](https://github.com/Sanoe9)
 - [Chris McGee](https://github.com/cmac0351)
 - [Richard Medina](https://github.com/richard960)
-- [Ryan Lott](https://github.com/ryanlott168)
+- [Ryan Lott](https://github.com/ryanclott)
 
 ## What is LEAFT?
 LEAFT is a full-stack application built under a 4 week constraint at the request of a hypothetical client at Hack Reactor. The app is a green-focused carpool/ridesharing service along the lines of Uber, Lyft, etc., but with the goal of reducing emissions and fostering community.
