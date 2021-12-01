@@ -12,7 +12,7 @@ Catch a ride, save a leaf!
 ## What is LEAFT?
 LEAFT is a full-stack application built under a 4 week constraint at the request of a hypothetical client at Hack Reactor. The app is a green-focused carpool/ridesharing service along the lines of Uber, Lyft, etc., but with the goal of reducing emissions and fostering community.
 
-Try it out [here!](bit.ly/leaft-app)
+Try it out [here](bit.ly/leaft-app)!
 
 ## What does LEAFT do?
 LEAFT was built in order to fill a gap in the current rideshare market. While most other rideshare apps treat drivers as independent contractors who provide a service to individual customers, LEAFT opts for a more flexible and community oriented model that is built around the idea of carpooling.
