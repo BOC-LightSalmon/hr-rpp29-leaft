@@ -166,3 +166,4 @@ The architecture owner helped the team agree upon the overall tech stack and mad
 The UI owner was responsible for delivering the initial wireframes that helped generate and ultimately accompany the planned user stories. They also facilitated and delegated among team members to have wireframes ready to present during the client proposal meeting.
 
 All team members helped each other with specific blockers/bugs throughout the process in paired and sometimes group coding sessions.
+
